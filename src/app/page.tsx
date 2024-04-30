@@ -1,3 +1,4 @@
+import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
 
 export default function Home() {
@@ -10,14 +11,7 @@ export default function Home() {
       </div>
 
       {/* Login button */}
-      <a href="/login" className="group rounded-lg px-5 py-4 transition hover:bg-blue-800/30">
-        <h2 className="text-2xl font-semibold">
-          Log In{" "}
-          <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-            -&gt;
-          </span>
-        </h2>
-      </a>
+      <Login />
 
       <footer />
     </main>
