@@ -29,5 +29,12 @@ export const RotatingTagline = () => {
     return setTagline(result[subChoice])
   }, [])
 
-  return <p className="italic mt-5 font-medium opacity-70 h-9">{tagline}</p>
+  return (
+    <p
+      onClick={() => window.location.reload()}
+      className="italic mt-5 cursor-pointer text-lg font-medium opacity-60 h-9"
+    >
+      <span className="animate-fadeIn">{tagline}</span>
+    </p>
+  )
 }
