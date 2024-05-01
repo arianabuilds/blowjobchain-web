@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
+import { login } from "./login-action"
 
 export const Login = () => {
   const searchParams = useSearchParams()
@@ -18,10 +19,12 @@ export const Login = () => {
     </Link>
   ) : (
     // Login screen
-    <section className="flex flex-col text-center">
+    <form className="flex flex-col text-center">
       <h3 className="text-xl mb-10">Log In</h3>
-      <input className="rounded p-1 px-3" placeholder="Phone number" type="tel" />
-      <button className="bg-blue-900/80 rounded text-white p-1 mt-2">Send Login Code</button>
-    </section>
+      <input name="email" className="rounded p-1 px-3" placeholder="Email" type="email" />
+      <button formAction={login} className="bg-blue-900/80 rounded text-white p-1 mt-2">
+        Send Login Code
+      </button>
+    </form>
   )
 }
