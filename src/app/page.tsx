@@ -1,7 +1,13 @@
 import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
+import { createClient } from "@/supabase/server"
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-24 px-4">
       {/* Logo and tagline */}
@@ -10,8 +16,7 @@ export default function Home() {
         <RotatingTagline />
       </div>
 
-      {/* Login button */}
-      <Login />
+      {!user ? <Login /> : <>Logged in: {user.email}</>}
 
       <footer />
     </main>
