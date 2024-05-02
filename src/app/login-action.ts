@@ -18,5 +18,25 @@ export async function login(formData: FormData) {
   //   if (error) redirect("/error")
 
   //   revalidatePath("/", "layout")
-  //   redirect("/")
+  redirect(`?enter-login-code&email=${data.email}`)
+}
+
+export async function submitLoginCode(formData: FormData) {
+  const supabase = createClient()
+
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.verifyOtp({
+    email: formData.get("email") as string,
+    token: formData.get("login-code") as string,
+    type: "email",
+  })
+
+  if (error) console.log("log-in error:", error)
+  //   if (error) redirect("/error")
+
+  console.log("session", session)
+
+  redirect("/")
 }
