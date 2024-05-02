@@ -1,6 +1,7 @@
 import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
 import { createClient } from "@/supabase/server"
+import { SetYourName } from "./SetYourName"
 
 export default async function Home() {
   const supabase = createClient()
@@ -13,10 +14,17 @@ export default async function Home() {
       {/* Logo and tagline */}
       <div className="text-center">
         <p className="text-4xl font-semibold">BlowjobChain</p>
-        <RotatingTagline />
+        {!user && <RotatingTagline />}
       </div>
 
-      {!user ? <Login /> : <>Logged in: {user.email}</>}
+      {!user ? (
+        <Login />
+      ) : (
+        <div>
+          {/* Logged in: {user.email} */}
+          <SetYourName />
+        </div>
+      )}
 
       <footer />
     </main>
