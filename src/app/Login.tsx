@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { login } from "./login-action"
+import { login, submitLoginCode } from "./login-action"
 
 export const Login = () => {
   const searchParams = useSearchParams()
@@ -43,7 +43,7 @@ export const Login = () => {
         placeholder="6-digit code"
         type="text"
       />
-      <button formAction={login} className="bg-blue-900/80 rounded text-white p-1 mt-2">
+      <button formAction={submitLoginCode} className="bg-blue-900/80 rounded text-white p-1 mt-2">
         Submit
       </button>
     </form>
