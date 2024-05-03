@@ -2,7 +2,7 @@ import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
 import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
-import { HelloName } from "./HelloName"
+import { EmptyList } from "./EmptyList"
 
 export default async function Home() {
   const supabase = createSupabaseServer()
@@ -28,7 +28,7 @@ export default async function Home() {
       </div>
 
       {/* Page content */}
-      {!user ? <Login /> : !name ? <SetYourName /> : <HelloName name={name} />}
+      {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
 
       <footer />
     </main>
