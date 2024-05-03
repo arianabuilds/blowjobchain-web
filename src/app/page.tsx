@@ -1,10 +1,11 @@
 import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
-import { createClient } from "@/supabase/server"
+import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
+import { HelloName } from "./HelloName"
 
 export default async function Home() {
-  const supabase = createClient()
+  const supabase = createSupabaseServer()
   // Are they logged in?
   const {
     data: { user },
@@ -27,7 +28,7 @@ export default async function Home() {
       </div>
 
       {/* Page content */}
-      {!user ? <Login /> : !name ? <SetYourName /> : <p>Hello {name}</p>}
+      {!user ? <Login /> : !name ? <SetYourName /> : <HelloName name={name} />}
 
       <footer />
     </main>

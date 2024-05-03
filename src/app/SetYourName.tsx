@@ -1,6 +1,6 @@
 "use client"
 
-import { createClient } from "@/supabase/client"
+import { createSupabaseClient } from "@/supabase/client"
 
 export const SetYourName = () => {
   return (
@@ -32,7 +32,7 @@ async function SetYourNameAction(formData: FormData) {
   const name = formData.get("name")
   // console.log("running SetYourName", name)
 
-  const supabase = createClient()
+  const supabase = createSupabaseClient()
   const user_id = (await supabase.auth.getUser()).data.user?.id
 
   const { data, error } = await supabase.from("profiles").insert({ name, user_id })
