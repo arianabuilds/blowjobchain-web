@@ -5,9 +5,18 @@ import { SetYourName } from "./SetYourName"
 
 export default async function Home() {
   const supabase = createClient()
+  // Are they logged in?
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
+  // Load user profile
+  let name = ""
+  if (user) {
+    const { data, error } = await supabase.from("profiles").select().eq("user_id", user.id)
+    if (error) console.error("Load-name error:", error)
+    if (data) name = data[0]?.name
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-24 px-4">
@@ -17,14 +26,8 @@ export default async function Home() {
         {!user && <RotatingTagline />}
       </div>
 
-      {!user ? (
-        <Login />
-      ) : (
-        <div>
-          {/* Logged in: {user.email} */}
-          <SetYourName />
-        </div>
-      )}
+      {/* Page content */}
+      {!user ? <Login /> : !name ? <SetYourName /> : <p>Hello {name}</p>}
 
       <footer />
     </main>

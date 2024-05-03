@@ -36,5 +36,6 @@ async function SetYourNameAction(formData: FormData) {
   const user_id = (await supabase.auth.getUser()).data.user?.id
 
   const { data, error } = await supabase.from("profiles").insert({ name, user_id })
-  // console.log("supa response", data, error)
+
+  window.location.reload()
 }
