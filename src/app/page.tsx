@@ -3,6 +3,7 @@ import { RotatingTagline } from "./RotatingTagline"
 import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
 import { EmptyList } from "./EmptyList"
+import { GrantAndClaimBtns } from "./GrantAndClaimBtns"
 
 export default async function Home() {
   const supabase = createSupabaseServer()
@@ -20,7 +21,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-24 px-4">
+    <main className="flex min-h-screen flex-col items-center justify-between pt-24 px-4">
       {/* Logo and tagline */}
       <div className="text-center">
         <p className="text-4xl font-semibold">BlowjobChain</p>
@@ -30,7 +31,7 @@ export default async function Home() {
       {/* Page content */}
       {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
 
-      <footer />
+      <footer className="pb-6">{!!name && <GrantAndClaimBtns />}</footer>
     </main>
   )
 }
