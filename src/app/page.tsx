@@ -21,12 +21,12 @@ export default async function Home() {
   }
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between ${!name ? "pt-24" : "pt-5"} px-4`}
-    >
+    <>
       {/* Logo and tagline */}
       <div className="text-center">
-        <p className={`${!name ? "text-4xl" : "text-2xl"} font-semibold`}>BlowjobChain</p>
+        <p className={`${!name ? "text-4xl pt-24" : "text-2xl pt-5"} font-semibold`}>
+          BlowjobChain
+        </p>
         {!user && <RotatingTagline />}
       </div>
 
@@ -34,6 +34,6 @@ export default async function Home() {
       {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
 
       <footer className="pb-6">{!!name && <GrantAndClaimBtns />}</footer>
-    </main>
+    </>
   )
 }
