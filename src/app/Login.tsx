@@ -12,7 +12,10 @@ export const Login = () => {
 
   return !isLoginScreen && !isEnterLoginCodeScreen ? (
     // Login Button
-    <Link href="?login" className="group rounded-lg px-5 py-4 transition hover:bg-blue-800/30">
+    <Link
+      href="?login"
+      className="inline-block group rounded-lg px-5 py-4 transition hover:bg-blue-800/30"
+    >
       <h2 className="text-2xl font-semibold">
         Log In{" "}
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

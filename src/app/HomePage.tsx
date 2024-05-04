@@ -4,6 +4,7 @@ import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
 import { EmptyList } from "./EmptyList"
 import { GrantAndClaimBtns } from "./GrantAndClaimBtns"
+import { Logo } from "./Logo"
 
 export async function HomePage() {
   const supabase = createSupabaseServer()
@@ -24,9 +25,7 @@ export async function HomePage() {
     <>
       {/* Logo and tagline */}
       <div className="text-center">
-        <p className={`${!name ? "text-4xl pt-24" : "text-2xl pt-5"} font-semibold`}>
-          BlowjobChain
-        </p>
+        <Logo big={!name} />
         {!user && <RotatingTagline />}
       </div>
 
