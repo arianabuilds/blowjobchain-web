@@ -9,3 +9,7 @@ begin
       where lower(au.email) = lower($1);
 end;
 $$ language plpgsql;
+
+revoke execute on function get_user_id_by_email(text) from PUBLIC;
+revoke execute on function get_user_id_by_email(text) from anon;
+revoke execute on function get_user_id_by_email(text) from authenticated;
