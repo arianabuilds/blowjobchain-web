@@ -28,6 +28,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     <form className="flex flex-col text-center">
       <h3 className="text-xl mb-10">{!inviterID ? "Log In" : "Join"}</h3>
       <input name="email" className="rounded p-1 px-3" placeholder="Email" type="email" />
+      <input name="inviter-id" value={inviterID} type="hidden" />
       <button formAction={login} className="bg-blue-900/80 rounded text-white p-1 mt-2">
         Send Login Code
       </button>

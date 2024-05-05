@@ -26,7 +26,7 @@ export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
       </div>
 
       <Suspense>
-        <Login inviterID="foobar" />
+        <Login inviterID={u} />
       </Suspense>
     </div>
   )

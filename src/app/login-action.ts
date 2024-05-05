@@ -1,24 +1,26 @@
 "use server"
 
-// import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 import { createSupabaseServer } from "@/supabase/server"
+import { createSupabaseAdmin } from "@/supabase/admin"
 
 export async function login(formData: FormData) {
   const supabase = createSupabaseServer()
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = { email: formData.get("email") as string }
+  // type-casting for convenience, should validate
+  const email = formData.get("email") as string
 
-  const { error } = await supabase.auth.signInWithOtp(data)
+  const { error } = await supabase.auth.signInWithOtp({ email })
+
+  // If there was an inviterID, store the relationship
+  const inviterID = formData.get("inviter-id")
+  if (typeof inviterID === "string") storePartnershipInvitation(inviterID, email)
 
   if (error) console.log("log-in error:", error)
-  //   if (error) redirect("/error")
+  // if (error) redirect("/error")
 
-  //   revalidatePath("/", "layout")
-  redirect(`?enter-login-code&email=${data.email}`)
+  redirect(`?enter-login-code&email=${email}`)
 }
 
 export async function submitLoginCode(formData: FormData) {
@@ -39,4 +41,17 @@ export async function submitLoginCode(formData: FormData) {
   console.log("session", session)
 
   redirect("/")
+}
+
+async function storePartnershipInvitation(inviterID: string, inviteeEmail: string) {
+  const supaAdmin = createSupabaseAdmin()
+
+  const { data: newUser, error } = await supaAdmin.rpc("get_user_id_by_email", {
+    email: inviteeEmail,
+  })
+
+  if (error) return console.error("Error loading new partner ID", error)
+  if (!newUser?.[0]) return console.error("Error finding new invitee", inviterID, inviteeEmail)
+
+  return supaAdmin.from("partnerships").insert({ inviter: inviterID, invitee: newUser[0].id })
 }
