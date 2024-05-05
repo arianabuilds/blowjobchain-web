@@ -4,7 +4,7 @@ import { useUserId } from "./useUserId"
 
 export const InvitePartnerLink = () => {
   const { userId } = useUserId()
-  const link = `blowjobchain-web.vercel.app/partner/${userId}`
+  const link = `blowjobchain-web.vercel.app/partner?u=${userId}`
 
   return (
     <div className="flex">

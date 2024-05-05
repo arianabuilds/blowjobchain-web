@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
+/** Access supabase on SSR'd pages, as the logged-in user (per their cookies) */
 export function createSupabaseServer() {
   const cookieStore = cookies()
 
