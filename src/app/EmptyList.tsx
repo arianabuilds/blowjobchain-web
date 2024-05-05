@@ -1,6 +1,5 @@
 import { HelloName } from "./HelloName"
-
-const link = `blowjobchain-web.vercel.app/partner/CE23B`
+import { InvitePartnerLink } from "./InvitePartnerLink"
 
 export const EmptyList = ({ name }: { name: string }) => {
   return (
@@ -11,19 +10,7 @@ export const EmptyList = ({ name }: { name: string }) => {
       <p className="border rounded-lg border-black/50 p-2 my-16 text-black/80">No records yet</p>
 
       {/* Share invite link */}
-      <div className="flex">
-        <div className="text-[36px] pr-2">🔗</div>
-        <div>
-          <p className="mb-1">Share invite link with partner:</p>
-          <a
-            href={`https://${link}`}
-            target="_blank"
-            className="block rounded text-xs bg-white/70 p-1"
-          >
-            {link}
-          </a>
-        </div>
-      </div>
+      <InvitePartnerLink />
     </div>
   )
 }
