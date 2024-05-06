@@ -40,7 +40,7 @@ export async function submitLoginCode(formData: FormData) {
   if (error) console.log("log-in error:", error)
   //   if (error) redirect("/error")
 
-  console.log("session", session)
+  // console.log("session", session)
 
   redirect("/")
 }
