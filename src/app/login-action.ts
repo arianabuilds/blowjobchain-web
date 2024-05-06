@@ -20,7 +20,9 @@ export async function login(formData: FormData) {
   if (error) console.log("log-in error:", error)
   // if (error) redirect("/error")
 
-  redirect(`?enter-login-code&email=${email}`)
+  redirect(
+    `?enter-login-code&email=${email}${typeof inviterID === "string" ? `&u=${inviterID}` : ""}`,
+  )
 }
 
 export async function submitLoginCode(formData: FormData) {
