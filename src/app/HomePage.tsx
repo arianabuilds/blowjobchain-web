@@ -32,7 +32,7 @@ export async function HomePage() {
       {/* Page content */}
       {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
 
-      <footer className="pb-6">{!!name && <Footer />}</footer>
+      <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
     </>
   )
 }
