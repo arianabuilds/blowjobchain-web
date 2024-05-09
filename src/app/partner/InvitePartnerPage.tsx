@@ -32,7 +32,7 @@ export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
   )
 }
 
-export async function loadInvitersName(user_id: string): Promise<string> {
+async function loadInvitersName(user_id: string): Promise<string> {
   const supabase = createSupabaseAdmin()
   const { data } = await supabase.from("profiles").select().eq("user_id", user_id)
   if (!data?.[0]) return "[Error: User not found]"

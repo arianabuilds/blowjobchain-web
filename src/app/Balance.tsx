@@ -1,14 +1,15 @@
 "use server"
 
-import { lookupPartnerships } from "./EmptyList"
-import { loadInvitersName } from "./partner/InvitePartnerPage"
+import { loadPartnerships } from "./load-partnerships"
 
 export const Balance = async ({ name }: { name: string }) => {
-  const { partnerships } = await lookupPartnerships()
+  const { partnerships } = await loadPartnerships()
   if (!partnerships?.[0]) return null
+  const first = partnerships[0]
 
-  // FIXME: wrongly assumes invitee is partner
-  const partner = await loadInvitersName(partnerships[0].invitee)
+  // Partner's name is the one that's not ours
+  let partner = first.inviter_name
+  if (partner === name) partner = first.invitee_name
 
   return (
     <div className="text-center">

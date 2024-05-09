@@ -1,9 +1,9 @@
-import { createSupabaseServer } from "@/supabase/server"
 import { HelloName } from "./HelloName"
 import { InvitePartnerLink } from "./InvitePartnerLink"
+import { loadPartnerships } from "./load-partnerships"
 
 export const EmptyList = async ({ name }: { name: string }) => {
-  const { partnerships } = await lookupPartnerships()
+  const { partnerships } = await loadPartnerships()
   const hasPartner = !!partnerships?.length
 
   return (
@@ -19,10 +19,4 @@ export const EmptyList = async ({ name }: { name: string }) => {
       {!hasPartner && <InvitePartnerLink />}
     </div>
   )
-}
-
-export async function lookupPartnerships() {
-  const supabase = createSupabaseServer()
-  const { data: partnerships, error } = await supabase.from("partnerships").select()
-  return { partnerships }
 }
