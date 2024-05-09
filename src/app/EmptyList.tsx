@@ -21,7 +21,7 @@ export const EmptyList = async ({ name }: { name: string }) => {
   )
 }
 
-async function lookupPartnerships() {
+export async function lookupPartnerships() {
   const supabase = createSupabaseServer()
   const { data: partnerships, error } = await supabase.from("partnerships").select()
   return { partnerships }

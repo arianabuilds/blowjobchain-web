@@ -3,8 +3,8 @@ import { RotatingTagline } from "./RotatingTagline"
 import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
 import { EmptyList } from "./EmptyList"
-import { GrantAndClaimBtns } from "./GrantAndClaimBtns"
 import { Logo } from "./Logo"
+import { Footer } from "./Footer"
 
 export async function HomePage() {
   const supabase = createSupabaseServer()
@@ -32,7 +32,7 @@ export async function HomePage() {
       {/* Page content */}
       {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
 
-      <footer className="pb-6">{!!name && <GrantAndClaimBtns />}</footer>
+      <footer className="pb-6">{!!name && <Footer />}</footer>
     </>
   )
 }
