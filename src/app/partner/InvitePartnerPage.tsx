@@ -37,5 +37,5 @@ async function loadInvitersName(user_id: string): Promise<string> {
   const { data } = await supabase.from("profiles").select().eq("user_id", user_id)
   if (!data?.[0]) return "[Error: User not found]"
 
-  return data[0].name
+  return data[0].name || "[Warning: Name not set]"
 }
