@@ -9,11 +9,15 @@ export const GrantAndClaimBtns = ({
 }: {
   partnerships: PartnershipWithName | null
 }) => {
+  const partner = partnerships?.[0]
+
   return (
     <div className="flex justify-center space-x-10">
       <button
         className={`${buttonClasses} border-blue-400/70 bg-blue-300`}
-        onClick={() => alert("Add a partner to grant them blowjob points")}
+        onClick={() =>
+          !partner ? alert("Add a partner to grant them blowjob points") : grantPoints()
+        }
       >
         Grant
       </button>
@@ -25,4 +29,12 @@ export const GrantAndClaimBtns = ({
       </button>
     </div>
   )
+}
+
+function grantPoints() {
+  const points = prompt("Grant how many points?")
+  if (!points) return
+
+  const comment = prompt("Add optional comment:")
+  alert(`${points}: ${comment}`)
 }
