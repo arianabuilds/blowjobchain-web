@@ -1,8 +1,14 @@
 "use client"
 
+import { PartnershipWithName } from "./load-partnerships"
+
 const buttonClasses = `px-10 py-2 border-2 rounded-md text-gray-800 transition font-medium`
 
-export const GrantAndClaimBtns = () => {
+export const GrantAndClaimBtns = ({
+  partnerships,
+}: {
+  partnerships: PartnershipWithName | null
+}) => {
   return (
     <div className="flex justify-center space-x-10">
       <button

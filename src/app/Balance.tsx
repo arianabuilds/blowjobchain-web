@@ -1,10 +1,14 @@
 "use server"
 
-import { loadPartnerships } from "./load-partnerships"
+import { PartnershipWithName } from "./load-partnerships"
 
-export const Balance = async ({ name }: { name: string }) => {
-  const { partnerships } = await loadPartnerships()
-  if (!partnerships?.[0]) return null
+export const Balance = async ({
+  name,
+  partnerships,
+}: {
+  name: string
+  partnerships: PartnershipWithName
+}) => {
   const first = partnerships[0]
 
   // Partner's name is the one that's not ours
