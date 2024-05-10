@@ -9,7 +9,7 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      entries: {
+      "entries (2022 archive)": {
         Row: {
           comment: string | null
           created_at: string | null
@@ -63,6 +63,51 @@ export type Database = {
           {
             foreignKeyName: "partnerships_inviter_fkey"
             columns: ["inviter"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      points: {
+        Row: {
+          amount: number
+          comment: string | null
+          created_at: string
+          from: string
+          id: number
+          signature: string | null
+          to: string
+        }
+        Insert: {
+          amount: number
+          comment?: string | null
+          created_at?: string
+          from: string
+          id?: number
+          signature?: string | null
+          to: string
+        }
+        Update: {
+          amount?: number
+          comment?: string | null
+          created_at?: string
+          from?: string
+          id?: number
+          signature?: string | null
+          to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "points_from_fkey"
+            columns: ["from"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "points_to_fkey"
+            columns: ["to"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]

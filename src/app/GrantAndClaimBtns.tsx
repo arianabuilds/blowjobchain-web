@@ -1,5 +1,6 @@
 "use client"
 
+import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipWithName } from "./load-partnerships"
 
 const buttonClasses = `px-10 py-2 border-2 rounded-md text-gray-800 transition font-medium`
@@ -31,10 +32,17 @@ export const GrantAndClaimBtns = ({
   )
 }
 
-function grantPoints() {
+async function grantPoints() {
   const points = prompt("Grant how many points?")
   if (!points) return
 
   const comment = prompt("Add optional comment:")
-  alert(`${points}: ${comment}`)
+  // alert(`${points}: ${comment}`)
+  const supabase = createSupabaseClient()
+  const user_id = (await supabase.auth.getSession()).data.session?.user.id
+  if (!user_id) return
+  const result = await supabase
+    .from("points")
+    .insert({ amount: +points, comment, from: user_id, to: user_id })
+  alert(JSON.stringify(result))
 }
