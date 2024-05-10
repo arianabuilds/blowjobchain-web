@@ -15,7 +15,10 @@ export const HelloName = ({ name }: { name: string }) => {
           const supabase = createSupabaseClient()
           const user_id = (await supabase.auth.getUser()).data.user?.id
 
-          await supabase.from("profiles").delete().eq("user_id", user_id)
+          await supabase
+            .from("profiles")
+            .delete()
+            .eq("user_id", user_id || "")
           window.location.reload()
         }}
       >

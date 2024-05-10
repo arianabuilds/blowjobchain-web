@@ -30,12 +30,13 @@ export const SetYourName = () => {
 
 async function SetYourNameAction(formData: FormData) {
   const name = formData.get("name")
-  // console.log("running SetYourName", name)
+  if (typeof name !== "string") return console.error("SetName error", name)
 
   const supabase = createSupabaseClient()
   const user_id = (await supabase.auth.getUser()).data.user?.id
+  if (typeof user_id !== "string") return console.error("SetName: not logged in", user_id)
 
-  const { data, error } = await supabase.from("profiles").insert({ name, user_id })
+  await supabase.from("profiles").insert({ name, user_id })
 
   window.location.reload()
 }

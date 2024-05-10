@@ -14,7 +14,7 @@ export async function HomePage() {
   } = await supabase.auth.getUser()
 
   // Load user profile
-  let name = ""
+  let name: string | null = null
   if (user) {
     const { data, error } = await supabase.from("profiles").select().eq("user_id", user.id)
     if (error) console.error("Load-name error:", error)

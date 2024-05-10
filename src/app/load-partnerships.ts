@@ -1,10 +1,11 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { Database } from "@/supabase/types"
 
-export type PartnershipWithName =
-  Database["public"]["Functions"]["get_partnerships_with_names"]["Returns"]
+const rpc_name = "get_partnerships_with_names"
+export type PartnershipWithName = Database["public"]["Functions"][typeof rpc_name]["Returns"]
+
 export async function loadPartnerships() {
   const supabase = createSupabaseServer()
-  const { data: partnerships, error } = await supabase.rpc("get_partnerships_with_names").select()
+  const { data: partnerships, error } = await supabase.rpc(rpc_name).select()
   return { partnerships }
 }
