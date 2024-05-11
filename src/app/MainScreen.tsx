@@ -55,7 +55,10 @@ export const MainScreen = async ({ name }: { name: string }) => {
 
 async function loadPoints() {
   const supabase = createSupabaseServer()
-  const { data: points, error } = await supabase.from("points").select()
+  const { data: points, error } = await supabase
+    .from("points")
+    .select()
+    .order("created_at", { ascending: false })
   if (error) return alert(`Error loading points: ${JSON.stringify(error)}`)
 
   return points
