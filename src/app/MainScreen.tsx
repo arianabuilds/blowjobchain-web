@@ -39,6 +39,7 @@ export const MainScreen = async ({ name }: { name: string }) => {
                   .replace(/\d\d seconds/, "now")
                   .replace(" minute", "m")
                   .replace(" hour", "h")
+                  .replace(" day", "d")
                   .replace("s ", " ")}
               </span>{" "}
               <span className="mr-1">{userIdToName[r.to]}</span> +{r.amount} point
