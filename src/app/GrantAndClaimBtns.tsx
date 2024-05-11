@@ -33,16 +33,19 @@ export const GrantAndClaimBtns = ({
 }
 
 async function grantPoints() {
-  const points = prompt("Grant how many points?")
-  if (!points) return
-
-  const comment = prompt("Add optional comment:")
-  // alert(`${points}: ${comment}`)
+  // Get user session
   const supabase = createSupabaseClient()
   const user_id = (await supabase.auth.getSession()).data.session?.user.id
-  if (!user_id) return
-  const result = await supabase
+  if (!user_id) return alert("Not Logged In")
+
+  // Prompt points and optional comment
+  const points = prompt("Grant how many points?")
+  if (!points) return
+  const comment = prompt("Add optional comment:")
+
+  // Save to db
+  const { error } = await supabase
     .from("points")
     .insert({ amount: +points, comment, from: user_id, to: user_id })
-  alert(JSON.stringify(result))
+  if (error) alert(JSON.stringify({ error }))
 }
