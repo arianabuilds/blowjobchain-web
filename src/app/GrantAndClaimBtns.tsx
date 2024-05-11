@@ -10,14 +10,16 @@ export const GrantAndClaimBtns = ({
 }: {
   partnerships: PartnershipWithName | null
 }) => {
-  const partner = partnerships?.[0]
+  const partnership = partnerships?.[0]
 
   return (
     <div className="flex justify-center space-x-10">
       <button
         className={`${buttonClasses} border-blue-400/70 bg-blue-300`}
         onClick={() =>
-          !partner ? alert("Add a partner to grant them blowjob points") : grantPoints()
+          !partnership
+            ? alert("Add a partner to grant them blowjob points")
+            : grantPoints(partnership)
         }
       >
         Grant
@@ -32,11 +34,12 @@ export const GrantAndClaimBtns = ({
   )
 }
 
-async function grantPoints() {
+async function grantPoints({ inviter, invitee }: { inviter: string; invitee: string }) {
   // Get user session
   const supabase = createSupabaseClient()
   const user_id = (await supabase.auth.getSession()).data.session?.user.id
   if (!user_id) return alert("Not Logged In")
+  let partner = inviter !== user_id ? inviter : invitee
 
   // Prompt points and optional comment
   const points = prompt("Grant how many points?")
@@ -46,6 +49,6 @@ async function grantPoints() {
   // Save to db
   const { error } = await supabase
     .from("points")
-    .insert({ amount: +points, comment, from: user_id, to: user_id })
+    .insert({ amount: +points, comment, from: user_id, to: partner })
   if (error) alert(JSON.stringify({ error }))
 }

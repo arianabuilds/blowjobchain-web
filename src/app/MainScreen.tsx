@@ -34,8 +34,10 @@ export const MainScreen = async ({ name }: { name: string }) => {
             >
               <span className="mr-4">
                 {format(r.created_at)
-                  .replace(" hour", "h")
+                  .replace("just ", "")
+                  .replace(/\d\d seconds ago/, "now")
                   .replace(" minute", "m")
+                  .replace(" hour", "h")
                   .replace("s ", " ")}
               </span>{" "}
               {userIdToName[r.to]} +{r.amount} point
