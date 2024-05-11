@@ -2,7 +2,7 @@ import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
 import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
-import { EmptyList } from "./EmptyList"
+import { MainScreen } from "./MainScreen"
 import { Logo } from "./Logo"
 import { Footer } from "./Footer"
 
@@ -30,7 +30,7 @@ export async function HomePage() {
       </div>
 
       {/* Page content */}
-      {!user ? <Login /> : !name ? <SetYourName /> : <EmptyList name={name} />}
+      {!user ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
 
       <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
     </>

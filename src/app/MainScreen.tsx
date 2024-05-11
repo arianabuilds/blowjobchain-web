@@ -2,7 +2,7 @@ import { HelloName } from "./HelloName"
 import { InvitePartnerLink } from "./InvitePartnerLink"
 import { loadPartnerships } from "./load-partnerships"
 
-export const EmptyList = async ({ name }: { name: string }) => {
+export const MainScreen = async ({ name }: { name: string }) => {
   const { partnerships } = await loadPartnerships()
   const hasPartner = !!partnerships?.length
 
