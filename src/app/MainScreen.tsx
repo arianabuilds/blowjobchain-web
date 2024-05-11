@@ -9,7 +9,7 @@ export const MainScreen = async ({ name }: { name: string }) => {
   const hasPartner = !!partnerships?.length
 
   const userIdToName = (partnerships || []).reduce(
-    (memo, p) => ({ ...memo, [p.inviter]: p.inviter_name, [p.invitee]: p.invitee_name }),
+    (memo, p) => ({ ...memo, [p.inviter]: p.inviter_name[0], [p.invitee]: p.invitee_name[0] }),
     {} as Record<string, string | undefined>,
   )
 
@@ -28,21 +28,23 @@ export const MainScreen = async ({ name }: { name: string }) => {
         // List of points
         <div className="mt-6 text-left">
           {points.map((r, index) => (
-            <p
+            <div
               key={index}
               className="border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80"
             >
-              <span className="mr-4">
+              <span className="inline-block w-[5rem] opacity-70 text-sm">
                 {format(r.created_at)
+                  .replace("ago", "")
                   .replace("just ", "")
-                  .replace(/\d\d seconds ago/, "now")
+                  .replace(/\d\d seconds/, "now")
                   .replace(" minute", "m")
                   .replace(" hour", "h")
                   .replace("s ", " ")}
               </span>{" "}
-              {userIdToName[r.to]} +{r.amount} point
+              <span className="mr-1">{userIdToName[r.to]}</span> +{r.amount} point
               {r.amount !== 1 ? "s" : ""}
-            </p>
+              <span className="inline-block w-[5rem] text-right">{r.comment ? "💬" : ""}</span>
+            </div>
           ))}
         </div>
       )}
