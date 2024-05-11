@@ -2,6 +2,7 @@ import { createSupabaseServer } from "@/supabase/server"
 import { HelloName } from "./HelloName"
 import { InvitePartnerLink } from "./InvitePartnerLink"
 import { loadPartnerships } from "./load-partnerships"
+import { format } from "@expo/timeago.js"
 
 export const MainScreen = async ({ name }: { name: string }) => {
   const { partnerships } = await loadPartnerships()
@@ -26,7 +27,10 @@ export const MainScreen = async ({ name }: { name: string }) => {
               key={index}
               className="border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80"
             >
-              <span className="mr-4">{r.created_at}</span> {r.to} +{r.amount} point
+              <span className="mr-4">
+                {format(r.created_at).replace(" hours", "h").replace(" minutes", "m")}
+              </span>{" "}
+              {r.to} +{r.amount} point
               {r.amount !== 1 ? "s" : ""}
             </p>
           ))}
