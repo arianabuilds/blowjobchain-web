@@ -8,8 +8,28 @@ import { Footer } from "./Footer"
 import { SettingsButton } from "./SettingsButton"
 
 export async function HomePage() {
-  const supabase = createSupabaseServer()
+  const { user, name } = await loadUserIDandName()
+
+  return (
+    <>
+      {/* Logo and tagline */}
+      <div className="text-center">
+        <Logo big={!name} />
+        {!user && <RotatingTagline />}
+        {name && <SettingsButton />}
+      </div>
+
+      {/* Page content */}
+      {!user ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
+
+      <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
+    </>
+  )
+}
+
+export async function loadUserIDandName() {
   // Are they logged in?
+  const supabase = createSupabaseServer()
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -22,19 +42,5 @@ export async function HomePage() {
     if (data) name = data[0]?.name
   }
 
-  return (
-    <>
-      {/* Logo and tagline */}
-      <div className="text-center">
-        <Logo big={!name} />
-        {!user && <RotatingTagline />}
-        {user && <SettingsButton />}
-      </div>
-
-      {/* Page content */}
-      {!user ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
-
-      <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
-    </>
-  )
+  return { user, name }
 }
