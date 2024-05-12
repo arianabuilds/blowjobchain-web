@@ -5,6 +5,7 @@ import { SetYourName } from "./SetYourName"
 import { MainScreen } from "./MainScreen"
 import { Logo } from "./Logo"
 import { Footer } from "./Footer"
+import { SettingsButton } from "./SettingsButton"
 
 export async function HomePage() {
   const supabase = createSupabaseServer()
@@ -27,6 +28,7 @@ export async function HomePage() {
       <div className="text-center">
         <Logo big={!name} />
         {!user && <RotatingTagline />}
+        {user && <SettingsButton />}
       </div>
 
       {/* Page content */}
