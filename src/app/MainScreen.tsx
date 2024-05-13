@@ -9,7 +9,7 @@ export const MainScreen = async ({ name }: { name: string }) => {
   const hasPartner = !!partnerships?.length
 
   const userIdToName = (partnerships || []).reduce(
-    (memo, p) => ({ ...memo, [p.inviter]: p.inviter_name[0], [p.invitee]: p.invitee_name[0] }),
+    (memo, p) => ({ ...memo, [p.inviter]: p.inviter_name?.[0], [p.invitee]: p.invitee_name?.[0] }),
     {} as Record<string, string | undefined>,
   )
 
