@@ -9,12 +9,12 @@ export const SettingsPage = async () => {
   if (!name) redirect("/")
 
   return (
-    <div className="p-4 text-center space-y-3">
+    <div className="py-0.5 text-center space-y-5">
       {/* Back button */}
       <BackButton />
 
       {/* 'Settings' title */}
-      <h1>Settings</h1>
+      <h1 className="opacity-80">Settings</h1>
 
       {/* HelloName */}
       <HelloName name={name} />
