@@ -20,7 +20,7 @@ export const SettingsPage = async () => {
       <HelloName name={name} />
 
       {/* Partnership Settings */}
-      <PartnershipSettings />
+      <PartnershipSettings name={name} />
 
       {/* Logout button */}
     </div>
