@@ -19,6 +19,19 @@ export const PartnershipSettings = async ({ name }: { name: string }) => {
       </div>
 
       {/* Other Partnerships */}
+      {!!others.length && (
+        <>
+          <p className="text-right text-sm opacity-70">Click to switch:</p>
+          {others.map((p, i) => (
+            <div key={i} className="rounded-lg bg-black/10 p-1 px-3 mb-3">
+              <p>{p.inviter_name !== name ? p.inviter_name : p.invitee_name}</p>
+              <div className="flex justify-between mt-2 text-sm">
+                <button className="bg-red-600/40 rounded px-2 cursor-not-allowed">Archive</button>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
 
       {/* Invite New Partner */}
       <InvitePartnerLink />
