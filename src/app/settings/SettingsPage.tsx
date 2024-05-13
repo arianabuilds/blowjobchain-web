@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
 import { HelloName } from "../HelloName"
 import { loadUserIDandName } from "../HomePage"
-import Link from "next/link"
 import { PartnershipSettings } from "./PartnershipSettings"
+import { BackButton } from "./BackButton"
 
 export const SettingsPage = async () => {
   const { name } = await loadUserIDandName()
@@ -11,9 +11,7 @@ export const SettingsPage = async () => {
   return (
     <div className="p-4 text-center space-y-3">
       {/* Back button */}
-      <Link href="/" className="absolute left-5 top-5">
-        {"<"}
-      </Link>
+      <BackButton />
 
       {/* 'Settings' title */}
       <h1>Settings</h1>
