@@ -3,6 +3,7 @@ import { PartnershipsWithName, loadPartnerships } from "./load-partnerships"
 import { format } from "@expo/timeago.js"
 import { getActivePartnership, isNonEmptyArray } from "./settings/PartnershipSettings"
 import { PrePartner } from "./PrePartner"
+import { NoRecordsYet } from "./NoRecordsYet"
 
 export const MainScreen = async ({
   name,
@@ -26,10 +27,7 @@ export const MainScreen = async ({
   return (
     <div className="text-center">
       {!points?.length ? (
-        // No records
-        <p className="border rounded-lg border-black/50 p-2 px-10 my-16 text-black/80">
-          No records yet
-        </p>
+        <NoRecordsYet />
       ) : (
         // List of points
         <div className="mt-6 text-left">
