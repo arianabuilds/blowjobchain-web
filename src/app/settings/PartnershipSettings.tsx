@@ -11,6 +11,7 @@ export const PartnershipSettings = async ({
 }) => {
   const { partnerships } = await loadPartnerships()
   if (!partnerships) return <p>Error loading partnerships</p>
+  if (!isNonEmptyArray(partnerships)) return null
 
   const active = getActivePartnership(partnerships, active_partner)
 
@@ -77,9 +78,17 @@ export const PartnershipSettings = async ({
   )
 }
 
-/** Compares against `active_partner` setting, or defaults to 1st partnership */
+/** Helper type: an array with at least one element */
+type NonEmptyArray<T> = [T, ...T[]]
+
+/** Check if an array is non-empty */
+export function isNonEmptyArray<T>(arr: T[]): arr is NonEmptyArray<T> {
+  return arr.length > 0
+}
+
+/** Compares against `active_partner` setting, or defaults to 1st partnership. Requires partnerships that have first passed `isNonEmptyArray()` check. */
 export const getActivePartnership = (
-  partnerships: PartnershipsWithName,
+  partnerships: NonEmptyArray<PartnershipsWithName[0]>,
   active_partner?: string | null,
 ) =>
   partnerships.find((p) => [p.inviter, p.invitee].includes(active_partner || "")) || partnerships[0]

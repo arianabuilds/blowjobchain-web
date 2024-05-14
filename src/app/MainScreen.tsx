@@ -1,8 +1,8 @@
 import { createSupabaseServer } from "@/supabase/server"
-import { HelloName } from "./HelloName"
-import { InvitePartnerLink } from "./InvitePartnerLink"
-import { loadPartnerships } from "./load-partnerships"
+import { PartnershipsWithName, loadPartnerships } from "./load-partnerships"
 import { format } from "@expo/timeago.js"
+import { getActivePartnership, isNonEmptyArray } from "./settings/PartnershipSettings"
+import { PrePartner } from "./PrePartner"
 
 export const MainScreen = async ({
   name,
@@ -12,19 +12,19 @@ export const MainScreen = async ({
   active_partner?: null | string
 }) => {
   const { partnerships } = await loadPartnerships()
-  const hasPartner = !!partnerships?.length
+  if (partnerships === null) return <p>Error loading partnerships.</p>
+  if (!isNonEmptyArray(partnerships)) return <PrePartner name={name} />
 
-  const userIdToName = (partnerships || []).reduce(
-    (memo, p) => ({ ...memo, [p.inviter]: p.inviter_name?.[0], [p.invitee]: p.invitee_name?.[0] }),
-    {} as Record<string, string | undefined>,
-  )
+  const active = getActivePartnership(partnerships, active_partner)
 
+  const userIdToName = {
+    [active.inviter]: active.inviter_name,
+    [active.invitee]: active.invitee_name,
+  }
   const points = await loadPoints()
 
   return (
     <div className="text-center">
-      <HelloName name={name} />
-
       {!points?.length ? (
         // No records
         <p className="border rounded-lg border-black/50 p-2 px-10 my-16 text-black/80">
@@ -48,16 +48,13 @@ export const MainScreen = async ({
                   .replace(" day", "d")
                   .replace("s ", " ")}
               </span>{" "}
-              <span className="mr-1">{userIdToName[r.to]}</span> +{r.amount} point
+              <span className="mr-1">{userIdToName[r.to]?.[0]}</span> +{r.amount} point
               {r.amount !== 1 ? "s" : ""}
               <span className="inline-block w-[5rem] text-right">{r.comment ? "💬" : ""}</span>
             </div>
           ))}
         </div>
       )}
-
-      {/* Share invite link */}
-      {!hasPartner && <InvitePartnerLink />}
     </div>
   )
 }
