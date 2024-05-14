@@ -116,18 +116,28 @@ export type Database = {
       }
       profiles: {
         Row: {
+          active_partner: string | null
           name: string | null
           user_id: string
         }
         Insert: {
+          active_partner?: string | null
           name?: string | null
           user_id: string
         }
         Update: {
+          active_partner?: string | null
           name?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "profiles_active_partner_fkey"
+            columns: ["active_partner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "profiles_user_id_fkey"
             columns: ["user_id"]
