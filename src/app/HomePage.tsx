@@ -9,7 +9,7 @@ import { SettingsButton } from "./SettingsButton"
 import { Tables } from "@/supabase/types-generated"
 
 export async function HomePage() {
-  const { user_id, name } = await loadUserProfile()
+  const { user_id, name, active_partner } = await loadUserProfile()
 
   return (
     <>
@@ -21,9 +21,17 @@ export async function HomePage() {
       </div>
 
       {/* Page content */}
-      {!user_id ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
+      {!user_id ? (
+        <Login />
+      ) : !name ? (
+        <SetYourName />
+      ) : (
+        <MainScreen name={name} active_partner={active_partner} />
+      )}
 
-      <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
+      <footer className="pb-6">
+        {!!name && <Footer name={name} active_partner={active_partner} />}
+      </footer>
     </>
   )
 }

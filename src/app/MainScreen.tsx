@@ -4,7 +4,13 @@ import { InvitePartnerLink } from "./InvitePartnerLink"
 import { loadPartnerships } from "./load-partnerships"
 import { format } from "@expo/timeago.js"
 
-export const MainScreen = async ({ name }: { name: string }) => {
+export const MainScreen = async ({
+  name,
+  active_partner,
+}: {
+  name: string
+  active_partner?: null | string
+}) => {
   const { partnerships } = await loadPartnerships()
   const hasPartner = !!partnerships?.length
 

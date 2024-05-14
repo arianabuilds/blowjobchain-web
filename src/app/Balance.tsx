@@ -1,30 +1,31 @@
-"use server"
-
 import { createSupabaseServer } from "@/supabase/server"
-import { PartnershipWithName } from "./load-partnerships"
+import { PartnershipsWithName } from "./load-partnerships"
+import { getActivePartnership } from "./settings/PartnershipSettings"
 
 export const Balance = async ({
   name,
   partnerships,
+  active_partner,
 }: {
   name: string
-  partnerships: PartnershipWithName
+  partnerships: PartnershipsWithName
+  active_partner?: null | string
 }) => {
-  const firstPartnership = partnerships[0]
+  const active = getActivePartnership(partnerships, active_partner)
 
-  const balances = await getBalances(firstPartnership)
+  const balances = await getBalances(active)
   if (!balances) return <p>Error loading balances</p>
 
   // Partner's name is the one that's not ours
-  let partner = firstPartnership.inviter_name
-  let partner_balance = balances[firstPartnership.inviter]
-  let my_balance = balances[firstPartnership.invitee]
+  let partner = active.inviter_name
+  let partner_balance = balances[active.inviter]
+  let my_balance = balances[active.invitee]
   // We assumed partner was inviter,
   // if that was wrong, flip inviter and invitee
   if (partner === name) {
-    partner = firstPartnership.invitee_name
-    partner_balance = balances[firstPartnership.invitee]
-    my_balance = balances[firstPartnership.inviter]
+    partner = active.invitee_name
+    partner_balance = balances[active.invitee]
+    my_balance = balances[active.inviter]
   }
 
   return (

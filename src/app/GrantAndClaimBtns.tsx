@@ -1,14 +1,14 @@
 "use client"
 
 import { createSupabaseClient } from "@/supabase/client"
-import { PartnershipWithName } from "./load-partnerships"
+import { PartnershipsWithName } from "./load-partnerships"
 
 const buttonClasses = `px-10 py-2 border-2 rounded-md text-gray-800 transition font-medium`
 
 export const GrantAndClaimBtns = ({
   partnerships,
 }: {
-  partnerships: PartnershipWithName | null
+  partnerships: PartnershipsWithName | null
 }) => {
   const partnership = partnerships?.[0]
 

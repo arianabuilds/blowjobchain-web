@@ -1,8 +1,6 @@
-"use server"
-
 import { createSupabaseServer } from "@/supabase/server"
 import { InvitePartnerLink } from "../InvitePartnerLink"
-import { loadPartnerships } from "../load-partnerships"
+import { PartnershipsWithName, loadPartnerships } from "../load-partnerships"
 
 export const PartnershipSettings = async ({
   name,
@@ -14,9 +12,7 @@ export const PartnershipSettings = async ({
   const { partnerships } = await loadPartnerships()
   if (!partnerships) return <p>Error loading partnerships</p>
 
-  const active =
-    partnerships.find((p) => [p.inviter, p.invitee].includes(active_partner || "")) ||
-    partnerships[0]
+  const active = getActivePartnership(partnerships, active_partner)
 
   return (
     <div className="bg-black/5 rounded-xl p-2 text-left">
@@ -80,3 +76,10 @@ export const PartnershipSettings = async ({
     </div>
   )
 }
+
+/** Compares against `active_partner` setting, or defaults to 1st partnership */
+export const getActivePartnership = (
+  partnerships: PartnershipsWithName,
+  active_partner?: string | null,
+) =>
+  partnerships.find((p) => [p.inviter, p.invitee].includes(active_partner || "")) || partnerships[0]
