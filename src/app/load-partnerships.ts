@@ -6,6 +6,6 @@ export type PartnershipsWithName = Database["public"]["Functions"][typeof rpc_na
 
 export async function loadPartnerships() {
   const supabase = createSupabaseServer()
-  const { data: partnerships, error } = await supabase.rpc(rpc_name).select()
-  return { partnerships }
+  const { data } = await supabase.rpc(rpc_name).select()
+  return { partnerships: data }
 }
