@@ -1,10 +1,8 @@
-"use client"
+import { get_user_id } from "./get-user-id"
 
-import { useUserId } from "./useUserId"
-
-export const InvitePartnerLink = () => {
-  const { userId } = useUserId()
-  const link = `blowjobchain-web.vercel.app/partner?u=${userId}`
+export const InvitePartnerLink = async () => {
+  const { user_id } = await get_user_id()
+  const link = `blowjobchain-web.vercel.app/partner?u=${user_id}`
 
   return (
     <div className="flex">
