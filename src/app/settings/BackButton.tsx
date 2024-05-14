@@ -2,7 +2,10 @@ import Link from "next/link"
 
 export const BackButton = () => {
   return (
-    <Link href="/" className="absolute left-5 top-6 opacity-70 cursor-pointer">
+    <Link
+      href="/"
+      className="hover:bg-black/10 rounded-full absolute left-3 top-4 opacity-70 cursor-pointer z-10 p-2"
+    >
       <svg height="20px" width="20px" version="1.1" viewBox="0 0 309.143 309.143">
         <path
           style={{ fill: "#231F20" }}
