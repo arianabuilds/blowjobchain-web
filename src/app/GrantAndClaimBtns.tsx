@@ -20,7 +20,7 @@ export const GrantAndClaimBtns = ({
   return (
     <div className="flex justify-center space-x-10">
       <button
-        className={`${buttonClasses} border-blue-400/70 bg-blue-300 hover:bg-blue-400`}
+        className={`${buttonClasses} border-blue-400/70 bg-blue-300 hover:bg-blue-300/60`}
         onClick={() =>
           !active ? alert("Add a partner to grant them blowjob points") : grantPoints(active)
         }
@@ -28,7 +28,7 @@ export const GrantAndClaimBtns = ({
         Grant
       </button>
       <button
-        className={`${buttonClasses} border-purple-400/80 bg-purple-300/80 hover:bg-purple-400/80`}
+        className={`${buttonClasses} border-purple-400/80 bg-purple-300/80 hover:bg-purple-300/50`}
         onClick={() => alert("Earn 10 points from your partner to claim 1 blowjob card")}
       >
         Claim
