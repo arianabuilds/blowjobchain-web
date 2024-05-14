@@ -54,4 +54,6 @@ async function grantPoints({ inviter, invitee }: { inviter: string; invitee: str
     .from("points")
     .insert({ amount: +points, comment, from: user_id, to: partner })
   if (error) alert(JSON.stringify({ error }))
+
+  window.location.reload()
 }
