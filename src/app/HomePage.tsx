@@ -7,6 +7,7 @@ import { Logo } from "./Logo"
 import { Footer } from "./Footer"
 import { SettingsButton } from "./SettingsButton"
 import { Tables } from "@/supabase/types-generated"
+import { get_user_id } from "./get-user-id"
 
 export async function HomePage() {
   const { user_id, name, active_partner } = await loadUserProfile()
@@ -38,17 +39,15 @@ export async function HomePage() {
 
 export async function loadUserProfile(): Promise<Tables<"profiles"> | Record<string, undefined>> {
   // Are they logged in?
-  const supabase = createSupabaseServer()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser() // TODO: Switch to faster getSession()
-  if (!user) return {}
+  const { user_id } = await get_user_id()
+  if (!user_id) return {}
 
   // Load user profile
-  const { data, error } = await supabase.from("profiles").select().eq("user_id", user.id)
-  if (error) {
-    console.error("Load-name error:", error)
-    return {}
-  }
+  const { data, error } = await createSupabaseServer()
+    .from("profiles")
+    .select()
+    .eq("user_id", user_id)
+  if (error) return console.error("Load-name error:", error), {}
+
   return data[0]
 }
