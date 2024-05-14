@@ -6,41 +6,41 @@ import { MainScreen } from "./MainScreen"
 import { Logo } from "./Logo"
 import { Footer } from "./Footer"
 import { SettingsButton } from "./SettingsButton"
+import { Tables } from "@/supabase/types-generated"
 
 export async function HomePage() {
-  const { user, name } = await loadUserIDandName()
+  const { user_id, name } = await loadUserProfile()
 
   return (
     <>
       {/* Logo and tagline */}
       <div className="text-center">
         <Logo big={!name} />
-        {!user && <RotatingTagline />}
+        {!user_id && <RotatingTagline />}
         {name && <SettingsButton />}
       </div>
 
       {/* Page content */}
-      {!user ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
+      {!user_id ? <Login /> : !name ? <SetYourName /> : <MainScreen name={name} />}
 
       <footer className="pb-6">{!!name && <Footer name={name} />}</footer>
     </>
   )
 }
 
-export async function loadUserIDandName() {
+export async function loadUserProfile(): Promise<Tables<"profiles"> | Record<string, undefined>> {
   // Are they logged in?
   const supabase = createSupabaseServer()
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser() // TODO: Switch to faster getSession()
+  if (!user) return {}
 
   // Load user profile
-  let name: string | null = null
-  if (user) {
-    const { data, error } = await supabase.from("profiles").select().eq("user_id", user.id)
-    if (error) console.error("Load-name error:", error)
-    if (data) name = data[0]?.name
+  const { data, error } = await supabase.from("profiles").select().eq("user_id", user.id)
+  if (error) {
+    console.error("Load-name error:", error)
+    return {}
   }
-
-  return { user, name }
+  return data[0]
 }

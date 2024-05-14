@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation"
 import { HelloName } from "../HelloName"
-import { loadUserIDandName } from "../HomePage"
+import { loadUserProfile } from "../HomePage"
 import { PartnershipSettings } from "./PartnershipSettings"
 import { BackButton } from "./BackButton"
 
 export const SettingsPage = async () => {
-  const { name } = await loadUserIDandName()
+  const { name, active_partner } = await loadUserProfile()
   if (!name) redirect("/")
 
   return (
@@ -20,7 +20,7 @@ export const SettingsPage = async () => {
       <HelloName name={name} />
 
       {/* Partnership Settings */}
-      <PartnershipSettings name={name} />
+      <PartnershipSettings name={name} active_partner={active_partner} />
 
       {/* Logout button */}
     </div>
