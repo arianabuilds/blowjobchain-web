@@ -2,6 +2,7 @@ import { createSupabaseServer } from "@/supabase/server"
 import { InvitePartnerLink } from "../InvitePartnerLink"
 import { loadPartnerships } from "../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
+import { revalidatePath } from "next/cache"
 
 const rowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
@@ -62,6 +63,8 @@ export const PartnershipSettings = async ({
                       .update({ active_partner: p.inviter !== user.id ? p.inviter : p.invitee })
                       .eq("user_id", user.id)
                     if (error) return console.error("Error setting active_partner:", error)
+
+                    revalidatePath("/settings")
                   }}
                 >
                   Set Current
