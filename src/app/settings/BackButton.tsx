@@ -6,7 +6,13 @@ export const BackButton = () => {
       href="/"
       className="hover:bg-black/10 rounded-full absolute left-3 top-4 opacity-70 cursor-pointer z-10 p-2"
     >
-      <svg height="20px" width="20px" version="1.1" viewBox="0 0 309.143 309.143">
+      <svg
+        height="20px"
+        width="20px"
+        version="1.1"
+        viewBox="0 0 309.143 309.143"
+        className="right-px relative"
+      >
         <path
           style={{ fill: "#231F20" }}
           d="M112.855,154.571L240.481,26.946c2.929-2.929,2.929-7.678,0-10.606L226.339,2.197
