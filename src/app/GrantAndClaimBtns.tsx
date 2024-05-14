@@ -2,24 +2,27 @@
 
 import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipsWithName } from "./load-partnerships"
+import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
 
 const buttonClasses = `px-10 py-2 border-2 rounded-md text-gray-800 transition font-medium`
 
 export const GrantAndClaimBtns = ({
   partnerships,
+  active_partner,
 }: {
   partnerships: PartnershipsWithName | null
+  active_partner?: null | string
 }) => {
-  const partnership = partnerships?.[0]
+  let active = null
+  if (partnerships && isNonEmptyArray(partnerships))
+    active = getActivePartnership(partnerships, active_partner)
 
   return (
     <div className="flex justify-center space-x-10">
       <button
         className={`${buttonClasses} border-blue-400/70 bg-blue-300`}
         onClick={() =>
-          !partnership
-            ? alert("Add a partner to grant them blowjob points")
-            : grantPoints(partnership)
+          !active ? alert("Add a partner to grant them blowjob points") : grantPoints(active)
         }
       >
         Grant

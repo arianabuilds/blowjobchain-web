@@ -1,7 +1,7 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { PartnershipsWithName, loadPartnerships } from "./load-partnerships"
 import { format } from "@expo/timeago.js"
-import { getActivePartnership, isNonEmptyArray } from "./settings/PartnershipSettings"
+import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
 import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 
