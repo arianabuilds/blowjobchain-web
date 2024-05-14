@@ -3,7 +3,7 @@ import { InvitePartnerLink } from "../InvitePartnerLink"
 import { loadPartnerships } from "../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 
-const rowStyle = "rounded-lg bg-black/10 p-1 px-4 mb-3 flex justify-between"
+const rowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
 export const PartnershipSettings = async ({
   name,
@@ -43,7 +43,7 @@ export const PartnershipSettings = async ({
               <form>
                 <button
                   type="submit"
-                  className="text-neutral-200/80 border-neutral-200/80 border hover:bg-neutral-300/40 hover:text-neutral-100 rounded px-2 text-sm"
+                  className="text-black/30 border-black/20 border hover:bg-white/20 hover:text-black/70 rounded px-2 text-sm"
                   formAction={async () => {
                     "use server"
 

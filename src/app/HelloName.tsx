@@ -7,7 +7,7 @@ export const HelloName = ({ name }: { name: string }) => {
     <p className="text-xl">
       Hello{" "}
       <a
-        className="underline decoration-dashed decoration-slate-500 cursor-pointer"
+        className="underline decoration-dashed decoration-black/50 cursor-pointer hover:bg-pink-100/30 rounded-lg px-1 -ml-0.5"
         style={{ textUnderlineOffset: 3 }}
         onClick={async () => {
           if (!confirm("Change your name?")) return
