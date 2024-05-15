@@ -41,7 +41,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         </div>
 
         {/* Right: Comment icon */}
-        <span className="inline-block w-12 text-right">{point.comment ? "💬" : ""}</span>
+        <span className="inline-block w-12 text-right opacity-60">{point.comment ? "💬" : ""}</span>
       </div>
 
       {/* Hidden second row */}
