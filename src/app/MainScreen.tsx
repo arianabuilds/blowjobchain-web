@@ -28,7 +28,7 @@ export const MainScreen = async ({
         <NoRecordsYet />
       ) : (
         // List of points
-        <div className="mt-6 w-full max-h-[65vh] px-4 max-w-96 mx-auto">
+        <div className="mt-6 w-full max-h-[55vh] px-4 max-w-96 mx-auto">
           {points.map((point) => (
             <PointRow
               key={point.id}
