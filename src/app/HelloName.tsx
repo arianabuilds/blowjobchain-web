@@ -17,7 +17,7 @@ export const HelloName = ({ name }: { name: string }) => {
 
           await supabase
             .from("profiles")
-            .delete()
+            .update({ name: null })
             .eq("user_id", user_id || "")
           window.location.reload()
         }}

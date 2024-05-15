@@ -36,7 +36,7 @@ async function SetYourNameAction(formData: FormData) {
   const user_id = (await supabase.auth.getUser()).data.user?.id
   if (typeof user_id !== "string") return console.error("SetName: not logged in", user_id)
 
-  await supabase.from("profiles").insert({ name, user_id })
+  await supabase.from("profiles").upsert({ name, user_id })
 
   window.location.reload()
 }
