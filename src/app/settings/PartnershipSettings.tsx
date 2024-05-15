@@ -3,6 +3,7 @@ import { InvitePartnerLink } from "../InvitePartnerLink"
 import { loadPartnerships } from "../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { revalidatePath } from "next/cache"
+import { get_user_id } from "../get-user-id"
 
 const rowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
@@ -51,17 +52,14 @@ export const PartnershipSettings = async ({
                     const supabase = createSupabaseServer()
 
                     // Get user.id
-                    const {
-                      data: { session },
-                    } = await supabase.auth.getSession()
-                    if (!session) return console.error("Error: not logged in")
-                    const { user } = session
+                    const { user_id } = await get_user_id()
+                    if (!user_id) return console.error("Error: not logged in")
 
                     // Save new active_partner id to db
                     const { error } = await supabase
                       .from("profiles")
-                      .update({ active_partner: p.inviter !== user.id ? p.inviter : p.invitee })
-                      .eq("user_id", user.id)
+                      .update({ active_partner: p.inviter !== user_id ? p.inviter : p.invitee })
+                      .eq("user_id", user_id)
                     if (error) return console.error("Error setting active_partner:", error)
 
                     revalidatePath("/settings")
