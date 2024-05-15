@@ -22,6 +22,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
             .replace(" minute", "m")
             .replace(" hour", "h")
             .replace(" day", "d")
+            .replace(" month", "mo")
+            .replace(" year", "y")
             .replace("s ", " ")}
         </span>{" "}
         {/* who */}
