@@ -47,15 +47,17 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   const summary = { [inviter]: 0, [invitee]: 0 }
 
   // Download all entries [TODO: newer then balance summary]
-  const { data: newEntries, error } = await createSupabaseServer().from("points").select()
-  if (!newEntries)
-    return console.error(`Error loading new balance entries: ${JSON.stringify(error)}`)
+  const { data: newPoints, error } = await createSupabaseServer()
+    .from("points")
+    .select()
+    .in("from", [inviter, invitee])
+    .in("to", [inviter, invitee])
+  if (!newPoints) return console.error(`Error loading new balance Points: ${JSON.stringify(error)}`)
 
   // Calc new balance
   const new_balance = { ...summary }
-  newEntries.forEach((entry) => {
-    if (entry.to === inviter) new_balance[inviter] += entry.amount / 10
-    if (entry.to === invitee) new_balance[invitee] += entry.amount / 10
+  newPoints.forEach((point) => {
+    new_balance[point.amount < 0 ? point.from : point.to] += point.amount / 10
   })
 
   // TODO: If balance changed, store update
