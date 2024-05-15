@@ -28,7 +28,7 @@ export const MainScreen = async ({
         <NoRecordsYet />
       ) : (
         // List of points
-        <div className="mt-6 text-left">
+        <div className="mt-6 text-left overflow-y-scroll max-h-[65vh]">
           {points.map((r, index) => (
             <PointRow key={index} r={r} from={idToName[r.from]} />
           ))}
