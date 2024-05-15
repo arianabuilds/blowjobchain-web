@@ -3,6 +3,8 @@
 import { Tables } from "@/supabase/types-generated"
 import { format } from "@expo/timeago.js"
 import { useState } from "react"
+import CommentIcon from "./comment-icon.svg"
+import Image from "next/image"
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
@@ -41,7 +43,9 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         </div>
 
         {/* Right: Comment icon */}
-        <span className="inline-block w-12 text-right opacity-60">{point.comment ? "💬" : ""}</span>
+        <div className="w-12 flex justify-end opacity-30">
+          {point.comment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
+        </div>
       </div>
 
       {/* Hidden second row */}
