@@ -28,7 +28,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         <span className="mr-1">{who?.[0]}</span>
         {/* Amount */}
         <>
-          +{point.amount} point
+          {point.amount > 0 && "+"}
+          {point.amount} point
           {point.amount !== 1 ? "s" : ""}
         </>
         {/* Comment icon */}
