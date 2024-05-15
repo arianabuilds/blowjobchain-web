@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { login, submitLoginCode } from "./login-action"
+import { useFormStatus } from "react-dom"
 
 export const Login = ({ inviterID }: { inviterID?: string }) => {
   const searchParams = useSearchParams()
@@ -29,9 +30,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
       <h3 className="text-xl mb-10">{!inviterID ? "Log In" : "Join"}</h3>
       <input name="email" className="rounded p-1 px-3" placeholder="Email" type="email" />
       <input name="inviter-id" value={inviterID} type="hidden" />
-      <button formAction={login} className="bg-blue-900/80 rounded text-white p-1 mt-2">
-        Send Login Code
-      </button>
+      <SendLoginCodeButton />
     </form>
   ) : (
     // Enter Login Code
@@ -47,9 +46,33 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
         placeholder="6-digit code"
         type="text"
       />
-      <button formAction={submitLoginCode} className="bg-blue-900/80 rounded text-white p-1 mt-2">
-        Submit
-      </button>
+      <SubmitCodeButton />
     </form>
+  )
+}
+
+function SendLoginCodeButton() {
+  const { pending } = useFormStatus()
+  return (
+    <button
+      disabled={pending}
+      formAction={login}
+      className="bg-blue-900/80 rounded text-white p-1 mt-2"
+    >
+      Send{pending ? "ing" : ""} Login Code
+    </button>
+  )
+}
+
+function SubmitCodeButton() {
+  const { pending } = useFormStatus()
+  return (
+    <button
+      disabled={pending}
+      formAction={submitLoginCode}
+      className="bg-blue-900/80 rounded text-white p-1 mt-2"
+    >
+      Submit{pending ? "ting..." : ""}
+    </button>
   )
 }
