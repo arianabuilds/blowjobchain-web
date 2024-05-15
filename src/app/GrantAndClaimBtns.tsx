@@ -4,7 +4,7 @@ import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipsWithName } from "./load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
 
-const buttonClasses = `px-10 py-2 border-2 rounded-md text-gray-800 transition font-medium`
+const buttonClasses = `px-12 py-2 border-2 rounded-md text-gray-800 transition font-medium`
 
 export const GrantAndClaimBtns = ({
   partnerships,

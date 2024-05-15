@@ -23,12 +23,12 @@ export const MainScreen = async ({
   const points = await loadPoints(a)
 
   return (
-    <div className="text-center px-2.5 w-full">
+    <div className="text-center w-full overflow-y-scroll">
       {!points?.length ? (
         <NoRecordsYet />
       ) : (
         // List of points
-        <div className="mt-6 w-full max-h-[65vh] px-2.5 overflow-y-scroll max-w-96 mx-auto">
+        <div className="mt-6 w-full max-h-[65vh] px-4 max-w-96 mx-auto">
           {points.map((point) => (
             <PointRow
               key={point.id}

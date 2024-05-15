@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-red-300">
       <body
-        className={`from-red-300 to-blue-200 bg-gradient-to-b  min-h-[100cqh] flex flex-col items-center justify-between overflow-hidden ${inter.className}`}
+        className={`from-red-300 to-blue-200 bg-gradient-to-b  min-h-[100cqh] flex flex-col items-center justify-between px-1 overflow-hidden ${inter.className}`}
       >
         {children}
       </body>
