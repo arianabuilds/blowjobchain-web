@@ -5,7 +5,7 @@ import { PartnershipsWithName } from "./load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
 import { useState } from "react"
 
-const buttonClasses = `px-12 py-2 border-2 rounded-md text-gray-800 transition font-medium`
+const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-md text-gray-800 transition font-medium`
 
 export const GrantAndClaimBtns = ({
   partnerships,

@@ -30,11 +30,11 @@ export const Balance = async ({
 
   return (
     <div className="text-center">
-      <div className="flex justify-center space-x-12 mb-2">
-        <div className="w-[7.5rem]">
+      <div className="flex justify-center space-x-10 mb-2">
+        <div className="w-[9.1rem]">
           {partner}: {partner_balance.toFixed(1)}
         </div>
-        <div className="w-[7.5rem]">
+        <div className="w-[9.1rem]">
           {name}: {my_balance.toFixed(1)}
         </div>
       </div>
