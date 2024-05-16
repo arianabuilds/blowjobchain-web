@@ -1,6 +1,6 @@
 "use client"
 
-import { Tables } from "@/supabase/types-generated"
+import { Tables } from "@/supabase/types"
 import { format } from "@expo/timeago.js"
 import { useState } from "react"
 import CommentIcon from "./comment-icon.svg"

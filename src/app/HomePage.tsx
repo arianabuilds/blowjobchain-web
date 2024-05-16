@@ -6,7 +6,7 @@ import { MainScreen } from "./MainScreen"
 import { Logo } from "./Logo"
 import { Footer } from "./Footer"
 import { SettingsButton } from "./SettingsButton"
-import { Tables } from "@/supabase/types-generated"
+import { Tables } from "@/supabase/types"
 import { get_user_id } from "./get-user-id"
 
 export async function HomePage() {
