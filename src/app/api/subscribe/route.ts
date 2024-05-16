@@ -21,10 +21,11 @@ export async function POST(req: NextRequest) {
     .update({ push_notif_subscriptions: [subscription] })
     .eq("user_id", user_id)
 
-  const payload = JSON.stringify({ title: "bjchain notifications enabled", body: "be in touch" })
-
   try {
-    await webPush.sendNotification(subscription, payload)
+    await webPush.sendNotification(
+      subscription,
+      JSON.stringify({ title: "notifications enabled", body: "be in touch" }),
+    )
     return NextResponse.json({ message: "Notification sent" })
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 })

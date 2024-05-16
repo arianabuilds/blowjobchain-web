@@ -47,6 +47,9 @@ export const GrantAndClaimBtns = ({
             .insert({ amount: +points, comment, from: user_id, to: partner })
           if (error) alert(JSON.stringify({ error }))
 
+          // Notify partner
+          await notifyPartner(user_id, active, +points, comment || "")
+
           window.location.reload()
         }}
       >
@@ -55,11 +58,28 @@ export const GrantAndClaimBtns = ({
       <button
         disabled={pendingClaim}
         className={`${buttonClasses} border-purple-400/80 bg-purple-300/80 hover:bg-purple-300/50`}
-        onClick={() => {
+        onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 
           setPendingClaim(true)
-          claimPoints(active)
+          // Get user session
+          const supabase = createSupabaseClient()
+          const user_id = (await supabase.auth.getSession()).data.session?.user.id
+          if (!user_id) return alert("Not Logged In")
+          let partner = active.inviter !== user_id ? active.inviter : active.invitee
+
+          const amount = -10
+
+          // Save to db
+          const { error } = await supabase
+            .from("points")
+            .insert({ amount, from: user_id, to: partner })
+          if (error) alert(JSON.stringify({ error }))
+
+          // Notify partner
+          await notifyPartner(user_id, active, amount)
+
+          window.location.reload()
         }}
       >
         Claim{pendingClaim && "ing..."}
@@ -68,18 +88,19 @@ export const GrantAndClaimBtns = ({
   )
 }
 
-async function claimPoints({ inviter, invitee }: { inviter: string; invitee: string }) {
-  // Get user session
-  const supabase = createSupabaseClient()
-  const user_id = (await supabase.auth.getSession()).data.session?.user.id
-  if (!user_id) return alert("Not Logged In")
-  let partner = inviter !== user_id ? inviter : invitee
+function notifyPartner(
+  user_id: string,
+  active: PartnershipsWithName[0],
+  amount: number,
+  comment?: string,
+) {
+  const to_id = active.inviter !== user_id ? active.inviter : active.invitee
+  const from_name = active.inviter === user_id ? active.inviter_name : active.invitee_name
+  const title = `${from_name} ${amount === -10 ? "is claiming a card" : `granted you ${amount} point${amount !== 1 ? "s" : ""}`}`
 
-  // Save to db
-  const { error } = await supabase
-    .from("points")
-    .insert({ amount: -10, from: user_id, to: partner })
-  if (error) alert(JSON.stringify({ error }))
-
-  window.location.reload()
+  return fetch("/api/notify", {
+    method: "POST",
+    body: JSON.stringify({ to_id, title, body: comment }),
+    headers: { "Content-Type": "application/json" },
+  })
 }
