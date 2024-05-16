@@ -3,6 +3,7 @@ import { HelloName } from "../HelloName"
 import { loadUserProfile } from "../HomePage"
 import { PartnershipSettings } from "./PartnershipSettings"
 import { BackButton } from "./BackButton"
+import { EnableNotifications } from "./EnableNotifications"
 
 export const SettingsPage = async () => {
   const { name, active_partner } = await loadUserProfile()
@@ -18,6 +19,8 @@ export const SettingsPage = async () => {
 
       {/* HelloName */}
       <HelloName name={name} />
+
+      <EnableNotifications />
 
       {/* Partnership Settings */}
       <PartnershipSettings name={name} active_partner={active_partner} />
