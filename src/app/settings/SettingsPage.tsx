@@ -10,7 +10,7 @@ export const SettingsPage = async () => {
   if (!name) redirect("/")
 
   return (
-    <div className="py-0.5 text-center space-y-5">
+    <div className="py-0.5 text-center space-y-5 px-1.5">
       {/* Back button */}
       <BackButton />
 
