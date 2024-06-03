@@ -4,7 +4,7 @@ export const UpgradeMembershipButtons = () => {
   const onClick = () => alert("coming soon")
 
   return (
-    <div className="space-x-5">
+    <div className="space-x-5 text-sm">
       <button onClick={onClick} className="bg-white/40 hover:bg-white/50 px-3 rounded-lg">
         Yearly: $10
       </button>
