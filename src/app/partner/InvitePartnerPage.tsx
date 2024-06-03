@@ -18,7 +18,7 @@ export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
         <b className="font-semibold">{inviter}</b> invites you to be their partner 💕
       </p>
 
-      <div className="opacity-60 mt-8 space-y-3 mb-12">
+      <div className="opacity-60 mt-8 space-y-3 mb-32">
         <p>A surprisingly fun way to reward each other.</p>
         <p>
           <i>Earn 10 points to claim 1 blowjob card</i>
