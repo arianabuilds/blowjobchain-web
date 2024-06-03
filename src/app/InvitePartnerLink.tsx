@@ -2,7 +2,7 @@ import { get_user_id } from "./get-user-id"
 
 export const InvitePartnerLink = async () => {
   const { user_id } = await get_user_id()
-  const link = `blowjobchain-web.vercel.app/partner?u=${user_id}`
+  const link = `blowjobchain.com/partner?u=${user_id}`
 
   return (
     <div className="flex">
