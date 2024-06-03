@@ -4,8 +4,9 @@ import { loadPartnerships } from "../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { revalidatePath } from "next/cache"
 import { get_user_id } from "../get-user-id"
+import { MembershipSettings } from "./MembershipSettings"
 
-const rowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
+const shadedRowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
 export const PartnershipSettings = async ({
   name,
@@ -24,11 +25,18 @@ export const PartnershipSettings = async ({
     <div className="bg-black/5 rounded-xl p-3 px-5 text-left">
       <h3 className="mb-3">Partnership Settings:</h3>
       {/* Active Partnership */}
-      <div className={rowStyle}>
-        {/* Name */}
-        <div>{active.inviter_name !== name ? active.inviter_name : active.invitee_name}</div>
-        {/* Current label */}
-        {partnerships.length > 1 && <div className="text-sm opacity-40 italic pt-0.5">Current</div>}
+      <div className={`${shadedRowStyle} flex-col`}>
+        {/* Top row */}
+        <div className="flex justify-between">
+          {/* Name */}
+          <div>{active.inviter_name !== name ? active.inviter_name : active.invitee_name}</div>
+          {/* Current label */}
+          {partnerships.length > 1 && (
+            <div className="text-sm opacity-40 italic pt-0.5">Current</div>
+          )}
+        </div>
+
+        <MembershipSettings />
       </div>
 
       {/* Other Partnerships */}
@@ -37,7 +45,7 @@ export const PartnershipSettings = async ({
           .filter((p) => p !== active)
           .map((p, i) => (
             // One row
-            <div key={i} className={rowStyle}>
+            <div key={i} className={shadedRowStyle}>
               {/* Name */}
               <div>{p.inviter_name !== name ? p.inviter_name : p.invitee_name}</div>
 
