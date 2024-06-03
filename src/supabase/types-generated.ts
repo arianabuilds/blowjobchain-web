@@ -118,18 +118,21 @@ export type Database = {
         Row: {
           active_partner: string | null
           name: string | null
+          pub_key: string | null
           push_notif_subscriptions: Json[] | null
           user_id: string
         }
         Insert: {
           active_partner?: string | null
           name?: string | null
+          pub_key?: string | null
           push_notif_subscriptions?: Json[] | null
           user_id: string
         }
         Update: {
           active_partner?: string | null
           name?: string | null
+          pub_key?: string | null
           push_notif_subscriptions?: Json[] | null
           user_id?: string
         }
