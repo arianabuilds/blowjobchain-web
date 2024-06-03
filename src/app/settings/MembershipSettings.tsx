@@ -5,7 +5,7 @@ export const MembershipSettings = () => {
     <div className="text-center space-y-1">
       <h4>Free Usage Remaining:</h4>
       <div className="space-x-5 border border-white/30 rounded-lg inline-block p-2 min-w-[50%] mt-1">
-        <span>Partner: 3 blowjob cards</span>
+        <span>Partner: 3 cards</span>
         <span>You: 3 cards</span>
       </div>
 
