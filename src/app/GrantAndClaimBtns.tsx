@@ -117,10 +117,10 @@ function notifyPartner(
  */
 function usePublicKey(): { loadedPublicKey: boolean; publicKey?: null | string } {
   // Hasn't finished loading yet:
-  return { loadedPublicKey: false, publicKey: undefined }
+  // return { loadedPublicKey: false, publicKey: undefined }
 
   // No pubkey set for user:
-  // return { loadedPublicKey: false, publicKey: undefined }
+  return { loadedPublicKey: true, publicKey: null }
 
   // Pubkey found for user:
   // return { loadedPublicKey: true, publicKey: "example_pub_key" }
