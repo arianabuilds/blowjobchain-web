@@ -53,7 +53,7 @@ export const PartnershipSettings = async ({
               <form>
                 <button
                   type="submit"
-                  className="text-black/30 border-black/20 border hover:bg-white/20 hover:text-black/70 rounded px-2 text-sm"
+                  className="text-black text-opacity-30 border-black/20 border hover:bg-white/20 hover:text-opacity-70 hover:border-purple-600 active:bg-white/40 rounded px-2 text-sm"
                   formAction={async () => {
                     "use server"
 
