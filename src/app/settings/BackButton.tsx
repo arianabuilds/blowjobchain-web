@@ -4,7 +4,7 @@ export const BackButton = () => {
   return (
     <Link
       href="/"
-      className="hover:bg-black/10 rounded-full absolute left-3 top-4 opacity-70 cursor-pointer z-10 p-2"
+      className="hover:bg-black/10 rounded-full absolute left-3 top-4 opacity-70 cursor-pointer z-10 p-2 active:bg-black/15"
     >
       <svg
         height="20px"
