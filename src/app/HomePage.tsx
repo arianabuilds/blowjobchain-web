@@ -1,7 +1,7 @@
 import { Login } from "./logged-out/Login"
 import { RotatingTagline } from "./logged-out/RotatingTagline"
 import { SetYourName } from "./logged-in/SetYourName"
-import { MainScreen } from "./logged-in/MainScreen"
+import { MainList } from "./logged-in/MainList"
 import { Logo } from "./Logo"
 import { Footer } from "./logged-in/Footer"
 import { SettingsButton } from "./logged-in/SettingsButton"
@@ -26,7 +26,7 @@ export async function HomePage() {
       ) : !name ? (
         <SetYourName />
       ) : (
-        <MainScreen name={name} active_partner={active_partner} />
+        <MainList name={name} active_partner={active_partner} />
       )}
 
       <footer className="pb-6">

@@ -5,7 +5,7 @@ import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"
 
-export const MainScreen = async ({
+export const MainList = async ({
   name,
   active_partner,
 }: {
