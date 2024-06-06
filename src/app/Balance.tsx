@@ -32,10 +32,10 @@ export const Balance = async ({
     <div className="text-center">
       <div className="flex justify-center space-x-10 mb-2">
         <div className="w-[9.1rem]">
-          {partner}: {partner_balance.toFixed(1)}
+          {partner}: {printDecimals(partner_balance)}
         </div>
         <div className="w-[9.1rem]">
-          {name}: {my_balance.toFixed(1)}
+          {name}: {printDecimals(my_balance)}
         </div>
       </div>
     </div>
@@ -63,4 +63,9 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   // TODO: If balance changed, store update
 
   return new_balance
+}
+
+/** Show up to 2 decimal places, but don't show trailing zeros in the decimal places */
+function printDecimals(number: number): string {
+  return parseFloat(number.toFixed(4)).toString()
 }
