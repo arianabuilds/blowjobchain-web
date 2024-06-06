@@ -4,7 +4,7 @@ import { loadUserProfile } from "../HomePage"
 import { PartnershipSettings } from "./partnership/PartnershipSettings"
 import { BackButton } from "./BackButton"
 import { EnableNotifications } from "./EnableNotifications"
-import { PasswordSettings } from "./PasswordSettings"
+import { PasswordSettings } from "./password/PasswordSettings"
 import { LogOutButton } from "./LogOutButton"
 
 export const SettingsPage = async () => {
