@@ -1,6 +1,6 @@
 "use client"
 
-export const UpgradeMembershipButtons = () => {
+export const MembershipUpgradeButtons = () => {
   return (
     <div className="space-x-5 text-sm">
       {[["Yearly: $10"], ["Monthly: $1"]].map(([label]) => (
