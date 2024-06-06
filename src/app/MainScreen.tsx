@@ -43,8 +43,7 @@ export const MainScreen = async ({
 }
 
 async function loadPoints(a: PartnershipsWithName[0]) {
-  const supabase = createSupabaseServer()
-  const { data: points, error } = await supabase
+  const { data: points, error } = await createSupabaseServer()
     .from("points")
     .select()
     .order("created_at", { ascending: false })
