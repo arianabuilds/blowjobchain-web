@@ -17,6 +17,7 @@ export const SetPassword = () => {
       <button
         className="border ml-2 p-2 rounded-lg text-sm px-5 hover:bg-white/10"
         onClick={async () => {
+          // Are they logged in?
           const supabase = createSupabaseClient()
           const user_id = (await supabase.auth.getSession()).data.session?.user.id
           if (!user_id) return alert("Error: not logged in")
@@ -44,7 +45,7 @@ export const SetPassword = () => {
             .eq("user_id", user_id)
           if (error) alert(JSON.stringify(error))
 
-          setSaving(false)
+          window.location.reload()
         }}
       >
         Sav{!saving ? "e" : "ing"}
