@@ -8,14 +8,14 @@ export const SetPassword = () => {
   const $input = useRef<HTMLInputElement>(null)
   const [saving, setSaving] = useState(false)
   return (
-    <>
+    <div className="flex mt-2">
       <input
-        className="w-56 p-2 py-2 mt-2 rounded-lg opacity-90"
+        className="w-56 p-2 rounded-lg opacity-90"
         placeholder="correcthorsebatterystaple"
         ref={$input}
       />
       <button
-        className="p-2 px-5 ml-2 text-sm border rounded-lg hover:bg-white/10"
+        className="w-20 ml-2 text-sm border rounded-lg hover:bg-white/10 active:bg-white/20"
         onClick={async () => {
           // Are they logged in?
           const supabase = createSupabaseClient()
@@ -50,7 +50,7 @@ export const SetPassword = () => {
       >
         Sav{!saving ? "e" : "ing"}
       </button>
-    </>
+    </div>
   )
 }
 
