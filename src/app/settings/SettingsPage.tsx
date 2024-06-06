@@ -12,26 +12,28 @@ export const SettingsPage = async () => {
   if (!name) redirect("/")
 
   return (
-    <div className="py-0.5 text-center space-y-5 px-1.5 overflow-y-scroll max-h-screen">
-      {/* Back button */}
-      <BackButton />
+    <div className="py-0.5 text-center px-1.5 overflow-y-scroll max-h-screen w-full">
+      <div className="space-y-5 max-w-lg mx-auto">
+        {/* Back button */}
+        <BackButton />
 
-      {/* 'Settings' title */}
-      <h1 className="opacity-80">Settings</h1>
+        {/* 'Settings' title */}
+        <h1 className="opacity-80">Settings</h1>
 
-      {/* HelloName */}
-      <HelloName name={name} />
+        {/* HelloName */}
+        <HelloName name={name} />
 
-      <LogOutButton />
+        <LogOutButton />
 
-      <EnableNotifications />
+        <EnableNotifications />
 
-      {/* Partnership Settings */}
-      <PartnershipSettings name={name} active_partner={active_partner} />
+        {/* Partnership Settings */}
+        <PartnershipSettings name={name} active_partner={active_partner} />
 
-      <PasswordSettings />
+        <PasswordSettings />
 
-      {/* Logout button */}
+        {/* Logout button */}
+      </div>
     </div>
   )
 }
