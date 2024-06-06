@@ -15,7 +15,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     // Login Button
     <Link
       href="?login"
-      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-blue-800/30"
+      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-blue-800/30 active:bg-blue-800/40"
     >
       <h2 className="text-2xl font-semibold">
         Log In{" "}
@@ -57,7 +57,7 @@ function SendLoginCodeButton() {
     <button
       disabled={pending}
       formAction={login}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80"
+      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
     >
       Send{pending ? "ing" : ""} Login Code
     </button>
@@ -70,7 +70,7 @@ function SubmitCodeButton() {
     <button
       disabled={pending}
       formAction={submitLoginCode}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80"
+      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
     >
       Submit{pending ? "ting..." : ""}
     </button>
