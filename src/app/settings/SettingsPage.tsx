@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { HelloName } from "../HelloName"
+import { HelloName } from "../logged-in/HelloName"
 import { loadUserProfile } from "../HomePage"
 import { PartnershipSettings } from "./partnership/PartnershipSettings"
 import { BackButton } from "./BackButton"

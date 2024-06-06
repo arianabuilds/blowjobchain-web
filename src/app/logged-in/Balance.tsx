@@ -1,6 +1,6 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { PartnershipsWithName } from "./load-partnerships"
-import { NonEmptyArray, getActivePartnership } from "./settings/partnership/getActivePartnership"
+import { NonEmptyArray, getActivePartnership } from "./getActivePartnership"
 
 export const Balance = async ({
   name,

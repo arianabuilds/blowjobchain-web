@@ -2,7 +2,7 @@
 
 import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipsWithName } from "./load-partnerships"
-import { getActivePartnership, isNonEmptyArray } from "./settings/partnership/getActivePartnership"
+import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { useState } from "react"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-md text-gray-800 transition font-medium`

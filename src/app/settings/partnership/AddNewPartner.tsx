@@ -1,6 +1,6 @@
 "use client"
 
-import { InvitePartnerLink } from "@/app/InvitePartnerLink"
+import { InvitePartnerLink } from "@/app/logged-in/InvitePartnerLink"
 import { useState } from "react"
 
 export const AddNewPartner = () => {

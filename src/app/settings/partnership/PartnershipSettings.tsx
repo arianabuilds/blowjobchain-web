@@ -1,5 +1,5 @@
-import { loadPartnerships } from "../../load-partnerships"
-import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
+import { loadPartnerships } from "@/app/logged-in/load-partnerships"
+import { getActivePartnership, isNonEmptyArray } from "@/app/logged-in/getActivePartnership"
 
 import { MembershipSettings } from "./MembershipSettings"
 import { AddNewPartner } from "./AddNewPartner"

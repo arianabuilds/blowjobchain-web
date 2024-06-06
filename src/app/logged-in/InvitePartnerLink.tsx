@@ -1,6 +1,6 @@
 "use client"
 
-import { useUserId } from "./use-user-id"
+import { useUserId } from "../use-user-id"
 
 export const InvitePartnerLink = () => {
   const { user_id } = useUserId()

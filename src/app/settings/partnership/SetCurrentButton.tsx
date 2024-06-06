@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache"
-import { get_user_id_server } from "../../get-user-id-server"
+import { get_user_id_server } from "@/app/get-user-id-server"
 import { BackSVG } from "../BackButton"
-import { PartnershipsWithName } from "@/app/load-partnerships"
+import { PartnershipsWithName } from "@/app/logged-in/load-partnerships"
 
 export const SetCurrentButton = ({ p }: { p: PartnershipsWithName[0] }) => {
   return (
