@@ -1,7 +1,6 @@
 "use client"
 
 import { createSupabaseClient } from "@/supabase/client"
-import { PBKDF2 } from "crypto-js"
 import { privateToPublic } from "ed25519-keys"
 import { useRef, useState } from "react"
 
@@ -29,10 +28,14 @@ export const SetPassword = () => {
           setSaving(true)
 
           // 2. password derives private key
-          const privateKey = PBKDF2(input, "oursalt_sjdkjfskjdfklsjfnvn").toString()
+          const privateKey = new Uint32Array(
+            await derivePrivateKey(input, "oursalt_sjdkjfskjdfklsjfnvn"),
+          ).toString()
+          // console.log("privateKey", privateKey)
 
           // 3. private key calculates public key
           const pubKey = await privateToPublic(privateKey).catch(console.error)
+          // console.log("pubKey", pubKey)
 
           //   // 4. store public key in db
           const { error } = await supabase
@@ -47,5 +50,22 @@ export const SetPassword = () => {
         Sav{!saving ? "e" : "ing"}
       </button>
     </>
+  )
+}
+
+async function derivePrivateKey(input: string, salt: string): Promise<ArrayBuffer> {
+  const enc = new TextEncoder()
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(input),
+    { name: "PBKDF2" },
+    false,
+    ["deriveBits"],
+  )
+
+  return crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt: enc.encode(salt), iterations: 1000, hash: "SHA-256" },
+    keyMaterial,
+    256,
   )
 }
