@@ -1,7 +1,7 @@
-import { get_user_id } from "./get-user-id"
+import { get_user_id_server } from "./get-user-id-server"
 
 export const InvitePartnerLink = async () => {
-  const { user_id } = await get_user_id()
+  const { user_id } = await get_user_id_server()
   const link = `blowjobchain.com/partner?u=${user_id}`
 
   return (

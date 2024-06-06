@@ -1,9 +1,8 @@
-import { createSupabaseServer } from "@/supabase/server"
 import { InvitePartnerLink } from "../../InvitePartnerLink"
 import { loadPartnerships } from "../../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { revalidatePath } from "next/cache"
-import { get_user_id } from "../../get-user-id"
+import { get_user_id_server } from "../../get-user-id-server"
 import { MembershipSettings } from "./MembershipSettings"
 
 const shadedRowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
@@ -56,10 +55,8 @@ export const PartnershipSettings = async ({
                   formAction={async () => {
                     "use server"
 
-                    const supabase = createSupabaseServer()
-
                     // Get user.id
-                    const { user_id } = await get_user_id()
+                    const { user_id, supabase } = await get_user_id_server()
                     if (!user_id) return console.error("Error: not logged in")
 
                     // Save new active_partner id to db

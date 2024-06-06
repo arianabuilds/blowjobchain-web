@@ -1,13 +1,12 @@
 import { Login } from "./Login"
 import { RotatingTagline } from "./RotatingTagline"
-import { createSupabaseServer } from "@/supabase/server"
 import { SetYourName } from "./SetYourName"
 import { MainScreen } from "./MainScreen"
 import { Logo } from "./Logo"
 import { Footer } from "./Footer"
 import { SettingsButton } from "./SettingsButton"
 import { Tables } from "@/supabase/types"
-import { get_user_id } from "./get-user-id"
+import { get_user_id_server } from "./get-user-id-server"
 
 export async function HomePage() {
   const { user_id, name, active_partner } = await loadUserProfile()
@@ -39,14 +38,11 @@ export async function HomePage() {
 
 export async function loadUserProfile(): Promise<Tables<"profiles"> | Record<string, undefined>> {
   // Are they logged in?
-  const { user_id } = await get_user_id()
+  const { user_id, supabase } = await get_user_id_server()
   if (!user_id) return {}
 
   // Load user profile
-  const { data, error } = await createSupabaseServer()
-    .from("profiles")
-    .select()
-    .eq("user_id", user_id)
+  const { data, error } = await supabase.from("profiles").select().eq("user_id", user_id)
   if (error) return console.error("Load-name error:", error), {}
 
   return data[0]
