@@ -20,12 +20,20 @@ export const GrantAndClaimBtns = ({
   if (partnerships && isNonEmptyArray(partnerships))
     active = getActivePartnership(partnerships, active_partner)
 
+  const { loadedPublicKey, publicKey } = usePublicKey()
+
   return (
     <div className="flex justify-center space-x-10">
       <button
         disabled={pendingGrant}
         className={`${buttonClasses} border-blue-400/70 bg-blue-300 hover:bg-blue-300/60`}
         onClick={async () => {
+          // Use account public key info
+          if (!loadedPublicKey) return alert("Error: Still loading account info")
+          let password: null | string | undefined = undefined
+          if (publicKey) password = prompt("Your Password — to sign the transaction:")
+          if (password === null) return // pressed 'Cancel'
+
           if (!active) return alert("Add a partner to grant them blowjob points")
 
           // Get user session
@@ -103,4 +111,17 @@ function notifyPartner(
     body: JSON.stringify({ to_id, title, body: comment }),
     headers: { "Content-Type": "application/json" },
   })
+}
+
+/** Has the current user set a public key for their account? `loadedPublicKey` reports pending state whether this hook has finished.
+ */
+function usePublicKey(): { loadedPublicKey: boolean; publicKey?: null | string } {
+  // Hasn't finished loading yet:
+  return { loadedPublicKey: false, publicKey: undefined }
+
+  // No pubkey set for user:
+  // return { loadedPublicKey: false, publicKey: undefined }
+
+  // Pubkey found for user:
+  // return { loadedPublicKey: true, publicKey: "example_pub_key" }
 }
