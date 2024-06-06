@@ -1,6 +1,6 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { PartnershipsWithName, loadPartnerships } from "./load-partnerships"
-import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
+import { getActivePartnership, isNonEmptyArray } from "./settings/partnership/getActivePartnership"
 import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"

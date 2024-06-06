@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { HelloName } from "../HelloName"
 import { loadUserProfile } from "../HomePage"
-import { PartnershipSettings } from "./PartnershipSettings"
+import { PartnershipSettings } from "./partnership/PartnershipSettings"
 import { BackButton } from "./BackButton"
 import { EnableNotifications } from "./EnableNotifications"
 import { PasswordSettings } from "./PasswordSettings"

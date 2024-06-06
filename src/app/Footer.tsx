@@ -1,7 +1,7 @@
 import { Balance } from "./Balance"
 import { GrantAndClaimBtns } from "./GrantAndClaimBtns"
 import { loadPartnerships } from "./load-partnerships"
-import { isNonEmptyArray } from "./settings/getActivePartnership"
+import { isNonEmptyArray } from "./settings/partnership/getActivePartnership"
 
 export const Footer = async ({
   name,

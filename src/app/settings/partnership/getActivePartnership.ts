@@ -1,4 +1,4 @@
-import { PartnershipsWithName } from "../load-partnerships"
+import { PartnershipsWithName } from "../../load-partnerships"
 
 /** Helper type: an array with at least one element */
 export type NonEmptyArray<T> = [T, ...T[]]
