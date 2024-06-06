@@ -81,8 +81,6 @@ export const PartnershipSettings = async ({
 
       {/* Invite New Partner */}
       <InvitePartnerLink />
-
-      {/* Archived Partnerships */}
     </div>
   )
 }
