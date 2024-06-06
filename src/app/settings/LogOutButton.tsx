@@ -19,7 +19,7 @@ export const LogOutButton = () => {
         router.push("/")
       }}
     >
-      ↪ Log Out
+      ⤷ Log Out
     </button>
   )
 }
