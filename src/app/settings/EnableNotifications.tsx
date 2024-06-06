@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { registerPushNotifications } from "../registerPushNotifications"
+import { registerPushNotifications } from "./registerPushNotifications"
 import { IoMdNotificationsOutline } from "react-icons/io"
 
 export const EnableNotifications = () => {
