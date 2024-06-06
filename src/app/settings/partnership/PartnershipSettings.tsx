@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { get_user_id_server } from "../../get-user-id-server"
 import { MembershipSettings } from "./MembershipSettings"
 import { AddNewPartner } from "./AddNewPartner"
+import { BackSVG } from "../BackButton"
 
 const shadedRowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
@@ -51,7 +52,7 @@ export const PartnershipSettings = async ({
               <form>
                 <button
                   type="submit"
-                  className="text-black text-opacity-30 border-black/20 border hover:bg-white/20 hover:text-opacity-70 hover:border-purple-600 active:bg-white/40 rounded px-2 text-sm"
+                  className="text-black text-opacity-30 border-black/20 border hover:bg-white/20 hover:text-opacity-70 hover:border-purple-600 active:bg-white/40 rounded px-2 text-sm group"
                   formAction={async () => {
                     "use server"
 
@@ -69,7 +70,11 @@ export const PartnershipSettings = async ({
                     revalidatePath("/settings")
                   }}
                 >
-                  Set Current
+                  Set Current{" "}
+                  <BackSVG
+                    className="inline -scale-x-100 opacity-50 group-hover:opacity-90 relative bottom-px"
+                    size={10}
+                  />
                 </button>
               </form>
             </div>
