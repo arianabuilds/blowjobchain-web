@@ -1,5 +1,5 @@
-import { Login } from "./Login"
-import { RotatingTagline } from "./RotatingTagline"
+import { Login } from "./logged-out/Login"
+import { RotatingTagline } from "./logged-out/RotatingTagline"
 import { SetYourName } from "./logged-in/SetYourName"
 import { MainScreen } from "./logged-in/MainScreen"
 import { Logo } from "./Logo"

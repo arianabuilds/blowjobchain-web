@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Login } from "../Login"
+import { Login } from "../logged-out/Login"
 import { Logo } from "../Logo"
 import { createSupabaseAdmin } from "@/supabase/admin"
 
