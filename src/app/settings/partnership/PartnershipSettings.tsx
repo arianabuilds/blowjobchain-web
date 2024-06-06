@@ -23,8 +23,8 @@ export const PartnershipSettings = async ({
 
   return (
     <div className="bg-black/5 rounded-xl p-3 px-5 text-left">
-      <h3 className="mb-3">Partnership Settings:</h3>
       {/* Active Partnership */}
+      <h3 className="mb-1 font-medium">Active Partnership</h3>
       <div className={`${shadedRowStyle} flex-col`}>
         {/* Top row */}
         <div className="flex justify-between">
@@ -44,12 +44,11 @@ export const PartnershipSettings = async ({
         partnerships
           .filter((p) => p !== active)
           .map((p, i) => (
-            // One row
             <div key={i} className={shadedRowStyle}>
               {/* Name */}
               <div>{p.inviter_name !== name ? p.inviter_name : p.invitee_name}</div>
 
-              {/* Set Current button */}
+              {/* `Set Current` button */}
               <form>
                 <button
                   type="submit"
