@@ -13,7 +13,7 @@ export const SettingsPage = async () => {
 
   return (
     <div className="py-0.5 text-center px-1.5 overflow-y-scroll max-h-screen w-full">
-      <div className="space-y-5 max-w-lg mx-auto pb-6">
+      <div className="max-w-lg pb-6 mx-auto space-y-5">
         <BackButton />
 
         {/* 'Settings' title */}

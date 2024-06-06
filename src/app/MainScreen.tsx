@@ -23,7 +23,7 @@ export const MainScreen = async ({
   const points = await loadPoints(a)
 
   return (
-    <div className="text-center w-full overflow-y-scroll">
+    <div className="w-full overflow-y-scroll text-center">
       {!points?.length ? (
         <NoRecordsYet />
       ) : (

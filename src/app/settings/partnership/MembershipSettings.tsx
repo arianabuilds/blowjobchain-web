@@ -2,8 +2,8 @@ import { MembershipUpgradeButtons } from "./MembershipUpgradeButtons"
 
 export const MembershipSettings = () => {
   return (
-    <div className="text-center bg-black/5 rounded-lg p-2 my-2 mx-auto flex flex-col sm:px-10 px-5">
-      <h4 className="text-sm opacity-70 mx-auto">Free Usage Remaining</h4>
+    <div className="flex flex-col p-2 px-5 mx-auto my-2 text-center rounded-lg bg-black/5 sm:px-10">
+      <h4 className="mx-auto text-sm opacity-70">Free Usage Remaining</h4>
       <div className="space-x-5 min-w-[50%] mb-3">
         <span>You: 2 cards</span>
         <span>Partner: 2 cards</span>
@@ -11,7 +11,7 @@ export const MembershipSettings = () => {
 
       {/* Upgrade Membership Box */}
       <div className="inline-block p-2 min-w-[70%] rounded-lg bg-white/15">
-        <h4 className="text-sm font-semibold mb-1">Upgrade Couple Membership</h4>
+        <h4 className="mb-1 text-sm font-semibold">Upgrade Couple Membership</h4>
         <MembershipUpgradeButtons />
       </div>
     </div>

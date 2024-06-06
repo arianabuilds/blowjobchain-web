@@ -22,7 +22,7 @@ export const PartnershipSettings = async ({
   const active = getActivePartnership(partnerships, active_partner)
 
   return (
-    <div className="bg-black/5 rounded-xl p-3 px-5 text-left">
+    <div className="p-3 px-5 text-left bg-black/5 rounded-xl">
       {/* Active Partnership */}
       <h3 className="mb-1 font-medium">Active Partnership</h3>
       <div className={`${shadedRowStyle} flex-col`}>

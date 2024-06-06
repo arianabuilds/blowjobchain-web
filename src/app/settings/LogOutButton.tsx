@@ -9,7 +9,7 @@ export const LogOutButton = () => {
 
   return (
     <button
-      className="hover:bg-black/10 active:bg-black/20 px-3 rounded-lg py-2 text-sm font-light cursor-pointer border-black/20 border"
+      className="px-3 py-2 text-sm font-light border rounded-lg cursor-pointer hover:bg-black/10 active:bg-black/20 border-black/20"
       onClick={async () => {
         // Supabase logout call
         const { error } = await supabase.auth.signOut()

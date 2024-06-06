@@ -10,12 +10,12 @@ export const SetPassword = () => {
   return (
     <>
       <input
-        className="w-56 p-2 py-2 rounded-lg mt-2 opacity-90"
+        className="w-56 p-2 py-2 mt-2 rounded-lg opacity-90"
         placeholder="correcthorsebatterystaple"
         ref={$input}
       />
       <button
-        className="border ml-2 p-2 rounded-lg text-sm px-5 hover:bg-white/10"
+        className="p-2 px-5 ml-2 text-sm border rounded-lg hover:bg-white/10"
         onClick={async () => {
           // Are they logged in?
           const supabase = createSupabaseClient()
