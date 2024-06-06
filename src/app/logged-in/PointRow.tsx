@@ -11,7 +11,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   return (
     <div
-      className={`border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80 w-full ${point.comment ? "hover:bg-black/5 cursor-pointer" : ""}`}
+      className={`border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80 w-full ${point.comment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
       onClick={() => point.comment && setOpen(!open)}
     >
       {/* First row */}
