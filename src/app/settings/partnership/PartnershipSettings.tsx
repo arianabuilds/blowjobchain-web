@@ -1,9 +1,9 @@
-import { InvitePartnerLink } from "../../InvitePartnerLink"
 import { loadPartnerships } from "../../load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { revalidatePath } from "next/cache"
 import { get_user_id_server } from "../../get-user-id-server"
 import { MembershipSettings } from "./MembershipSettings"
+import { AddNewPartner } from "./AddNewPartner"
 
 const shadedRowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
 
@@ -75,8 +75,7 @@ export const PartnershipSettings = async ({
             </div>
           ))}
 
-      {/* Invite New Partner */}
-      <InvitePartnerLink />
+      <AddNewPartner />
     </div>
   )
 }
