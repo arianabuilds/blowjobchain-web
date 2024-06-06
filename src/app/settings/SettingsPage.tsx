@@ -13,26 +13,21 @@ export const SettingsPage = async () => {
 
   return (
     <div className="py-0.5 text-center px-1.5 overflow-y-scroll max-h-screen w-full">
-      <div className="space-y-5 max-w-lg mx-auto">
-        {/* Back button */}
+      <div className="space-y-5 max-w-lg mx-auto pb-6">
         <BackButton />
 
         {/* 'Settings' title */}
         <h1 className="opacity-80">Settings</h1>
 
-        {/* HelloName */}
         <HelloName name={name} />
-
-        <LogOutButton />
 
         <EnableNotifications />
 
-        {/* Partnership Settings */}
         <PartnershipSettings name={name} active_partner={active_partner} />
 
         <PasswordSettings />
 
-        {/* Logout button */}
+        <LogOutButton />
       </div>
     </div>
   )
