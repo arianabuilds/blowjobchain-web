@@ -12,7 +12,7 @@ export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
   const inviter = await loadInvitersName(u)
 
   return (
-    <div className="text-center">
+    <div className="px-1 text-center">
       <Logo />
       <p className="mt-7">
         <b className="font-semibold">{inviter}</b> invites you to be their partner 💕

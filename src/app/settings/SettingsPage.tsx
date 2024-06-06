@@ -12,7 +12,7 @@ export const SettingsPage = async () => {
   if (!name) redirect("/")
 
   return (
-    <div className="py-0.5 text-center px-1.5 overflow-y-scroll max-h-screen w-full">
+    <div className="py-0.5 text-center px-3.5 overflow-y-scroll max-h-screen w-full">
       <div className="max-w-lg pb-6 mx-auto space-y-5">
         <BackButton />
 
