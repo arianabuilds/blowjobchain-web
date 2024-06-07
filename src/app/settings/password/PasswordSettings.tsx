@@ -7,7 +7,7 @@ export const PasswordSettings = async () => {
   const isPasswordSet = !!data?.pub_key
 
   return (
-    <div className="bg-black/5 rounded-lg p-2 text-left px-5">
+    <div className="p-2 px-5 text-left rounded-lg bg-black/5">
       <h2 className="font-medium">
         {!isPasswordSet ? "Set Password" : "Password Was Set"} for Extra Security
       </h2>
@@ -15,7 +15,7 @@ export const PasswordSettings = async () => {
         This password {!isPasswordSet ? "will be" : "is"} used as a private key to prevent anyone
         else from granting points.
       </p>
-      <p className="text-sm text-black/60 mt-2">🔒 Required when granting or claiming points</p>
+      <p className="mt-2 text-sm text-black/60">🔒 Required when granting or claiming points</p>
       {!isPasswordSet ? <SetPassword /> : <ForgotPassword />}
     </div>
   )

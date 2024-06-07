@@ -19,7 +19,7 @@ export const SetYourName = () => {
         </div>
       </div>
       <button
-        className="border border-blue-800/60 text-blue-900 rounded px-2 py-3 hover:bg-blue-700/20"
+        className="px-2 py-3 text-blue-900 border rounded border-blue-800/60 hover:bg-blue-700/20 active:bg-blue-700/30"
         type="submit"
       >
         Next →

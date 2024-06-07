@@ -2,7 +2,7 @@
 
 import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipsWithName } from "./load-partnerships"
-import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
+import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { useState } from "react"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-md text-gray-800 transition font-medium`
@@ -26,7 +26,7 @@ export const GrantAndClaimBtns = ({
     <div className="flex justify-center space-x-10">
       <button
         disabled={pendingGrant}
-        className={`${buttonClasses} border-blue-400/70 bg-blue-300 hover:bg-blue-300/60`}
+        className={`${buttonClasses} border-blue-400/70 bg-blue-300 hover:bg-blue-300/60 active:bg-blue-400/60`}
         onClick={async () => {
           // Use account public key info
           if (!loadedPublicKey) return alert("Error: Still loading account info")
@@ -65,7 +65,7 @@ export const GrantAndClaimBtns = ({
       </button>
       <button
         disabled={pendingClaim}
-        className={`${buttonClasses} border-purple-400/80 bg-purple-300/80 hover:bg-purple-300/50`}
+        className={`${buttonClasses} border-purple-400/80 bg-purple-300/80 hover:bg-purple-300/50 active:bg-purple-400/50`}
         onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 
@@ -117,10 +117,10 @@ function notifyPartner(
  */
 function usePublicKey(): { loadedPublicKey: boolean; publicKey?: null | string } {
   // Hasn't finished loading yet:
-  return { loadedPublicKey: false, publicKey: undefined }
+  // return { loadedPublicKey: false, publicKey: undefined }
 
   // No pubkey set for user:
-  // return { loadedPublicKey: false, publicKey: undefined }
+  return { loadedPublicKey: true, publicKey: null }
 
   // Pubkey found for user:
   // return { loadedPublicKey: true, publicKey: "example_pub_key" }

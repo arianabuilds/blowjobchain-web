@@ -32,7 +32,7 @@ export const RotatingTagline = () => {
   return (
     <p
       onClick={() => window.location.reload()}
-      className="italic mt-5 cursor-pointer text-lg font-medium opacity-60 h-9 px-5"
+      className="px-5 mt-5 text-lg italic font-medium cursor-pointer opacity-60 h-9"
     >
       <span className="animate-fadeIn">{tagline}</span>
     </p>

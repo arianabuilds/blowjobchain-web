@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation"
-import { HelloName } from "../HelloName"
+import { HelloName } from "../logged-in/HelloName"
 import { loadUserProfile } from "../HomePage"
-import { PartnershipSettings } from "./PartnershipSettings"
+import { PartnershipSettings } from "./partnership/PartnershipSettings"
 import { BackButton } from "./BackButton"
 import { EnableNotifications } from "./EnableNotifications"
-import { PasswordSettings } from "./PasswordSettings"
+import { PasswordSettings } from "./password/PasswordSettings"
 import { LogOutButton } from "./LogOutButton"
 
 export const SettingsPage = async () => {
@@ -12,8 +12,8 @@ export const SettingsPage = async () => {
   if (!name) redirect("/")
 
   return (
-    <div className="py-0.5 text-center px-1.5 overflow-y-scroll max-h-screen w-full">
-      <div className="space-y-5 max-w-lg mx-auto pb-6">
+    <div className="py-0.5 text-center px-3.5 overflow-y-scroll max-h-screen w-full">
+      <div className="max-w-lg pb-6 mx-auto space-y-5">
         <BackButton />
 
         {/* 'Settings' title */}

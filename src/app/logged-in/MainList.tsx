@@ -1,11 +1,11 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { PartnershipsWithName, loadPartnerships } from "./load-partnerships"
-import { getActivePartnership, isNonEmptyArray } from "./settings/getActivePartnership"
+import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"
 
-export const MainScreen = async ({
+export const MainList = async ({
   name,
   active_partner,
 }: {
@@ -23,7 +23,7 @@ export const MainScreen = async ({
   const points = await loadPoints(a)
 
   return (
-    <div className="text-center w-full overflow-y-scroll">
+    <div className="w-full px-1 overflow-y-scroll text-center">
       {!points?.length ? (
         <NoRecordsYet />
       ) : (
@@ -43,8 +43,7 @@ export const MainScreen = async ({
 }
 
 async function loadPoints(a: PartnershipsWithName[0]) {
-  const supabase = createSupabaseServer()
-  const { data: points, error } = await supabase
+  const { data: points, error } = await createSupabaseServer()
     .from("points")
     .select()
     .order("created_at", { ascending: false })

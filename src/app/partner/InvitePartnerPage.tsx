@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Login } from "../Login"
+import { Login } from "../logged-out/Login"
 import { Logo } from "../Logo"
 import { createSupabaseAdmin } from "@/supabase/admin"
 
@@ -12,13 +12,13 @@ export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
   const inviter = await loadInvitersName(u)
 
   return (
-    <div className="text-center">
+    <div className="px-1 text-center">
       <Logo />
       <p className="mt-7">
         <b className="font-semibold">{inviter}</b> invites you to be their partner 💕
       </p>
 
-      <div className="opacity-60 mt-8 space-y-3 mb-32">
+      <div className="mt-8 mb-32 space-y-3 opacity-60">
         <p>A surprisingly fun way to reward each other.</p>
         <p>
           <i>Earn 10 points to claim 1 blowjob card</i>

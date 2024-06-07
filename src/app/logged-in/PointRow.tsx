@@ -11,13 +11,13 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   return (
     <div
-      className={`border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80 w-full ${point.comment ? "hover:bg-black/5 cursor-pointer" : ""}`}
+      className={`border rounded-lg border-black/50 p-2 px-3 my-2 text-black/80 w-full ${point.comment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
       onClick={() => point.comment && setOpen(!open)}
     >
       {/* First row */}
-      <div className="justify-between flex items-center">
+      <div className="flex items-center justify-between">
         {/* Left: Timestamp */}
-        <span className="inline-block w-12 opacity-70 text-sm text-left">
+        <span className="inline-block w-12 text-sm text-left opacity-70">
           {format(point.created_at)
             .replace("ago", "")
             .replace("just ", "")
@@ -44,14 +44,14 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         </div>
 
         {/* Right: Comment icon */}
-        <div className="w-12 flex justify-end opacity-30">
+        <div className="flex justify-end w-12 opacity-30">
           {point.comment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
         </div>
       </div>
 
       {/* Hidden second row */}
       {open && (
-        <div className="text-sm opacity-60 mt-1 text-center">
+        <div className="mt-1 text-sm text-center opacity-60">
           {'"'}
           {point.comment}
           {'"'}
