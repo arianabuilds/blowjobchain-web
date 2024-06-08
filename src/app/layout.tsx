@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-red-300">
+    <html lang="en">
       <body
         className={`from-red-300 to-blue-200 bg-gradient-to-b  min-h-[100cqh] flex flex-col items-center justify-between overflow-hidden ${inter.className}`}
       >
