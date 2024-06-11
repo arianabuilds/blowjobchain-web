@@ -9,10 +9,7 @@ const buttonClasses = `w-[9.1rem]
   py-2
   border-2
   rounded-lg
-  text-zinc-300/60
-  font-normal
-  shadow-[0_0_4px_rgba(255,255,255,0.2)]
-  ring-opacity-80`
+  bg-black/10`
 
 export const GrantAndClaimBtns = ({
   partnerships,
@@ -30,10 +27,10 @@ export const GrantAndClaimBtns = ({
   const { loadedPublicKey, publicKey } = usePublicKey()
 
   return (
-    <div className="flex justify-center space-x-7">
+    <div className="flex justify-center space-x-7   text-white/60">
       <button
         disabled={pendingGrant}
-        className={`${buttonClasses} border-purple-950/10 bg-[#182c25b4] hover:bg-green-800/60 active:bg-green-900/60`}
+        className={`${buttonClasses} border-white/30 hover:bg-blue-800/20 active:bg-blue-900/30`}
         onClick={async () => {
           // Use account public key info
           if (!loadedPublicKey) return alert("Error: Still loading account info")
@@ -72,7 +69,7 @@ export const GrantAndClaimBtns = ({
       </button>
       <button
         disabled={pendingClaim}
-        className={`${buttonClasses} border-[#093f1c3d] bg-[#041e0d8f] hover:bg-blue-800/50 active:bg-blue-900/50`}
+        className={`${buttonClasses} border-white/30 hover:bg-purple-800/20 active:bg-purple-900/30`}
         onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 
