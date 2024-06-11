@@ -25,22 +25,25 @@ export const MainList = async ({
   const points = await loadPoints(a)
 
   return (
-    <div className="w-full px-1 overflow-y-scroll text-center">
-      {points?.length ? (
-        <NoRecordsYet />
-      ) : (
-        // List of points
-        <div className="mt-6 w-full max-h-[55vh] px-4 max-w-96 mx-auto">
-          {points.map((point) => (
-            <PointRow
-              key={point.id}
-              point={point}
-              who={idToName[point.amount < 0 ? point.from : point.to]}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <>
+      <Image className="max-w-96 mx-auto" src={orgasm} alt="Orgasm image" />
+      <div className="w-full px-1 overflow-y-scroll text-center">
+        {!points?.length ? (
+          <NoRecordsYet />
+        ) : (
+          // List of points
+          <div className="mt-6 w-full max-h-[55vh] px-4 max-w-96 mx-auto">
+            {points.map((point) => (
+              <PointRow
+                key={point.id}
+                point={point}
+                who={idToName[point.amount < 0 ? point.from : point.to]}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
