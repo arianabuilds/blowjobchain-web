@@ -4,10 +4,10 @@ import { createSupabaseClient } from "@/supabase/client"
 
 export const HelloName = ({ name }: { name: string }) => {
   return (
-    <p className="text-xl">
+    <p className="text-xl text-zinc-300/70">
       Hello{" "}
       <a
-        className="underline decoration-dashed decoration-black/50 cursor-pointer hover:bg-pink-100/30 active:bg-pink-100/60 rounded-lg px-1 -ml-0.5"
+        className="underline decoration-dashed decoration-zinc/50 cursor-pointer hover:bg-pink-100/30 active:bg-pink-100/60 rounded-lg px-1 -ml-0.5"
         style={{ textUnderlineOffset: 3 }}
         onClick={async () => {
           if (!confirm("Change your name?")) return
