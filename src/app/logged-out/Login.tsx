@@ -51,14 +51,13 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
   )
 }
 
+const buttonClass =
+  "p-1 mt-2 text-white/80 rounded bg-red-900/40 hover:bg-red-800/50 active:bg-red-700/50"
+
 function SendLoginCodeButton() {
   const { pending } = useFormStatus()
   return (
-    <button
-      disabled={pending}
-      formAction={login}
-      className="p-1 mt-2 text-white/50 rounded bg-red-900/40 hover:bg-purple-300/30 active:bg-purple-200/10"
-    >
+    <button disabled={pending} formAction={login} className={buttonClass}>
       Send{pending ? "ing" : ""} Login Code
     </button>
   )
@@ -67,11 +66,7 @@ function SendLoginCodeButton() {
 function SubmitCodeButton() {
   const { pending } = useFormStatus()
   return (
-    <button
-      disabled={pending}
-      formAction={submitLoginCode}
-      className="p-1 mt-2 text-white rounded bg-red-900/40  hover:bg-purple-300/30 active:bg-purple-200/10"
-    >
+    <button disabled={pending} formAction={submitLoginCode} className={buttonClass}>
       Submit{pending ? "ting..." : ""}
     </button>
   )
