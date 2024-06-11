@@ -57,7 +57,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
 }
 
 const buttonClass =
-  "p-1 mt-2 text-white/80 rounded bg-red-900/40 hover:bg-red-800/50 active:bg-red-700/50"
+  "p-1 mt-2 text-white/80 rounded bg-fuchsia-900/40 hover:bg-fuchsia-800/50 active:bg-fuchsia-700/50"
 
 function SendLoginCodeButton() {
   const { pending } = useFormStatus()
