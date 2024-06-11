@@ -28,7 +28,12 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     // Login screen
     <form className="flex flex-col -mt-20 text-center">
       <h3 className="mb-10 text-xl opacity-70">{!inviterID ? "Log In" : "Join"}</h3>
-      <input name="email" className="p-1 px-3 rounded" placeholder="Email" type="email" />
+      <input
+        name="email"
+        className="p-1 px-3 rounded text-black/70"
+        placeholder="Email"
+        type="email"
+      />
       <input name="inviter-id" value={inviterID} type="hidden" />
       <SendLoginCodeButton />
     </form>
@@ -42,7 +47,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
       <input name="email" value={email as string} type="hidden" />
       <input
         name="login-code"
-        className="p-1 px-3 rounded text-gray-500"
+        className="p-1 px-3 rounded text-black/70"
         placeholder="6-digit code"
         type="text"
       />
