@@ -22,7 +22,9 @@ export async function HomePage() {
 
       {/* Page content */}
       {!user_id ? (
-        <Login />
+        <div className="flex flex-col justify-center flex-1">
+          <Login />
+        </div>
       ) : !name ? (
         <SetYourName />
       ) : (
