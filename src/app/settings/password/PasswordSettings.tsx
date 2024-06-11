@@ -1,6 +1,8 @@
 import { createSupabaseServer } from "@/supabase/server"
 import { ForgotPassword } from "./ForgotPassword"
 import { SetPassword } from "./SetPassword"
+import PasswordIcon from "./PasswordIcon.svg"
+import Image from "next/image"
 
 export const PasswordSettings = async () => {
   const { data } = await createSupabaseServer().from("profiles").select("pub_key").single()
@@ -15,7 +17,14 @@ export const PasswordSettings = async () => {
         This password {!isPasswordSet ? "will be" : "is"} used as a private key to prevent anyone
         else from granting points.
       </p>
-      <p className="mt-2 text-sm text-black/60">🔒 Required when granting or claiming points</p>
+      <p className="mt-2 text-sm text-zinc-300/30">
+        <Image
+          className="inline mr-1  scale-x-75 -ml-0.5 relative bottom-0.5"
+          src={PasswordIcon}
+          alt="Password Icon"
+        />{" "}
+        Required when granting or claiming points
+      </p>
       {!isPasswordSet ? <SetPassword /> : <ForgotPassword />}
     </div>
   )
