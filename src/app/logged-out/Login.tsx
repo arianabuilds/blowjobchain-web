@@ -15,7 +15,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     // Login Button
     <Link
       href="?login"
-      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-blue-800/30 active:bg-blue-800/40"
+      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-[#5c0241] active:bg-pink-600/20"
     >
       <h2 className="text-2xl font-semibold">
         Log In{" "}
