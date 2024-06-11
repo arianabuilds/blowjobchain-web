@@ -22,17 +22,19 @@ export const PartnershipSettings = async ({
   const active = getActivePartnership(partnerships, active_partner)
 
   return (
-    <div className="p-3 px-5 text-left bg-black/5 rounded-xl">
+    <div className="p-3 px-5 text-left bg-black/10 rounded-xl">
       {/* Active Partnership */}
-      <h3 className="mb-1 font-medium">Active Partnership</h3>
+      <h3 className="mb-1 font-medium text-zinc-300/60">Active Partnership</h3>
       <div className={`${shadedRowStyle} flex-col`}>
         {/* Top row */}
         <div className="flex justify-between">
           {/* Name */}
-          <div>{active.inviter_name !== name ? active.inviter_name : active.invitee_name}</div>
+          <div className="text-zinc-300/80">
+            {active.inviter_name !== name ? active.inviter_name : active.invitee_name}
+          </div>
           {/* Current label */}
           {partnerships.length > 1 && (
-            <div className="text-sm opacity-40 italic pt-0.5">Current</div>
+            <div className="text-zinc-200/70 text-sm opacity-40 italic pt-0.5">Current</div>
           )}
         </div>
 
@@ -46,7 +48,9 @@ export const PartnershipSettings = async ({
           .map((p, i) => (
             <div key={i} className={shadedRowStyle}>
               {/* Name */}
-              <div>{p.inviter_name !== name ? p.inviter_name : p.invitee_name}</div>
+              <div className="text-zinc-300/70">
+                {p.inviter_name !== name ? p.inviter_name : p.invitee_name}
+              </div>
 
               <SetCurrentButton {...{ p }} />
             </div>

@@ -14,11 +14,11 @@ export const InvitePartnerLink = () => {
           <p className="text-sm italic opacity-50">Loading your custom invite link...</p>
         ) : (
           <>
-            <p className="mb-1">Share invite link with partner:</p>
+            <p className="mb-1 text-zinc-400/50">Share invite link with partner:</p>
             <a
               href={`https://${link}`}
               target="_blank"
-              className="block overflow-hidden text-xs text-blue-700 underline break-words text-ellipsis hover:text-blue-500 active:text-blue-600 whitespace-nowrap"
+              className="block overflow-hidden text-xs text-blue-500 underline break-words text-ellipsis hover:text-blue-300 active:text-blue-600 whitespace-nowrap"
             >
               {link}
             </a>
