@@ -6,7 +6,7 @@ import { AddNewPartner } from "./AddNewPartner"
 
 import { SetCurrentButton } from "./SetCurrentButton"
 
-const shadedRowStyle = "rounded-lg bg-white/10 p-1 px-4 mb-3 flex justify-between"
+const shadedRowStyle = "rounded-lg bg-black/15 p-1 px-4 mb-3 flex justify-between"
 
 export const PartnershipSettings = async ({
   name,
@@ -22,7 +22,7 @@ export const PartnershipSettings = async ({
   const active = getActivePartnership(partnerships, active_partner)
 
   return (
-    <div className="p-3 px-5 text-left bg-black/10 rounded-xl">
+    <div className="p-3 px-5 text-left bg-white/5 rounded-xl">
       {/* Active Partnership */}
       <h3 className="mb-1 font-medium text-zinc-300/60">Active Partnership</h3>
       <div className={`${shadedRowStyle} flex-col`}>

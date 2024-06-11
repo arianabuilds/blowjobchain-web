@@ -9,7 +9,7 @@ export const PasswordSettings = async () => {
   const isPasswordSet = !!data?.pub_key
 
   return (
-    <div className="p-2 px-5 text-left rounded-lg bg-black/10">
+    <div className="p-2 px-5 text-left rounded-lg bg-white/5">
       <h2 className="font-medium">
         {!isPasswordSet ? "Set Password" : "Password Was Set"} for Extra Security
       </h2>
