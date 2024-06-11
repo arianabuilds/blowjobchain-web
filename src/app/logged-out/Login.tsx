@@ -26,8 +26,8 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     </Link>
   ) : !isEnterLoginCodeScreen ? (
     // Login screen
-    <form className="flex flex-col -mt-20 text-center text-gray-500">
-      <h3 className="mb-10 text-xl">{!inviterID ? "Log In" : "Join"}</h3>
+    <form className="flex flex-col -mt-20 text-center">
+      <h3 className="mb-10 text-xl opacity-70">{!inviterID ? "Log In" : "Join"}</h3>
       <input name="email" className="p-1 px-3 rounded" placeholder="Email" type="email" />
       <input name="inviter-id" value={inviterID} type="hidden" />
       <SendLoginCodeButton />
