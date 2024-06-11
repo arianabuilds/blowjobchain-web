@@ -11,6 +11,8 @@ export async function login(formData: FormData) {
   // type-casting for convenience, should validate
   const email = formData.get("email") as string
 
+  if (!email) return
+
   const { error } = await supabase.auth.signInWithOtp({ email })
 
   // If there was an inviterID, store the relationship
