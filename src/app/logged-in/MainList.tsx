@@ -26,7 +26,7 @@ export const MainList = async ({
 
   return (
     <div className="w-full px-1 overflow-y-scroll text-center">
-      {!points?.length ? (
+      {points?.length ? (
         <NoRecordsYet />
       ) : (
         // List of points
