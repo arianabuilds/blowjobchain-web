@@ -10,7 +10,7 @@ export const SetYourName = () => {
         <input
           type="text"
           name="name"
-          className="rounded-xl p-3 py-4 text-[21px] max-w-[250px] my-3 text-center"
+          className="rounded-xl p-3 py-4 text-[21px] max-w-[250px] my-3 text-center text-black/80"
           placeholder="Name"
         />
         <div className="text=sm opacity-60 mb-10">
