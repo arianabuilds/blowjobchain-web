@@ -30,10 +30,10 @@ export const GrantAndClaimBtns = ({
   const { loadedPublicKey, publicKey } = usePublicKey()
 
   return (
-    <div className="flex justify-center space-x-10">
+    <div className="flex justify-center space-x-7">
       <button
         disabled={pendingGrant}
-        className={`${buttonClasses} border-purple-950/10 rounded-full bg-[#182c25b4] hover:bg-green-800/60 active:bg-green-900/60`}
+        className={`${buttonClasses} border-purple-950/10 bg-[#182c25b4] hover:bg-green-800/60 active:bg-green-900/60`}
         onClick={async () => {
           // Use account public key info
           if (!loadedPublicKey) return alert("Error: Still loading account info")
@@ -72,7 +72,7 @@ export const GrantAndClaimBtns = ({
       </button>
       <button
         disabled={pendingClaim}
-        className={`${buttonClasses} border-[#093f1c3d] bg-[#041e0d8f] rounded-full hover:bg-blue-800/50 active:bg-blue-900/50`}
+        className={`${buttonClasses} border-[#093f1c3d] bg-[#041e0d8f] hover:bg-blue-800/50 active:bg-blue-900/50`}
         onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 

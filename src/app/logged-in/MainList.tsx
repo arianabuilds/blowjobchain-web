@@ -26,13 +26,13 @@ export const MainList = async ({
 
   return (
     <>
-      <Image className="max-w-96 mx-auto" src={orgasm} alt="Orgasm image" />
+      <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
       <div className="w-full px-1 overflow-y-scroll text-center">
         {!points?.length ? (
           <NoRecordsYet />
         ) : (
           // List of points
-          <div className="w-full px-4 max-w-96 mx-auto">
+          <div className="w-full px-4 max-w-[22rem] mx-auto">
             {points.map((point) => (
               <PointRow
                 key={point.id}
