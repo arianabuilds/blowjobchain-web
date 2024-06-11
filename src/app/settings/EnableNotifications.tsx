@@ -11,7 +11,7 @@ export const EnableNotifications = () => {
   return (
     <div className="justify-center">
       <div
-        className="border border-black/20 bg-white bg-opacity-10 hover:bg-opacity-20 active:bg-opacity-30 px-5 py-2.5 rounded-lg inline-flex items-center cursor-pointer"
+        className=" text-zinc-300/60 border border-black/20 bg-white bg-opacity-10 hover:bg-opacity-20 active:bg-opacity-30 px-5 py-2.5 rounded-lg inline-flex items-center cursor-pointer"
         onClick={async () => {
           // todo: if in browser, not PWA
           // if (mobileNotInstalled) {
