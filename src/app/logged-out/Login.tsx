@@ -57,7 +57,7 @@ function SendLoginCodeButton() {
     <button
       disabled={pending}
       formAction={login}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
+      className="p-1 mt-2 text-white/50 rounded bg-red-900/40 hover:bg-purple-300/30 active:bg-purple-200/10"
     >
       Send{pending ? "ing" : ""} Login Code
     </button>
@@ -70,7 +70,7 @@ function SubmitCodeButton() {
     <button
       disabled={pending}
       formAction={submitLoginCode}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
+      className="p-1 mt-2 text-white rounded bg-red-900/40  hover:bg-purple-300/30 active:bg-purple-200/10"
     >
       Submit{pending ? "ting..." : ""}
     </button>
