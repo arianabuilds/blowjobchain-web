@@ -4,6 +4,8 @@ import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"
+import Image from "next/image"
+import orgasm from "./orgasm.png"
 
 export const MainList = async ({
   name,
