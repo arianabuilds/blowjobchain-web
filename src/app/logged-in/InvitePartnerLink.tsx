@@ -1,6 +1,8 @@
 "use client"
 
 import { useUserId } from "../use-user-id"
+import LinkIcon from "./link-icon.svg"
+import Image from "next/image"
 
 export const InvitePartnerLink = () => {
   const { user_id } = useUserId()
@@ -8,7 +10,9 @@ export const InvitePartnerLink = () => {
 
   return (
     <div className="flex">
-      <div className="text-[36px] pr-2">🔗</div>
+      <div className="text-[36px] pr-2">
+        <Image src={LinkIcon} alt="Link Icon" className=" " />
+      </div>
       <div className="flex flex-col justify-center overflow-hidden">
         {user_id === undefined ? (
           <p className="text-sm italic opacity-50">Loading your custom invite link...</p>
