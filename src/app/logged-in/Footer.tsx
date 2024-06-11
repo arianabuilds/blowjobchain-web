@@ -14,7 +14,7 @@ export const Footer = async ({
 
   return (
     <div className="sm:mb-0 mb-8">
-      <p className="text-white/70 mb-1 text-sm text-center opacity-40 mt-2">
+      <p className="text-white/70 mb-1.5 text-sm text-center opacity-40 mt-6">
         10 points = 1 blowjob card
       </p>
       {partnerships && isNonEmptyArray(partnerships) && (
