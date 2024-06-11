@@ -7,7 +7,7 @@ export const MembershipUpgradeButtons = () => {
         <button
           key={label}
           onClick={() => alert("coming soon")}
-          className="px-3 bg-white rounded bg-opacity-40 hover:bg-opacity-60 active:bg-opacity-80"
+          className="px-3 bg-white rounded bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-40"
         >
           {label}
         </button>
