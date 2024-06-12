@@ -69,7 +69,7 @@ export const GrantAndClaimBtns = ({
       </button>
       <button
         disabled={pendingClaim}
-        className={`${buttonClasses} border-white/30 hover:bg-purple-800/20 active:bg-purple-900/30`}
+        className={`${buttonClasses} border-orange-600/70  hover:bg-orange-800/40 active:bg-orange-900/20 bg-orange-600/10`}
         onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 
