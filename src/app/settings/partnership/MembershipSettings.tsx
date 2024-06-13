@@ -16,7 +16,7 @@ export const MembershipSettings = () => {
       {/* Upgrade Membership Box */}
       <div className="inline-block p-2 min-w-[70%] rounded-lg bg-white/5 space-y-1">
         <h4
-          className="text-sm font-semibold  text-white text-opacity-50 hover:text-opacity-70 active:text-opacity-90 cursor-pointer"
+          className="text-sm font-semibold text-white text-opacity-50 hover:text-opacity-70 active:text-opacity-90 cursor-pointer"
           onClick={() => setShowButtons(!showButtons)}
         >
           Upgrade Couple Membership

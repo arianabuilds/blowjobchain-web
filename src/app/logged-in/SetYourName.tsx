@@ -14,7 +14,7 @@ export const SetYourName = () => {
             className="rounded-xl p-3 py-4 text-[21px] max-w-[250px] my-3 text-center text-black/80"
             placeholder="Name"
           />
-          <div className="text=sm opacity-60 mb-10">
+          <div className="text-sm opacity-60 mb-10">
             <p>For your partner to recognize you.</p>
             <p>Can change anytime</p>
           </div>

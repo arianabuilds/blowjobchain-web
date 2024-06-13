@@ -24,17 +24,17 @@ export const PartnershipSettings = async ({
   return (
     <div className="p-3 px-5 text-left bg-white/5 rounded-xl">
       {/* Active Partnership */}
-      <h3 className="mb-1 font-medium text-zinc-300/60">Active Partnership</h3>
+      <h3 className="mb-1 font-medium opacity-70">Active Partnership</h3>
       <div className={`${shadedRowStyle} flex-col`}>
         {/* Top row */}
         <div className="flex justify-between">
           {/* Name */}
-          <div className="text-zinc-300/80">
+          <div className="opacity-90">
             {active.inviter_name !== name ? active.inviter_name : active.invitee_name}
           </div>
           {/* Current label */}
           {partnerships.length > 1 && (
-            <div className="text-zinc-200/70 text-sm opacity-40 italic pt-0.5">Current</div>
+            <div className="text-sm opacity-40 italic pt-0.5">Current</div>
           )}
         </div>
 
@@ -48,7 +48,7 @@ export const PartnershipSettings = async ({
           .map((p, i) => (
             <div key={i} className={shadedRowStyle}>
               {/* Name */}
-              <div className="text-zinc-300/70">
+              <div className="opacity-80">
                 {p.inviter_name !== name ? p.inviter_name : p.invitee_name}
               </div>
 

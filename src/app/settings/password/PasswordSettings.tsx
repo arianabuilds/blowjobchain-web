@@ -19,7 +19,7 @@ export const PasswordSettings = async () => {
       </p>
       <p className="mt-2 text-sm text-zinc-300/30">
         <Image
-          className="inline mr-1  scale-x-75 -ml-0.5 relative bottom-0.5"
+          className="inline mr-1 scale-x-75 -ml-0.5 relative bottom-0.5"
           src={PasswordIcon}
           alt="Password Icon"
         />{" "}

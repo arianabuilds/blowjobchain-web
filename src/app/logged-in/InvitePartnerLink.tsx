@@ -11,14 +11,14 @@ export const InvitePartnerLink = () => {
   return (
     <div className="flex">
       <div className="text-[36px] pr-2">
-        <Image src={LinkIcon} alt="Link Icon" className=" " />
+        <Image src={LinkIcon} alt="Link Icon" />
       </div>
       <div className="flex flex-col justify-center overflow-hidden">
         {user_id === undefined ? (
           <p className="text-sm italic opacity-50">Loading your custom invite link...</p>
         ) : (
           <>
-            <p className="mb-1 text-zinc-400/50">Share invite link with partner:</p>
+            <p className="my-2 opacity-60">Share invite link with partner:</p>
             <a
               href={`https://${link}`}
               target="_blank"

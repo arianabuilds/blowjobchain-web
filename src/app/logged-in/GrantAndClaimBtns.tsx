@@ -5,11 +5,7 @@ import { PartnershipsWithName } from "./load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { useState } from "react"
 
-const buttonClasses = `w-[9.1rem]
-  py-2
-  border-2
-  rounded-lg
-  bg-black/10`
+const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-lg bg-black/10`
 
 export const GrantAndClaimBtns = ({
   partnerships,
@@ -27,11 +23,10 @@ export const GrantAndClaimBtns = ({
   const { loadedPublicKey, publicKey } = usePublicKey()
 
   return (
-    <div className="flex justify-center space-x-7   text-white/60">
+    <div className="flex justify-center space-x-7 text-white/60">
       <button
         disabled={pendingGrant}
-        className={`${buttonClasses} border-amber-500/40
-        bg-amber-500/5 hover:bg-amber-800/30 active:bg-amber-900/40`}
+        className={`${buttonClasses} border-amber-500/40 bg-amber-500/5 hover:bg-amber-800/30 active:bg-amber-900/40`}
         onClick={async () => {
           // Use account public key info
           if (!loadedPublicKey) return alert("Error: Still loading account info")
@@ -70,7 +65,7 @@ export const GrantAndClaimBtns = ({
       </button>
       <button
         disabled={pendingClaim}
-        className={`${buttonClasses} border-orange-600/70  hover:bg-orange-800/40 active:bg-orange-600/20 bg-orange-600/10`}
+        className={`${buttonClasses} border-orange-600/70 hover:bg-orange-800/40 active:bg-orange-600/20 bg-orange-600/10`}
         onClick={async () => {
           if (!active) return alert("Earn 10 points from your partner to claim 1 blowjob card")
 

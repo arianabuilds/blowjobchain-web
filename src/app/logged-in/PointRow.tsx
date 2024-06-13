@@ -11,7 +11,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   return (
     <div
-      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 text-zinc-200/40 w-full ${point.comment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
+      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-40 w-full ${point.comment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
       onClick={() => point.comment && setOpen(!open)}
     >
       {/* First row */}
@@ -45,11 +45,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
         {/* Right: Comment icon */}
         <div className="flex justify-end w-12 opacity-30">
-          {point.comment ? (
-            <Image src={CommentIcon} alt="Has comment" className="p-[5px] text-zinc-300" />
-          ) : (
-            ""
-          )}
+          {point.comment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
         </div>
       </div>
 
