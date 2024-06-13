@@ -10,12 +10,12 @@ export const SetPassword = () => {
   return (
     <div className="flex mt-2">
       <input
-        className="w-56 p-2 rounded-lg opacity-90"
+        className="w-56 p-2 rounded-lg opacity-60 text-gray-600"
         placeholder="correcthorsebatterystaple"
         ref={$input}
       />
       <button
-        className="w-20 ml-2 text-sm border rounded-lg hover:bg-white/10 active:bg-white/20"
+        className="w-20 ml-2 text-sm border border-zinc-300/50 rounded-lg hover:bg-white/10 active:bg-white/20"
         onClick={async () => {
           // Are they logged in?
           const supabase = createSupabaseClient()

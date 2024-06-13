@@ -13,8 +13,8 @@ export const Footer = async ({
   const { partnerships } = await loadPartnerships()
 
   return (
-    <div>
-      <p className="mb-3 text-lg italic text-center opacity-40">10 points = 1 blowjob card</p>
+    <div className="sm:mb-0 mb-8">
+      <p className="mb-1.5 text-sm text-center opacity-40 mt-6">10 points = 1 blowjob card</p>
       {partnerships && isNonEmptyArray(partnerships) && (
         <Balance name={name} partnerships={partnerships} active_partner={active_partner} />
       )}

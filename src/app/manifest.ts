@@ -6,8 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "BjChain",
     start_url: "/",
     display: "standalone",
-    background_color: "#fca5a5",
-    theme_color: "#fca5a5",
+    background_color: "#42002E",
+    theme_color: "#42002E",
     // icons: [
     //   {
     //     src: "/favicon.ico",

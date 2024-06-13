@@ -17,7 +17,7 @@ export const SetCurrentButton = ({ p }: { p: PartnershipsWithName[0] }) => {
   return (
     <button
       type="submit"
-      className={`px-2 text-sm text-black border rounded text-opacity-30 border-black/20 hover:bg-white/20 hover:text-opacity-70 hover:border-purple-600 active:bg-white/40 group ${pending && "opacity-60"}`}
+      className={`px-2 text-sm text-zinc-300 border rounded text-opacity-30 border-zinc-200/20 hover:bg-white/10 hover:text-opacity-70 hover:border-purple-600 active:bg-white/30 group ${pending && "opacity-60"}`}
       onClick={async () => {
         setPending(true)
 

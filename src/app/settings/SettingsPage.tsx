@@ -17,7 +17,7 @@ export const SettingsPage = async () => {
         <BackButton />
 
         {/* 'Settings' title */}
-        <h1 className="opacity-80">Settings</h1>
+        <h1 className="opacity-60">Settings</h1>
 
         <HelloName name={name} />
 

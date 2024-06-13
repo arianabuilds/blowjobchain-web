@@ -15,7 +15,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     // Login Button
     <Link
       href="?login"
-      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-blue-800/30 active:bg-blue-800/40"
+      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-[#5c0241] active:bg-pink-600/20"
     >
       <h2 className="text-2xl font-semibold">
         Log In{" "}
@@ -27,8 +27,13 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
   ) : !isEnterLoginCodeScreen ? (
     // Login screen
     <form className="flex flex-col -mt-20 text-center">
-      <h3 className="mb-10 text-xl">{!inviterID ? "Log In" : "Join"}</h3>
-      <input name="email" className="p-1 px-3 rounded" placeholder="Email" type="email" />
+      <h3 className="mb-10 text-xl opacity-70">{!inviterID ? "Log In" : "Join"}</h3>
+      <input
+        name="email"
+        className="p-1 px-3 rounded text-black/70"
+        placeholder="Email"
+        type="email"
+      />
       <input name="inviter-id" value={inviterID} type="hidden" />
       <SendLoginCodeButton />
     </form>
@@ -42,7 +47,7 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
       <input name="email" value={email as string} type="hidden" />
       <input
         name="login-code"
-        className="p-1 px-3 rounded"
+        className="p-1 px-3 rounded text-black/70"
         placeholder="6-digit code"
         type="text"
       />
@@ -51,14 +56,13 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
   )
 }
 
+const buttonClass =
+  "p-1 mt-2 text-white/80 rounded bg-fuchsia-900/40 hover:bg-fuchsia-800/50 active:bg-fuchsia-700/50"
+
 function SendLoginCodeButton() {
   const { pending } = useFormStatus()
   return (
-    <button
-      disabled={pending}
-      formAction={login}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
-    >
+    <button disabled={pending} formAction={login} className={buttonClass}>
       Send{pending ? "ing" : ""} Login Code
     </button>
   )
@@ -67,11 +71,7 @@ function SendLoginCodeButton() {
 function SubmitCodeButton() {
   const { pending } = useFormStatus()
   return (
-    <button
-      disabled={pending}
-      formAction={submitLoginCode}
-      className="p-1 mt-2 text-white rounded bg-blue-900/80 hover:bg-blue-800/80 active:bg-blue-700/80"
-    >
+    <button disabled={pending} formAction={submitLoginCode} className={buttonClass}>
       Submit{pending ? "ting..." : ""}
     </button>
   )
