@@ -38,14 +38,23 @@ export async function HomePage() {
   )
 }
 
-export async function loadUserProfile(): Promise<Tables<"profiles"> | Record<string, undefined>> {
+type NotLoggedIn = Record<string, undefined>
+type NoProfileYet = NotLoggedIn & { user_id: string }
+type Profile = Tables<"profiles">
+export async function loadUserProfile(): Promise<NotLoggedIn | NoProfileYet | Profile> {
   // Are they logged in?
   const { user_id, supabase } = await get_user_id_server()
   if (!user_id) return {}
 
   // Load user profile
-  const { data, error } = await supabase.from("profiles").select().eq("user_id", user_id)
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select()
+    .eq("user_id", user_id)
+    .maybeSingle()
   if (error) return console.error("Load-name error:", error), {}
 
-  return data[0]
+  if (!profile) return { user_id } as NoProfileYet
+
+  return profile
 }
