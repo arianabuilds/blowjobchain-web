@@ -4,7 +4,7 @@ import { createSupabaseClient } from "@/supabase/client"
 
 export const HelloName = ({ name }: { name: string }) => {
   return (
-    <p className="text-xl text-zinc-300/70">
+    <p className="text-xl opacity-80">
       Hello{" "}
       <a
         className="underline decoration-dashed cursor-pointer hover:bg-pink-100/30 active:bg-pink-100/60 rounded-lg px-1 -ml-0.5"
