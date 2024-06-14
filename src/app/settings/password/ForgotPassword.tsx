@@ -6,7 +6,7 @@ export const ForgotPassword = () => {
   return (
     <>
       <button
-        className=" rounded-lg w-full text-sm py-1.5 my-1.5 text-black/50 bg-purple-500 bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-40"
+        className=" rounded-lg w-full text-sm py-1.5 my-1.5 opacity-70 bg-purple-500 bg-opacity-40 hover:bg-opacity-50 active:bg-opacity-60"
         onClick={async () => {
           // Are they logged in
           const supabase = createSupabaseClient()
