@@ -24,7 +24,9 @@ export const GrantAndClaimBtns = ({
   const { publicKey } = usePublicKey()
 
   return (
-    <div className="flex justify-center space-x-7 text-white/60">
+    <div
+      className={`flex justify-center space-x-7 text-white/60 ${publicKey === undefined && "opacity-85"}`}
+    >
       <button
         disabled={pendingGrant}
         className={`${buttonClasses} border-amber-500/40 bg-amber-500/5 hover:bg-amber-900/20 active:bg-amber-900/40`}
