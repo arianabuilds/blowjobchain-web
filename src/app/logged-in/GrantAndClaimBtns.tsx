@@ -5,6 +5,7 @@ import { PartnershipsWithName } from "./load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { useEffect, useState } from "react"
 import { Tables } from "@/supabase/types"
+import { passwordToPublicKey } from "../settings/password/SetPassword"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-lg`
 
@@ -31,13 +32,19 @@ export const GrantAndClaimBtns = ({
         disabled={pendingGrant}
         className={`${buttonClasses} border-amber-500/40 bg-amber-500/5 hover:bg-amber-900/20 active:bg-amber-900/40`}
         onClick={async () => {
+          if (!active) return alert("Add a partner to grant them blowjob points")
+
           // Use account public key info
           if (publicKey === undefined) return alert("Error: Still loading publicKey info")
-          let password: null | string | undefined = undefined
-          if (publicKey) password = prompt("Your Password — to sign the transaction:")
-          if (password === null) return // pressed 'Cancel'
 
-          if (!active) return alert("Add a partner to grant them blowjob points")
+          // If password set, ask for it
+          let password: null | string | undefined = undefined
+          if (publicKey) {
+            password = prompt("Your Password — to sign the transaction:")
+            if (password === null) return // pressed 'Cancel'
+            if ((await passwordToPublicKey(password)) !== publicKey)
+              return alert("Incorrect password")
+          }
 
           // Get user session
           const supabase = createSupabaseClient()

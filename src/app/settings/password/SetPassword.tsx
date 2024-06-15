@@ -23,22 +23,15 @@ export const SetPassword = () => {
           if (!user_id) return alert("Error: not logged in")
 
           // 1. user inputs password
-          const input = $input.current?.value
-          if (!input) return
+          const password = $input.current?.value
+          if (!password) return
 
           setSaving(true)
 
-          // 2. password derives private key
-          const privateKey = new Uint32Array(
-            await derivePrivateKey(input, "oursalt_sjdkjfskjdfklsjfnvn"),
-          ).toString()
-          // console.log("privateKey", privateKey)
+          // 2, 3: password -> private key -> public key
+          const pubKey = await passwordToPublicKey(password)
 
-          // 3. private key calculates public key
-          const pubKey = await privateToPublic(privateKey).catch(console.error)
-          // console.log("pubKey", pubKey)
-
-          //   // 4. store public key in db
+          // 4. store public key in db
           const { error } = await supabase
             .from("profiles")
             .update({ pub_key: pubKey })
@@ -69,4 +62,18 @@ async function derivePrivateKey(input: string, salt: string): Promise<ArrayBuffe
     keyMaterial,
     256,
   )
+}
+
+export async function passwordToPublicKey(password: string) {
+  // 2. password derives private key
+  const privateKey = new Uint32Array(
+    await derivePrivateKey(password, "oursalt_sjdkjfskjdfklsjfnvn"),
+  ).toString()
+  // console.log("privateKey", privateKey)
+
+  // 3. private key calculates public key
+  const pubKey = await privateToPublic(privateKey).catch(console.error)
+  // console.log("pubKey", pubKey)
+
+  return pubKey
 }
