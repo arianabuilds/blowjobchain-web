@@ -3,7 +3,8 @@
 import { createSupabaseClient } from "@/supabase/client"
 import { PartnershipsWithName } from "./load-partnerships"
 import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Tables } from "@/supabase/types"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-lg`
 
@@ -113,15 +114,22 @@ function notifyPartner(
   })
 }
 
+type PublicKey = undefined | Tables<"profiles">["pub_key"]
 /** Has the current user set a public key for their account? `undefined` before finished loading
  */
-function usePublicKey(): { publicKey?: null | string } {
-  // Hasn't finished loading yet:
-  return { publicKey: undefined }
+function usePublicKey(): { publicKey: PublicKey } {
+  const [publicKey, setPublicKey] = useState<PublicKey>(undefined)
 
-  // No pubkey set for user:
-  return { publicKey: null }
+  useEffect(() => {
+    createSupabaseClient()
+      .from("profiles")
+      .select("pub_key")
+      .single()
+      .then(({ data, error }) => {
+        if (error) return alert(JSON.stringify({ error }))
+        setPublicKey(data.pub_key)
+      })
+  }, [])
 
-  // Pubkey found for user:
-  return { publicKey: "example_pub_key" }
+  return { publicKey }
 }
