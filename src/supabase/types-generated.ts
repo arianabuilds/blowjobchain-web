@@ -153,19 +153,16 @@ export type Database = {
       pub_keys: {
         Row: {
           created_at: string
-          id: string
           user_id: string
           value: string | null
         }
         Insert: {
           created_at?: string
-          id?: string
           user_id: string
           value?: string | null
         }
         Update: {
           created_at?: string
-          id?: string
           user_id?: string
           value?: string | null
         }
