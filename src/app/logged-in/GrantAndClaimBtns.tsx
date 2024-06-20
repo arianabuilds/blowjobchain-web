@@ -6,6 +6,7 @@ import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { useEffect, useState } from "react"
 import { Tables } from "@/supabase/types"
 import { passwordToPublicKey } from "../settings/password/SetPassword"
+import { useUserId } from "../use-user-id"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-lg`
 
@@ -129,17 +130,23 @@ type PublicKey = undefined | Tables<"pub_keys">["value"]
 function usePublicKey(): { publicKey: PublicKey } {
   const [publicKey, setPublicKey] = useState<PublicKey>(undefined)
 
+  const { user_id, supabase } = useUserId()
+
   useEffect(() => {
-    createSupabaseClient()
+    if (!user_id) return
+
+    supabase
       .from("pub_keys")
       .select()
+      .eq("user_id", user_id)
       .order("created_at", { ascending: false })
+      .limit(1)
       .single()
       .then(({ data, error }) => {
         if (error) return alert(JSON.stringify({ error }))
         setPublicKey(data.value)
       })
-  }, [])
+  }, [user_id, supabase])
 
   return { publicKey }
 }
