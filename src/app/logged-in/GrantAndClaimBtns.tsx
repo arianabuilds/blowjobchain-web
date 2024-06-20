@@ -141,10 +141,10 @@ function usePublicKey(): { publicKey: PublicKey } {
       .eq("user_id", user_id)
       .order("created_at", { ascending: false })
       .limit(1)
-      .single()
+      .maybeSingle()
       .then(({ data, error }) => {
         if (error) return alert(JSON.stringify({ error }))
-        setPublicKey(data.value)
+        setPublicKey(data?.value || null)
       })
   }, [user_id, supabase])
 

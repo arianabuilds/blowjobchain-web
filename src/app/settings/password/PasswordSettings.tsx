@@ -14,7 +14,7 @@ export const PasswordSettings = async () => {
     .eq("user_id", user_id)
     .order("created_at", { ascending: false })
     .limit(1)
-    .single()
+    .maybeSingle()
   const isPasswordSet = !!data?.value
 
   return (
