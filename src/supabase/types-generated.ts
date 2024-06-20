@@ -118,21 +118,18 @@ export type Database = {
         Row: {
           active_partner: string | null
           name: string | null
-          pub_key: string | null
           push_notif_subscriptions: Json[] | null
           user_id: string
         }
         Insert: {
           active_partner?: string | null
           name?: string | null
-          pub_key?: string | null
           push_notif_subscriptions?: Json[] | null
           user_id: string
         }
         Update: {
           active_partner?: string | null
           name?: string | null
-          pub_key?: string | null
           push_notif_subscriptions?: Json[] | null
           user_id?: string
         }
@@ -148,6 +145,35 @@ export type Database = {
             foreignKeyName: "profiles_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pub_keys: {
+        Row: {
+          created_at: string
+          id: string
+          user_id: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          user_id: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          user_id?: string
+          value?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pub_keys_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
