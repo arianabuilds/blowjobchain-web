@@ -6,6 +6,12 @@ import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"
 import Image from "next/image"
 import orgasm from "./orgasm.png"
+import { Tables } from "@/supabase/types"
+import { PubKeyChangeLine } from "./PubKeyChangeLine"
+
+type Point = Tables<"points">
+type PubKeyChange = Tables<"pub_keys">
+const isPoint = (item: Point | PubKeyChange): item is Point => item.hasOwnProperty("from")
 
 export const MainList = async ({
   name,
@@ -22,24 +28,35 @@ export const MainList = async ({
   const a = getActivePartnership(partnerships, active_partner)
   const idToName = { [a.inviter]: a.inviter_name, [a.invitee]: a.invitee_name }
 
-  const points = await loadPoints(a)
+  const points = (await loadPoints(a)) || []
+  const pubKeyChanges = (await loadPubKeyChanges(a)) || []
+
+  const combinedChain: (Point | PubKeyChange)[] = [...pubKeyChanges, ...points]
 
   return (
     <>
       <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
       <div className="w-full px-1 overflow-y-scroll text-center">
-        {!points?.length ? (
+        {!combinedChain?.length ? (
           <NoRecordsYet />
         ) : (
           // List of points
           <div className="w-full px-4 max-w-[22rem] mx-auto">
-            {points.map((point) => (
-              <PointRow
-                key={point.id}
-                point={point}
-                who={idToName[point.amount < 0 ? point.from : point.to]}
-              />
-            ))}
+            {combinedChain.map((item) =>
+              isPoint(item) ? (
+                <PointRow
+                  key={item.id}
+                  point={item}
+                  who={idToName[item.amount < 0 ? item.from : item.to]}
+                />
+              ) : (
+                <PubKeyChangeLine
+                  key={item.created_at + item.user_id}
+                  pubKeyChange={item}
+                  who={idToName[item.user_id]}
+                />
+              ),
+            )}
           </div>
         )}
       </div>
@@ -57,4 +74,15 @@ async function loadPoints(a: PartnershipsWithName[0]) {
   if (error) return alert(`Error loading points: ${JSON.stringify(error)}`)
 
   return points
+}
+
+async function loadPubKeyChanges(a: PartnershipsWithName[0]) {
+  const { data: pubKeyChanges, error } = await createSupabaseServer()
+    .from("pub_keys")
+    .select()
+    .order("created_at", { ascending: false })
+    .in("user_id", [a.inviter, a.invitee])
+  if (error) return alert(`Error loading pubKeyChanges: ${JSON.stringify(error)}`)
+
+  return pubKeyChanges
 }
