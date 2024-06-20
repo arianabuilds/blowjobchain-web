@@ -16,6 +16,7 @@
     "@supabase/supabase-js": "^2.43.0",
     "ed25519-keys": "^1.2.0",
     "next": "14.2.3",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.15",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/web-push": "^3.6.3",
