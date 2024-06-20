@@ -31,7 +31,9 @@ export const MainList = async ({
   const points = (await loadPoints(a)) || []
   const pubKeyChanges = (await loadPubKeyChanges(a)) || []
 
-  const combinedChain: (Point | PubKeyChange)[] = [...pubKeyChanges, ...points]
+  const combinedChain = [...pubKeyChanges, ...points].sort(
+    (a, b) => +new Date(b.created_at) - +new Date(a.created_at),
+  )
 
   return (
     <>
