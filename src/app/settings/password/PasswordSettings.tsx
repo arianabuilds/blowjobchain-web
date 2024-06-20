@@ -1,14 +1,19 @@
-import { createSupabaseServer } from "@/supabase/server"
 import { ForgotPassword } from "./ForgotPassword"
 import { SetPassword } from "./SetPassword"
 import PasswordIcon from "./PasswordIcon.svg"
 import Image from "next/image"
+import { get_user_id_server } from "@/app/get-user-id-server"
 
 export const PasswordSettings = async () => {
-  const { data } = await createSupabaseServer()
+  const { user_id, supabase } = await get_user_id_server()
+  if (!user_id) return null
+
+  const { data } = await supabase
     .from("pub_keys")
     .select()
+    .eq("user_id", user_id)
     .order("created_at", { ascending: false })
+    .limit(1)
     .single()
   const isPasswordSet = !!data?.value
 
