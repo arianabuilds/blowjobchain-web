@@ -21,10 +21,7 @@ This will be shown in the chain.`)
           if (!confirmed) return
 
           // Remove pubkey from account
-          const { error } = await supabase
-            .from("profiles")
-            .update({ pub_key: null })
-            .eq("user_id", user_id)
+          const { error } = await supabase.from("pub_keys").insert({ value: null, user_id })
           if (error) alert(JSON.stringify(error))
 
           window.location.reload()

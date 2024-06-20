@@ -32,10 +32,7 @@ export const SetPassword = () => {
           const pubKey = await passwordToPublicKey(password)
 
           // 4. store public key in db
-          const { error } = await supabase
-            .from("profiles")
-            .update({ pub_key: pubKey })
-            .eq("user_id", user_id)
+          const { error } = await supabase.from("pub_keys").insert({ value: pubKey, user_id })
           if (error) alert(JSON.stringify(error))
 
           window.location.reload()

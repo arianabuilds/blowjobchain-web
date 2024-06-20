@@ -123,7 +123,7 @@ function notifyPartner(
   })
 }
 
-type PublicKey = undefined | Tables<"profiles">["pub_key"]
+type PublicKey = undefined | Tables<"pub_keys">["value"]
 /** Has the current user set a public key for their account? `undefined` before finished loading
  */
 function usePublicKey(): { publicKey: PublicKey } {
@@ -131,12 +131,13 @@ function usePublicKey(): { publicKey: PublicKey } {
 
   useEffect(() => {
     createSupabaseClient()
-      .from("profiles")
-      .select("pub_key")
+      .from("pub_keys")
+      .select()
+      .order("created_at", { ascending: false })
       .single()
       .then(({ data, error }) => {
         if (error) return alert(JSON.stringify({ error }))
-        setPublicKey(data.pub_key)
+        setPublicKey(data.value)
       })
   }, [])
 

@@ -5,8 +5,12 @@ import PasswordIcon from "./PasswordIcon.svg"
 import Image from "next/image"
 
 export const PasswordSettings = async () => {
-  const { data } = await createSupabaseServer().from("profiles").select("pub_key").single()
-  const isPasswordSet = !!data?.pub_key
+  const { data } = await createSupabaseServer()
+    .from("pub_keys")
+    .select()
+    .order("created_at", { ascending: false })
+    .single()
+  const isPasswordSet = !!data?.value
 
   return (
     <div className="p-2 px-5 text-left rounded-lg bg-white/5">
