@@ -63,7 +63,7 @@ async function storePartnershipInvitation(inviterID: string, inviteeEmail: strin
 }
 
 const { SMTP_SERVER, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD } = process.env
-const transporter = createTransport({
+const nodemailer = createTransport({
   // @ts-expect-error
   host: SMTP_SERVER,
   port: SMTP_PORT,
@@ -82,7 +82,7 @@ async function sendLoginEmail(
   },
 ) {
   try {
-    await transporter.sendMail({
+    await nodemailer.sendMail({
       from: '"BlowjobChain" <blowjobchain@gmail.com>',
       to: recipient_email,
       subject: `Confirm Your Email: ${email_otp}`,
