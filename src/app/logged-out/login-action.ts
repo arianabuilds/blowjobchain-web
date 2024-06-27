@@ -81,8 +81,11 @@ async function sendLoginEmail(
     email_otp: string
   },
 ) {
+  const isLocalDB = process.env.NEXT_PUBLIC_SUPABASE_URL?.includes("127.0.0")
+  const sendMail = !isLocalDB ? nodemailer.sendMail : console.log
+
   try {
-    await nodemailer.sendMail({
+    await sendMail({
       from: '"BlowjobChain" <blowjobchain@gmail.com>',
       to: recipient_email,
       subject: `Confirm Your Email: ${email_otp}`,
