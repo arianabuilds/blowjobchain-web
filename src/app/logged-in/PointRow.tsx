@@ -44,7 +44,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         </div>
 
         {/* Right: Comment icon */}
-        <div className="flex justify-end w-12 opacity-30">
+        <div className="flex justify-end w-12 opacity-45">
           {point.comment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
         </div>
       </div>
