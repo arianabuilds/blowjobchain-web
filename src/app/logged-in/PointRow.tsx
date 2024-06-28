@@ -75,11 +75,16 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
           </div>
 
           {/* Mark Resolved button */}
-          {isCharge && point.from === user_id && (
+          {isCharge && (
             <div
               className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer" : "border-white/30"}`}
-              onClick={async () => {
+              onClick={async (event) => {
                 if (point.resolved_at) return
+
+                if (point.from !== user_id) {
+                  event.stopPropagation()
+                  return alert("Ask partner to resolve")
+                }
 
                 const { error } = await MarkResolvedAction(point.id)
                 if (error) alert(JSON.stringify({ error }))
