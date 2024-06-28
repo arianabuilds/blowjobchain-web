@@ -43,7 +43,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
             // Amount
             <>
               {point.amount > 0 && "+"}
-              {point.amount} {isCharge ? "charge" : "point"}
+              {point.amount}{" "}
+              {isCharge ? `charge${point.resolved_at ? " - Resolved" : ""}` : "point"}
               {!isCharge && point.amount !== 1 ? "s" : ""}
             </>
           )}
