@@ -8,11 +8,12 @@ import Image from "next/image"
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
+  const hasComment = point.comment && point.comment !== "$$IS_CLAIM$$"
 
   return (
     <div
-      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${point.comment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
-      onClick={() => point.comment && setOpen(!open)}
+      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
+      onClick={() => hasComment && setOpen(!open)}
     >
       {/* First row */}
       <div className="flex items-center justify-between">
@@ -45,7 +46,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
         {/* Right: Comment icon */}
         <div className="flex justify-end w-12 opacity-45">
-          {point.comment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
+          {hasComment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
         </div>
       </div>
 
