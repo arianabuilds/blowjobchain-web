@@ -45,8 +45,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
           {/* Amount */}
           <>
             {point.amount > 0 && "+"}
-            {point.amount} point
-            {Math.abs(point.amount) !== 1 ? "s" : ""}
+            {point.amount} {isCharge ? "charge" : "point"}
+            {!isCharge && point.amount !== 1 ? "s" : ""}
           </>
         </div>
 
