@@ -49,7 +49,7 @@ export const MainList = async ({
                 <PointRow
                   key={item.id}
                   point={item}
-                  who={idToName[item.amount < 0 ? item.from : item.to]}
+                  who={idToName[item.comment === "$$IS_CLAIM$$" ? item.from : item.to]}
                 />
               ) : (
                 <PubKeyChangeLine
