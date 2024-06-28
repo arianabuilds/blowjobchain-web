@@ -6,6 +6,7 @@ import { useState } from "react"
 import CommentIcon from "./comment-icon.svg"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
+import { MarkResolvedAction } from "./mark-resolved-action"
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
@@ -80,10 +81,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
           {/* Mark Resolved button */}
           {isCharge && (
             <div
-              className="z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 hover:opacity-80 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20"
-              onClick={(event) => {
-                // alert("clicked")
-              }}
+              className="z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20"
+              onClick={async () => await MarkResolvedAction()}
             >
               Mark Resolved?
             </div>
