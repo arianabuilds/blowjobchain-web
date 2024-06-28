@@ -17,11 +17,11 @@ export const PubKeyChangeLine = ({
 
   return (
     <div
-      className={`mb-2 opacity-30 text-sm italic ${value ? "active:opacity-50 cursor-pointer" : ""}`}
+      className={`mb-2 opacity-30 text-sm italic ${value && "active:opacity-50 cursor-pointer"}`}
       onClick={() => setOpen(!open)}
     >
       {who} {value ? "set new" : "removed their"} pub key
-      {open && value && <div className="text-xs">{value ? `${value.slice(0, 10)}...` : ""}</div>}
+      {open && value && <div className="text-xs">{`${value.slice(0, 10)}...`}</div>}
     </div>
   )
 }
