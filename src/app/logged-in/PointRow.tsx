@@ -18,8 +18,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   return (
     <div
-      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
-      onClick={() => hasComment && setOpen(!open)}
+      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment || isCharge ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
+      onClick={() => (hasComment || isCharge) && setOpen(!open)}
     >
       {/* First row */}
       <div className="flex items-center justify-between">
@@ -61,13 +61,34 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         </div>
       </div>
 
-      {/* Hidden second row */}
+      {/* Expanded View */}
       {open && (
-        <div className="mt-1 text-sm text-center opacity-60">
-          {'"'}
-          {point.comment}
-          {'"'}
-        </div>
+        <>
+          {/* Comment */}
+          <div className="mt-1 text-sm opacity-60">
+            {point.comment ? (
+              <>
+                {'"'}
+                {point.comment}
+                {'"'}
+              </>
+            ) : (
+              <span className="text-xs italic">No comment written.</span>
+            )}
+          </div>
+
+          {/* Mark Resolved button */}
+          {isCharge && (
+            <div
+              className="z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 hover:opacity-80 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20"
+              onClick={(event) => {
+                // alert("clicked")
+              }}
+            >
+              Mark Resolved?
+            </div>
+          )}
+        </>
       )}
     </div>
   )
