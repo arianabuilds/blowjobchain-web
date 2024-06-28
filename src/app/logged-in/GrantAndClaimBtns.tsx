@@ -51,7 +51,7 @@ export const GrantAndClaimBtns = ({
           const supabase = createSupabaseClient()
           const user_id = (await supabase.auth.getSession()).data.session?.user.id
           if (!user_id) return alert("Not Logged In")
-          let partner = active.inviter !== user_id ? active.inviter : active.invitee
+          const partner = active.inviter !== user_id ? active.inviter : active.invitee
 
           // Prompt points and optional comment
           const points = prompt("Grant how many points?")
@@ -85,7 +85,7 @@ export const GrantAndClaimBtns = ({
           const supabase = createSupabaseClient()
           const user_id = (await supabase.auth.getSession()).data.session?.user.id
           if (!user_id) return alert("Not Logged In")
-          let partner = active.inviter !== user_id ? active.inviter : active.invitee
+          const partner = active.inviter !== user_id ? active.inviter : active.invitee
 
           const amount = -10
 
