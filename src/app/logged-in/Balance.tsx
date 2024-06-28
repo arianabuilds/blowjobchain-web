@@ -57,7 +57,11 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   // Calc new balance
   const new_balance = { ...summary }
   newPoints.forEach((point) => {
-    new_balance[point.amount < 0 ? point.from : point.to] += point.amount / 10
+    // If it's a positive grant, add to's balance
+    if (point.amount > 0) return (new_balance[point.to] += point.amount / 10)
+
+    // If it's a $$IS_CLAIM$$, subtract from's balance 1 card
+    if (point.comment === "$$IS_CLAIM$$") return (new_balance[point.from] -= 1)
   })
 
   // TODO: If balance changed, store update
