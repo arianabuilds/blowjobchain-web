@@ -46,7 +46,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
           <>
             {point.amount > 0 && "+"}
             {point.amount} point
-            {point.amount !== 1 ? "s" : ""}
+            {Math.abs(point.amount) !== 1 ? "s" : ""}
           </>
         </div>
 
