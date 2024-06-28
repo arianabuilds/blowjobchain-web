@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import { printDecimals } from "./print-decimals"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect } from "react"
 
 export const UnresolvedChargesTotal = ({
   partner_name,
@@ -16,8 +17,16 @@ export const UnresolvedChargesTotal = ({
   my_charges: number
 }) => {
   const isChargesFilter = useSearchParams().has("charges")
+  const noCharges = !partner_charges && !my_charges
 
-  if (!partner_charges && !my_charges) return null
+  // If charges are all Resolved, return to full list
+  const router = useRouter()
+  useEffect(() => {
+    if (isChargesFilter && noCharges) router.push("/")
+  }, [isChargesFilter, noCharges, router])
+
+  // Only show when there are any Unresolved charges
+  if (noCharges) return null
 
   return (
     <Link
