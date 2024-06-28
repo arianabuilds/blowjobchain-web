@@ -22,7 +22,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   return (
     <div
-      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment || isCharge ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""}`}
+      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment || isCharge ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""} ${point.resolved_at && !open ? "!opacity-20" : ""}`}
       onClick={() => (hasComment || isCharge) && setOpen(!open)}
     >
       {/* First row */}
