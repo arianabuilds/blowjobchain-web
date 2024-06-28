@@ -77,8 +77,9 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
     // If it's a $$IS_CLAIM$$, subtract from's balance 1 card
     if (point.comment === "$$IS_CLAIM$$") return (balances[point.from] -= 1)
 
-    // If it's a negative charge, and unresolved(TODO), add to's Charges balance
-    if (point.amount < 0) return (unresolved_charges[point.to] += point.amount / 10)
+    // If it's a negative charge and unresolved, add to's Charges balance
+    if (point.amount < 0 && !point.resolved_at)
+      return (unresolved_charges[point.to] += point.amount / 10)
   })
 
   // TODO: If balance changed, store update
