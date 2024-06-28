@@ -80,6 +80,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
                 const { error } = await MarkResolvedAction(point.id)
                 if (error) alert(JSON.stringify({ error }))
+
+                window.location.reload()
               }}
             >
               {!point.resolved_at
