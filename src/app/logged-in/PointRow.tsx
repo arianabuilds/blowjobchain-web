@@ -42,12 +42,17 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
         <div>
           {/* who */}
           <span className="mr-1">{who?.[0]}</span>
-          {/* Amount */}
-          <>
-            {point.amount > 0 && "+"}
-            {point.amount} {isCharge ? "charge" : "point"}
-            {!isCharge && point.amount !== 1 ? "s" : ""}
-          </>
+
+          {isClaim ? (
+            "claimed a card"
+          ) : (
+            // Amount
+            <>
+              {point.amount > 0 && "+"}
+              {point.amount} {isCharge ? "charge" : "point"}
+              {!isCharge && point.amount !== 1 ? "s" : ""}
+            </>
+          )}
         </div>
 
         {/* Right: Comment icon */}
