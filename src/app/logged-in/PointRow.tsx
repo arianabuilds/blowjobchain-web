@@ -29,17 +29,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
       <div className="flex items-center justify-between">
         {/* Left: Timestamp */}
         <span className="inline-block w-12 text-sm text-left opacity-70">
-          {format(point.created_at)
-            .replace("ago", "")
-            .replace("just ", "")
-            .replace(/\d\d seconds/, "now")
-            .replace(" minute", "m")
-            .replace(" hour", "h")
-            .replace(" day", "d")
-            .replace(" week", "w")
-            .replace(" month", "mo")
-            .replace(" year", "y")
-            .replace("s ", " ")}
+          {formatTimeAgo(point.created_at)}
         </span>
 
         {/* Center section */}
@@ -84,17 +74,35 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
           {/* Mark Resolved button */}
           {isCharge && point.from === user_id && (
             <div
-              className="z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20"
+              className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer" : "border-white/30"}`}
               onClick={async () => {
+                if (point.resolved_at) return
+
                 const { error } = await MarkResolvedAction(point.id)
                 if (error) alert(JSON.stringify({ error }))
               }}
             >
-              Mark Resolved?
+              {!point.resolved_at
+                ? "Mark Resolved?"
+                : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
             </div>
           )}
         </>
       )}
     </div>
   )
+}
+
+function formatTimeAgo(timestamp: string) {
+  return format(timestamp)
+    .replace("ago", "")
+    .replace("just ", "")
+    .replace(/\d\d seconds/, "now")
+    .replace(" minute", "m")
+    .replace(" hour", "h")
+    .replace(" day", "d")
+    .replace(" week", "w")
+    .replace(" month", "mo")
+    .replace(" year", "y")
+    .replace("s ", " ")
 }
