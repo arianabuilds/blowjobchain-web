@@ -16,12 +16,14 @@ export const UnresolvedChargesTotal = ({
       Unresolved Charges
       <div className="mb-1 text-xs opacity-50">Don{"'"}t let toxicity fester!</div>
       <div className="flex justify-center py-2 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
-        <div className="w-[9.1rem]">
-          {partner}: {printDecimals(partner_charges)}
-        </div>
-        <div className="w-[9.1rem]">
-          {name}: {printDecimals(my_charges)}
-        </div>
+        {[
+          { who: partner, total: partner_charges },
+          { who: name, total: my_charges },
+        ].map(({ who, total }, index) => (
+          <div className={`w-[9.1rem] ${!total ? "opacity-30" : ""}`} key={index}>
+            {who}: {printDecimals(total)}
+          </div>
+        ))}
       </div>
     </div>
   )
