@@ -17,7 +17,7 @@ export const PubKeyChangeLine = ({
 
   return (
     <div
-      className={`mb-2 opacity-30 text-sm italic ${value ? "hover:opacity-40 active:opacity-50 cursor-pointer" : ""}`}
+      className={`mb-2 opacity-30 text-sm italic ${value ? "active:opacity-50 cursor-pointer" : ""}`}
       onClick={() => setOpen(!open)}
     >
       {who} {value ? "set new" : "removed their"} pub key
