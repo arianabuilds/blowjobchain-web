@@ -92,7 +92,7 @@ export const GrantAndClaimBtns = ({
           // Save to db
           const { error } = await supabase
             .from("points")
-            .insert({ amount, from: user_id, to: partner })
+            .insert({ amount, from: user_id, to: partner, comment: "$$IS_CLAIM$$" })
           if (error) alert(JSON.stringify({ error }))
 
           // Notify partner
