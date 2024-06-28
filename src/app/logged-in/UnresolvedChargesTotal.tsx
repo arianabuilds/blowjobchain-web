@@ -17,6 +17,8 @@ export const UnresolvedChargesTotal = ({
 }) => {
   const isChargesFilter = useSearchParams().has("charges")
 
+  if (!partner_charges && !my_charges) return null
+
   return (
     <Link
       href={!isChargesFilter ? "?charges" : "/"}
