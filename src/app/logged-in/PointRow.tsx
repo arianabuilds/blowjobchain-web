@@ -20,10 +20,12 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
   const isChargesFilter = useSearchParams().has("charges")
   if (isChargesFilter && (!isCharge || point.resolved_at)) return null
 
+  const clickable = hasComment || isCharge
+
   return (
     <div
-      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${hasComment || isCharge ? "hover:bg-white/5 active:bg-white/10 cursor-pointer" : ""} ${point.resolved_at && `text-sm ${!open && "!opacity-20"}`}`}
-      onClick={() => (hasComment || isCharge) && setOpen(!open)}
+      className={`border rounded-lg border-zinc-300/20 p-2 px-3 mb-2 opacity-60 w-full ${clickable && "hover:bg-white/5 active:bg-white/10 cursor-pointer"} ${point.resolved_at && `text-sm ${!open && "!opacity-20"}`}`}
+      onClick={() => clickable && setOpen(!open)}
     >
       {/* First row */}
       <div className="flex items-center justify-between">
@@ -45,14 +47,14 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
               {point.amount > 0 && "+"}
               {point.amount}{" "}
               {isCharge ? `charge${point.resolved_at ? " - Resolved" : ""}` : "point"}
-              {!isCharge && point.amount !== 1 ? "s" : ""}
+              {!isCharge && point.amount !== 1 && "s"}
             </>
           )}
         </div>
 
         {/* Right: Comment icon */}
         <div className="flex justify-end w-12 opacity-45">
-          {hasComment ? <Image src={CommentIcon} alt="Has comment" className="p-[5px]" /> : ""}
+          {hasComment && <Image src={CommentIcon} alt="Has comment" className="p-[5px]" />}
         </div>
       </div>
 
