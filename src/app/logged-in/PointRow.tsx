@@ -18,7 +18,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   const isCharge = point.amount < 0 && !isClaim
   const isChargesFilter = useSearchParams().has("charges")
-  if (isChargesFilter && !isCharge) return null
+  if (isChargesFilter && (!isCharge || point.resolved_at)) return null
 
   return (
     <div
