@@ -40,7 +40,7 @@ export const UnresolvedChargesTotal = ({
           { who: partner_name, total: partner_charges },
           { who: my_name, total: my_charges },
         ].map(({ who, total }, index) => (
-          <div className={`w-[9.1rem] ${!total ? "opacity-30" : ""}`} key={index}>
+          <div className={`w-[9.1rem] ${!total && "opacity-30"}`} key={index}>
             {who}: {printDecimals(total)}
           </div>
         ))}
