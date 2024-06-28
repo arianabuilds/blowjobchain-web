@@ -1,6 +1,7 @@
 "use client"
 
 import { Tables } from "@/supabase/types"
+import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 
 export const PubKeyChangeLine = ({
@@ -11,6 +12,9 @@ export const PubKeyChangeLine = ({
   who: string | null
 }) => {
   const [open, setOpen] = useState(false)
+
+  if (useSearchParams().has("charges")) return null
+
   return (
     <div
       className={`mb-2 opacity-30 text-sm italic ${value ? "hover:opacity-40 active:opacity-50 cursor-pointer" : ""}`}

@@ -5,10 +5,16 @@ import { format } from "@expo/timeago.js"
 import { useState } from "react"
 import CommentIcon from "./comment-icon.svg"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
-  const hasComment = point.comment && point.comment !== "$$IS_CLAIM$$"
+  const isClaim = point.comment === "$$IS_CLAIM$$"
+  const hasComment = point.comment && !isClaim
+
+  const isCharge = point.amount < 0 && !isClaim
+  const isChargesFilter = useSearchParams().has("charges")
+  if (isChargesFilter && !isCharge) return null
 
   return (
     <div

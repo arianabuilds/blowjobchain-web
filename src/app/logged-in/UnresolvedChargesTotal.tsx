@@ -1,4 +1,8 @@
-import { printDecimals } from "./Balance"
+"use client"
+
+import Link from "next/link"
+import { printDecimals } from "./print-decimals"
+import { useSearchParams } from "next/navigation"
 
 export const UnresolvedChargesTotal = ({
   partner_name,
@@ -11,8 +15,13 @@ export const UnresolvedChargesTotal = ({
   my_name: string
   my_charges: number
 }) => {
+  const isChargesFilter = useSearchParams().has("charges")
+
   return (
-    <div className="py-1 mb-3 text-sm border-2 border-red-700 rounded-lg">
+    <Link
+      href={!isChargesFilter ? "?charges" : "/"}
+      className="block py-1 mb-3 text-sm border-2 border-red-700 rounded-lg cursor-pointer hover:bg-red-500/5 active:bg-red-500/10"
+    >
       Unresolved Charges
       <div className="mb-1 text-xs opacity-50">Don{"'"}t let toxicity fester!</div>
       <div className="flex justify-center py-2 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
@@ -25,6 +34,6 @@ export const UnresolvedChargesTotal = ({
           </div>
         ))}
       </div>
-    </div>
+    </Link>
   )
 }

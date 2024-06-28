@@ -2,6 +2,7 @@ import { createSupabaseServer } from "@/supabase/server"
 import { PartnershipsWithName } from "./load-partnerships"
 import { NonEmptyArray, getActivePartnership } from "./getActivePartnership"
 import { UnresolvedChargesTotal } from "./UnresolvedChargesTotal"
+import { printDecimals } from "./print-decimals"
 
 export const Balance = async ({
   name: my_name,
@@ -83,9 +84,4 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   // TODO: If balance changed, store update
 
   return { balances, unresolved_charges }
-}
-
-/** Show up to 2 decimal places, but don't show trailing zeros in the decimal places */
-export function printDecimals(number: number): string {
-  return parseFloat(number.toFixed(4)).toString()
 }
