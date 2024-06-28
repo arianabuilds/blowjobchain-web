@@ -36,7 +36,7 @@ export const MainList = async ({
   )
 
   return (
-    <>
+    <div className="flex-1">
       <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
       <div className="w-full px-1 overflow-y-scroll text-center">
         {!combinedChain?.length ? (
@@ -62,7 +62,7 @@ export const MainList = async ({
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
