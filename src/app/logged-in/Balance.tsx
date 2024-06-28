@@ -20,32 +20,35 @@ export const Balance = async ({
 
   // Partner's name is the one that's not ours
   let partner_name = active.inviter_name
-  let partner_balance = balances[active.inviter]
-  let partner_charges = unresolved_charges[active.inviter]
-  let my_balance = balances[active.invitee]
-  let my_charges = unresolved_charges[active.invitee]
+  let partner = active.inviter
+  let me = active.invitee
   // We assumed partner was inviter,
   // if that was wrong, flip inviter and invitee
   if (partner_name === my_name) {
     partner_name = active.invitee_name
-    partner_balance = balances[active.invitee]
-    partner_charges = unresolved_charges[active.invitee]
-    my_balance = balances[active.inviter]
-    my_charges = unresolved_charges[active.inviter]
+    partner = active.invitee
+    me = active.inviter
   }
 
   return (
     <div className="text-center">
       <div className="flex justify-center py-3 mb-5 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
         <div className="w-[9.1rem]">
-          {partner_name}: {printDecimals(partner_balance)}
+          {partner_name}: {printDecimals(balances[partner])}
         </div>
         <div className="w-[9.1rem]">
-          {my_name}: {printDecimals(my_balance)}
+          {my_name}: {printDecimals(balances[me])}
         </div>
       </div>
 
-      <UnresolvedChargesTotal {...{ partner_name, partner_charges, my_name, my_charges }} />
+      <UnresolvedChargesTotal
+        {...{
+          partner_name,
+          my_name,
+          partner_charges: unresolved_charges[partner],
+          my_charges: unresolved_charges[me],
+        }}
+      />
     </div>
   )
 }
