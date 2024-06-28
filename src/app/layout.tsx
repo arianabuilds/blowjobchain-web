@@ -15,7 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`from-[#42002E] to-[#4e031f] bg-gradient-to-b h-[100cqh] flex flex-col items-center overflow-hidden text-white/70 ${inter.className}`}
+        style={{ WebkitUserSelect: "none" }}
+        className={`from-[#42002E] to-[#4e031f] bg-gradient-to-b h-[100cqh] flex flex-col items-center overflow-hidden text-white/70 select-none ${inter.className}`}
       >
         {children}
       </body>
