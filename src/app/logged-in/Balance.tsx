@@ -4,7 +4,7 @@ import { NonEmptyArray, getActivePartnership } from "./getActivePartnership"
 import { UnresolvedChargesTotal } from "./UnresolvedChargesTotal"
 
 export const Balance = async ({
-  name,
+  name: my_name,
   partnerships,
   active_partner,
 }: {
@@ -19,15 +19,15 @@ export const Balance = async ({
   const { balances, unresolved_charges } = results
 
   // Partner's name is the one that's not ours
-  let partner = active.inviter_name
+  let partner_name = active.inviter_name
   let partner_balance = balances[active.inviter]
   let partner_charges = unresolved_charges[active.inviter]
   let my_balance = balances[active.invitee]
   let my_charges = unresolved_charges[active.invitee]
   // We assumed partner was inviter,
   // if that was wrong, flip inviter and invitee
-  if (partner === name) {
-    partner = active.invitee_name
+  if (partner_name === my_name) {
+    partner_name = active.invitee_name
     partner_balance = balances[active.invitee]
     partner_charges = unresolved_charges[active.invitee]
     my_balance = balances[active.inviter]
@@ -38,14 +38,14 @@ export const Balance = async ({
     <div className="text-center">
       <div className="flex justify-center py-3 mb-5 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
         <div className="w-[9.1rem]">
-          {partner}: {printDecimals(partner_balance)}
+          {partner_name}: {printDecimals(partner_balance)}
         </div>
         <div className="w-[9.1rem]">
-          {name}: {printDecimals(my_balance)}
+          {my_name}: {printDecimals(my_balance)}
         </div>
       </div>
 
-      <UnresolvedChargesTotal {...{ partner, partner_charges, name, my_charges }} />
+      <UnresolvedChargesTotal {...{ partner_name, partner_charges, my_name, my_charges }} />
     </div>
   )
 }

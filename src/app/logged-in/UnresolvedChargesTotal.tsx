@@ -1,14 +1,14 @@
 import { printDecimals } from "./Balance"
 
 export const UnresolvedChargesTotal = ({
-  partner,
+  partner_name,
   partner_charges,
-  name,
+  my_name,
   my_charges,
 }: {
-  partner: string | null
+  partner_name: string | null
   partner_charges: number
-  name: string
+  my_name: string
   my_charges: number
 }) => {
   return (
@@ -17,8 +17,8 @@ export const UnresolvedChargesTotal = ({
       <div className="mb-1 text-xs opacity-50">Don{"'"}t let toxicity fester!</div>
       <div className="flex justify-center py-2 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
         {[
-          { who: partner, total: partner_charges },
-          { who: name, total: my_charges },
+          { who: partner_name, total: partner_charges },
+          { who: my_name, total: my_charges },
         ].map(({ who, total }, index) => (
           <div className={`w-[9.1rem] ${!total ? "opacity-30" : ""}`} key={index}>
             {who}: {printDecimals(total)}
