@@ -76,6 +76,7 @@ export type Database = {
           created_at: string
           from: string
           id: number
+          resolved_at: string | null
           signature: string | null
           to: string
         }
@@ -85,6 +86,7 @@ export type Database = {
           created_at?: string
           from: string
           id?: number
+          resolved_at?: string | null
           signature?: string | null
           to: string
         }
@@ -94,6 +96,7 @@ export type Database = {
           created_at?: string
           from?: string
           id?: number
+          resolved_at?: string | null
           signature?: string | null
           to?: string
         }
