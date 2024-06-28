@@ -63,7 +63,7 @@ function SendLoginCodeButton() {
   const { pending } = useFormStatus()
   return (
     <button disabled={pending} formAction={login} className={buttonClass}>
-      Send{pending ? "ing" : ""} Login Code
+      Send{pending && "ing"} Login Code
     </button>
   )
 }
@@ -72,7 +72,7 @@ function SubmitCodeButton() {
   const { pending } = useFormStatus()
   return (
     <button disabled={pending} formAction={submitLoginCode} className={buttonClass}>
-      Submit{pending ? "ting..." : ""}
+      Submit{pending && "ting..."}
     </button>
   )
 }
