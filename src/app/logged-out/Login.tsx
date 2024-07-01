@@ -4,12 +4,14 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { login, submitLoginCode } from "./login-action"
 import { useFormStatus } from "react-dom"
+import { forwardRef, useRef } from "react"
 
 export const Login = ({ inviterID }: { inviterID?: string }) => {
   const searchParams = useSearchParams()
   const isLoginScreen = searchParams.has("login")
   const isEnterLoginCodeScreen = searchParams.has("enter-login-code")
   const email = searchParams.get("email")
+  const $submitCode = useRef<HTMLButtonElement>(null)
 
   return !isLoginScreen && !isEnterLoginCodeScreen && !inviterID ? (
     // Login Button
@@ -50,8 +52,12 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
         className="p-1 px-3 rounded text-black/70"
         placeholder="6-digit code"
         type="text"
+        onChange={(event) => {
+          // Is 6 digits?
+          if (/\d{6}/.test(event.currentTarget.value)) $submitCode.current?.click()
+        }}
       />
-      <SubmitCodeButton />
+      <SubmitCodeButton ref={$submitCode} />
     </form>
   )
 }
@@ -68,11 +74,12 @@ function SendLoginCodeButton() {
   )
 }
 
-function SubmitCodeButton() {
+const SubmitCodeButton = forwardRef<HTMLButtonElement>((props, ref) => {
   const { pending } = useFormStatus()
   return (
-    <button disabled={pending} formAction={submitLoginCode} className={buttonClass}>
+    <button ref={ref} disabled={pending} formAction={submitLoginCode} className={buttonClass}>
       Submit{pending && "ting..."}
     </button>
   )
-}
+})
+SubmitCodeButton.displayName = "SubmitCodeButton"
