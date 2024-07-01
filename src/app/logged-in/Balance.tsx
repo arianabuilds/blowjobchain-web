@@ -33,7 +33,7 @@ export const Balance = async ({
 
   return (
     <div className="text-center">
-      <div className="flex justify-center py-3 mb-5 rounded-full space-x-7 text-zinc-300/70 bg-black/20">
+      <div className="flex justify-center py-3 mb-5 rounded-full space-x-7 text-zinc-300/70 bg-black/20 hide-on-charges-filter">
         <div className="w-[9.1rem]">
           {partner_name}: {printDecimals(balances[partner])}
         </div>

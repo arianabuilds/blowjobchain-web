@@ -45,6 +45,13 @@ export const UnresolvedChargesTotal = ({
           </div>
         ))}
       </div>
+      {isChargesFilter && (
+        <style jsx global>{`
+          .hide-on-charges-filter {
+            opacity: 0;
+          }
+        `}</style>
+      )}
     </Link>
   )
 }
