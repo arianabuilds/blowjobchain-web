@@ -6,6 +6,7 @@ import { useRef, useState } from "react"
 
 export const SetPassword = () => {
   const $input = useRef<HTMLInputElement>(null)
+  const $submit = useRef<HTMLButtonElement>(null)
   const [saving, setSaving] = useState(false)
   return (
     <div className="flex mt-2">
@@ -13,9 +14,11 @@ export const SetPassword = () => {
         className="w-56 p-2 rounded-lg opacity-60 text-gray-600"
         placeholder="correcthorsebatterystaple"
         ref={$input}
+        onKeyDown={(event) => event.key === "Enter" && $submit.current?.click()}
       />
       <button
         className="w-20 ml-2 text-sm border border-zinc-300/50 rounded-lg hover:bg-white/10 active:bg-white/20"
+        ref={$submit}
         onClick={async () => {
           // Are they logged in?
           const supabase = createSupabaseClient()
