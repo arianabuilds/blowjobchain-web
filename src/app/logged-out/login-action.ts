@@ -85,7 +85,7 @@ async function sendLoginEmail(
   const sendMail = !isLocalDB ? nodemailer.sendMail : console.log
 
   try {
-    await sendMail({
+    await nodemailer.sendMail({
       from: '"BlowjobChain" <blowjobchain@gmail.com>',
       to: recipient_email,
       subject: `Confirm Your Email: ${email_otp}`,
