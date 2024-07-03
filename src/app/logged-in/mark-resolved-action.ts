@@ -12,7 +12,7 @@ export const MarkResolvedAction = async (id: number) => {
   // Use supa-as-admin to perform the precise Update
   const { error } = await createSupabaseAdmin()
     .from("points")
-    .update({ resolved_at: new Date() })
+    .update({ resolved_at: new Date().toISOString() })
     .eq("id", id)
     .eq("from", user_id)
 
