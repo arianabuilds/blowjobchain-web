@@ -36,6 +36,35 @@ export type Database = {
         }
         Relationships: []
       }
+      partial_resolutions: {
+        Row: {
+          amount: number
+          created_at: string
+          id: number
+          points_id: number
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: number
+          points_id: number
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: number
+          points_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partial_resolutions_points_id_fkey"
+            columns: ["points_id"]
+            isOneToOne: false
+            referencedRelation: "points"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partnerships: {
         Row: {
           created_at: string

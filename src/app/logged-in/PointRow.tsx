@@ -6,10 +6,11 @@ import { useState } from "react"
 import CommentIcon from "./comment-icon.svg"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { MarkResolvedAction } from "./mark-resolved-action"
+import { MarkResolvedAction, PartiallyResolveAction } from "./mark-resolved-action"
 import { useUserId } from "../use-user-id"
 
-const partial_resolution = -0.5
+// const partial_resolution = -0.5
+const partial_resolution = undefined
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
@@ -109,8 +110,10 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
                 {!point.resolved_at && (
                   <div
                     className="z-20 py-1 px-2 mb-0.5 mt-1.5 text-sm border rounded-r opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer border-l-0"
-                    onClick={(event) => {
+                    onClick={async (event) => {
                       event.stopPropagation()
+
+                      if (point.from !== user_id) return alert("Only partner can partially resolve")
 
                       const input = prompt(
                         `Partially resolve? Was ${point.amount}, enter remaining amount:`,
@@ -127,6 +130,11 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
                         return alert(
                           `Error: You gave ${input}, which is > original amount ${point.amount}.`,
                         )
+
+                      const { error } = await PartiallyResolveAction(point.id, +input)
+                      if (error) alert(JSON.stringify({ error }))
+
+                      window.location.reload()
                     }}
                   >
                     ▾
