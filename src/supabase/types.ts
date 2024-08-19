@@ -12,6 +12,11 @@ export type Database = MergeDeep<
           Row: { push_notif_subscriptions: PushSubscription[] | null }
           Update: { push_notif_subscriptions?: PushSubscription[] }
         }
+        points: {
+          Row: {
+            partial_resolutions: Tables<"partial_resolutions">[]
+          }
+        }
       }
       Functions: {
         get_partnerships_with_names: {

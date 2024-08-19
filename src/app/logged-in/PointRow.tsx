@@ -9,9 +9,6 @@ import { useSearchParams } from "next/navigation"
 import { MarkResolvedAction, PartiallyResolveAction } from "./mark-resolved-action"
 import { useUserId } from "../use-user-id"
 
-// const partial_resolution = -0.5
-const partial_resolution = undefined
-
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
   const { user_id } = useUserId()
@@ -24,6 +21,8 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
   if (isChargesFilter && (!isCharge || point.resolved_at)) return null
 
   const clickable = hasComment || isCharge
+
+  const [partial_resolution] = point.partial_resolutions
 
   return (
     <div
@@ -52,7 +51,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
               {partial_resolution && (
                 <>
                   <span className="opacity-70">{"->"} </span>
-                  {partial_resolution}{" "}
+                  {partial_resolution.amount}{" "}
                 </>
               )}
               {isCharge ? `charge${point.resolved_at ? " - Resolved" : ""}` : "point"}
@@ -143,8 +142,12 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
               </div>
               {partial_resolution && (
                 <div className="text-sm opacity-60 mt-2 flex justify-between items-center">
-                  <span className="opacity-70 text-xs">10m</span>
-                  <span className="italic -ml-8">Partially resolved to {partial_resolution}</span>
+                  <span className="opacity-70 text-xs">
+                    {formatTimeAgo(partial_resolution.created_at)}
+                  </span>
+                  <span className="italic -ml-8">
+                    Partially resolved to {partial_resolution.amount}
+                  </span>
                   <span></span>
                 </div>
               )}

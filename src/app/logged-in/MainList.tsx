@@ -69,7 +69,7 @@ export const MainList = async ({
 async function loadPoints(a: PartnershipsWithName[0]) {
   const { data: points, error } = await createSupabaseServer()
     .from("points")
-    .select()
+    .select(`*, partial_resolutions(*)`)
     .order("created_at", { ascending: false })
     .in("from", [a.inviter, a.invitee])
     .in("to", [a.inviter, a.invitee])
