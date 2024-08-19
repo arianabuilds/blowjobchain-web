@@ -9,6 +9,8 @@ import { useSearchParams } from "next/navigation"
 import { MarkResolvedAction } from "./mark-resolved-action"
 import { useUserId } from "../use-user-id"
 
+const partial_resolution = -0.5
+
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
   const { user_id } = useUserId()
@@ -45,7 +47,13 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
             // Amount
             <>
               {point.amount > 0 && "+"}
-              {point.amount}{" "}
+              <span className={partial_resolution && "opacity-70"}>{point.amount} </span>
+              {partial_resolution && (
+                <>
+                  <span className="opacity-70">{"->"} </span>
+                  {partial_resolution}{" "}
+                </>
+              )}
               {isCharge ? `charge${point.resolved_at ? " - Resolved" : ""}` : "point"}
               {!isCharge && point.amount !== 1 && "s"}
             </>
@@ -76,54 +84,63 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
           {/* Mark Resolved button */}
           {isCharge && (
-            <div className="flex">
-              <div
-                className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border opacity-50 flex-grow ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer rounded-l" : "border-white/30 rounded"}`}
-                onClick={async (event) => {
-                  if (point.resolved_at) return
-
-                  if (point.from !== user_id) {
-                    event.stopPropagation()
-                    return alert("Ask partner to resolve")
-                  }
-
-                  const { error } = await MarkResolvedAction(point.id)
-                  if (error) alert(JSON.stringify({ error }))
-
-                  window.location.reload()
-                }}
-              >
-                {!point.resolved_at
-                  ? "Mark Resolved?"
-                  : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
-              </div>
-              {!point.resolved_at && (
+            <>
+              <div className="flex">
                 <div
-                  className="z-20 py-1 px-2 mb-0.5 mt-1.5 text-sm border rounded-r opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer border-l-0"
-                  onClick={(event) => {
-                    event.stopPropagation()
+                  className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border opacity-50 flex-grow ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer rounded-l" : "border-white/30 rounded"}`}
+                  onClick={async (event) => {
+                    if (point.resolved_at) return
 
-                    const input = prompt(
-                      `Partially resolve? Was ${point.amount}, enter remaining amount:`,
-                    )
+                    if (point.from !== user_id) {
+                      event.stopPropagation()
+                      return alert("Ask partner to resolve")
+                    }
 
-                    if (input === "0") return alert("Use full resolve instead")
-                    if (!input) return // pressed Cancel
-                    if (Number.isNaN(+input)) return alert(`Not a number: ${input}`)
-                    if (+input <= point.amount)
-                      return alert(
-                        `Error: You gave ${input}, which doesn't resolve original amount ${point.amount}. Make new charge?`,
-                      )
-                    if (+input > Math.abs(point.amount))
-                      return alert(
-                        `Error: You gave ${input}, which is > original amount ${point.amount}.`,
-                      )
+                    const { error } = await MarkResolvedAction(point.id)
+                    if (error) alert(JSON.stringify({ error }))
+
+                    window.location.reload()
                   }}
                 >
-                  ▾
+                  {!point.resolved_at
+                    ? "Mark Resolved?"
+                    : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
+                </div>
+                {!point.resolved_at && (
+                  <div
+                    className="z-20 py-1 px-2 mb-0.5 mt-1.5 text-sm border rounded-r opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer border-l-0"
+                    onClick={(event) => {
+                      event.stopPropagation()
+
+                      const input = prompt(
+                        `Partially resolve? Was ${point.amount}, enter remaining amount:`,
+                      )
+
+                      if (input === "0") return alert("Use full resolve instead")
+                      if (!input) return // pressed Cancel
+                      if (Number.isNaN(+input)) return alert(`Not a number: ${input}`)
+                      if (+input <= point.amount)
+                        return alert(
+                          `Error: You gave ${input}, which doesn't resolve original amount ${point.amount}. Make new charge?`,
+                        )
+                      if (+input > Math.abs(point.amount))
+                        return alert(
+                          `Error: You gave ${input}, which is > original amount ${point.amount}.`,
+                        )
+                    }}
+                  >
+                    ▾
+                  </div>
+                )}
+              </div>
+              {partial_resolution && (
+                <div className="text-sm opacity-60 mt-2 flex justify-between items-center">
+                  <span className="opacity-70 text-xs">10m</span>
+                  <span className="italic -ml-8">Partially resolved to {partial_resolution}</span>
+                  <span></span>
                 </div>
               )}
-            </div>
+            </>
           )}
         </>
       )}
