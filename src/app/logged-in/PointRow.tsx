@@ -104,7 +104,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
                 >
                   {!point.resolved_at
                     ? "Mark Resolved?"
-                    : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
+                    : `Resolved ${formatTimeAgo(point.resolved_at)}${formatTimeAgo(point.resolved_at) !== "now" ? " ago" : ""}`}
                 </div>
                 {!point.resolved_at && (
                   <div
