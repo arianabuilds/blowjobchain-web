@@ -1,0 +1,13 @@
+diff --git a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+index fb3b6e6..cd67819 100644
+--- a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
++++ b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+@@ -809,7 +809,7 @@ export default class GoTrueClient {
+                         get: (target, prop, receiver) => {
+                             if (!suppressWarning && prop === 'user') {
+                                 // only show warning when the user object is being accessed from the server
+-                                console.warn('Using the user object as returned from supabase.auth.getSession() or from some supabase.auth.onAuthStateChange() events could be insecure! This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. Use supabase.auth.getUser() instead which authenticates the data by contacting the Supabase Auth server.');
++                                // console.warn('Using the user object as returned from supabase.auth.getSession() or from some supabase.auth.onAuthStateChange() events could be insecure! This value comes directly from the storage medium (usually cookies on the server) and many not be authentic. Use supabase.auth.getUser() instead which authenticates the data by contacting the Supabase Auth server.');
+                                 suppressWarning = true; // keeps this proxy instance from logging additional warnings
+                                 this.suppressGetSessionWarning = true; // keeps this client's future proxy instances from warning
+                             }
