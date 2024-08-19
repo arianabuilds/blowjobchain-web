@@ -76,25 +76,53 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
           {/* Mark Resolved button */}
           {isCharge && (
-            <div
-              className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border rounded opacity-50 ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer" : "border-white/30"}`}
-              onClick={async (event) => {
-                if (point.resolved_at) return
+            <div className="flex">
+              <div
+                className={`z-20 py-1 mb-0.5 mt-1.5 text-sm border opacity-50 flex-grow ${!point.resolved_at ? "hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer rounded-l" : "border-white/30 rounded"}`}
+                onClick={async (event) => {
+                  if (point.resolved_at) return
 
-                if (point.from !== user_id) {
-                  event.stopPropagation()
-                  return alert("Ask partner to resolve")
-                }
+                  if (point.from !== user_id) {
+                    event.stopPropagation()
+                    return alert("Ask partner to resolve")
+                  }
 
-                const { error } = await MarkResolvedAction(point.id)
-                if (error) alert(JSON.stringify({ error }))
+                  const { error } = await MarkResolvedAction(point.id)
+                  if (error) alert(JSON.stringify({ error }))
 
-                window.location.reload()
-              }}
-            >
-              {!point.resolved_at
-                ? "Mark Resolved?"
-                : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
+                  window.location.reload()
+                }}
+              >
+                {!point.resolved_at
+                  ? "Mark Resolved?"
+                  : `Resolved ${formatTimeAgo(point.resolved_at)} ago`}
+              </div>
+              {!point.resolved_at && (
+                <div
+                  className="z-20 py-1 px-2 mb-0.5 mt-1.5 text-sm border rounded-r opacity-50 hover:opacity-100 hover:border-purple-400 hover:text-purple-400 active:border-purple-400 active:text-purple-400 active:opacity-90 active:bg-purple-400/20 cursor-pointer border-l-0"
+                  onClick={(event) => {
+                    event.stopPropagation()
+
+                    const input = prompt(
+                      `Partially resolve? Was ${point.amount}, enter remaining amount:`,
+                    )
+
+                    if (input === "0") return alert("Use full resolve instead")
+                    if (!input) return // pressed Cancel
+                    if (Number.isNaN(+input)) return alert(`Not a number: ${input}`)
+                    if (+input <= point.amount)
+                      return alert(
+                        `Error: You gave ${input}, which doesn't resolve original amount ${point.amount}. Make new charge?`,
+                      )
+                    if (+input > Math.abs(point.amount))
+                      return alert(
+                        `Error: You gave ${input}, which is > original amount ${point.amount}.`,
+                      )
+                  }}
+                >
+                  ▾
+                </div>
+              )}
             </div>
           )}
         </>
