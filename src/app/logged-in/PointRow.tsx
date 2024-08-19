@@ -114,20 +114,21 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
                       if (point.from !== user_id) return alert("Only partner can partially resolve")
 
+                      const previousAmount = partial_resolution.amount || point.amount
                       const input = prompt(
-                        `Partially resolve? Was ${point.amount}, enter remaining amount:`,
+                        `Partially resolve? Was ${previousAmount}, enter remaining amount:`,
                       )
 
                       if (input === "0") return alert("Use full resolve instead")
                       if (!input) return // pressed Cancel
                       if (Number.isNaN(+input)) return alert(`Not a number: ${input}`)
-                      if (+input <= point.amount)
+                      if (+input <= previousAmount)
                         return alert(
-                          `Error: You gave ${input}, which doesn't resolve original amount ${point.amount}. Make new charge?`,
+                          `Error: You gave ${input}, which doesn't resolve previous amount ${previousAmount}. Make new charge?`,
                         )
-                      if (+input > Math.abs(point.amount))
+                      if (+input > Math.abs(previousAmount))
                         return alert(
-                          `Error: You gave ${input}, which is > original amount ${point.amount}.`,
+                          `Error: You gave ${input}, which is > previous amount ${previousAmount}.`,
                         )
 
                       const { error } = await PartiallyResolveAction(point.id, +input)
