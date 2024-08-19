@@ -48,7 +48,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
             <>
               {point.amount > 0 && "+"}
               <span className={latest_partial_resolution && "opacity-70"}>{point.amount} </span>
-              {latest_partial_resolution && (
+              {latest_partial_resolution && !point.resolved_at && (
                 <>
                   <span className="opacity-70">{"->"} </span>
                   {latest_partial_resolution.amount}{" "}
