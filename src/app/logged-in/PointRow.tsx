@@ -22,7 +22,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
   const clickable = hasComment || isCharge
 
-  const [partial_resolution] = point.partial_resolutions
+  const latest_partial_resolution = point.partial_resolutions.at(-1)
 
   return (
     <div
@@ -47,11 +47,11 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
             // Amount
             <>
               {point.amount > 0 && "+"}
-              <span className={partial_resolution && "opacity-70"}>{point.amount} </span>
-              {partial_resolution && (
+              <span className={latest_partial_resolution && "opacity-70"}>{point.amount} </span>
+              {latest_partial_resolution && (
                 <>
                   <span className="opacity-70">{"->"} </span>
-                  {partial_resolution.amount}{" "}
+                  {latest_partial_resolution.amount}{" "}
                 </>
               )}
               {isCharge ? `charge${point.resolved_at ? " - Resolved" : ""}` : "point"}
@@ -114,7 +114,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
                       if (point.from !== user_id) return alert("Only partner can partially resolve")
 
-                      const previousAmount = partial_resolution.amount || point.amount
+                      const previousAmount = latest_partial_resolution?.amount || point.amount
                       const input = prompt(
                         `Partially resolve? Was ${previousAmount}, enter remaining amount:`,
                       )
@@ -141,17 +141,13 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
                   </div>
                 )}
               </div>
-              {partial_resolution && (
-                <div className="text-sm opacity-60 mt-2 flex justify-between items-center">
-                  <span className="opacity-70 text-xs">
-                    {formatTimeAgo(partial_resolution.created_at)}
-                  </span>
-                  <span className="italic -ml-8">
-                    Partially resolved to {partial_resolution.amount}
-                  </span>
+              {point.partial_resolutions.map(({ created_at, amount, id }) => (
+                <div key={id} className="text-sm opacity-60 mt-2 flex justify-between items-center">
+                  <span className="opacity-70 text-xs">{formatTimeAgo(created_at)}</span>
+                  <span className="italic -ml-8">Partially resolved to {amount}</span>
                   <span></span>
                 </div>
-              )}
+              ))}
             </>
           )}
         </>
