@@ -1,0 +1,30 @@
+diff --git a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.d.ts b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.d.ts
+index 4a30e44..74b02a8 100644
+--- a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.d.ts
++++ b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.d.ts
+@@ -169,9 +169,9 @@ export default class GoTrueClient {
+      * to the client. If that storage is based on request cookies for example,
+      * the values in it may not be authentic and therefore it's strongly advised
+      * against using this method and its results in such circumstances. A warning
+-     * will be emitted if this is detected. Use {@link #getUser()} instead.
++     * will be emitted if this is detected, unless suppressWarning is set to true. Use {@link #getUser()} instead.
+      */
+-    getSession(): Promise<{
++    getSession(options?: { suppressWarning?: boolean }): Promise<{
+         data: {
+             session: Session;
+         };
+diff --git a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+index 353bee1..66c107e 100644
+--- a/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
++++ b/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+@@ -704,7 +704,8 @@ export default class GoTrueClient {
+      * against using this method and its results in such circumstances. A warning
+      * will be emitted if this is detected. Use {@link #getUser()} instead.
+      */
+-    async getSession() {
++    async getSession(options) {
++        this.suppressGetSessionWarning = options?.suppressWarning ?? false
+         await this.initializePromise;
+         const result = await this._acquireLock(-1, async () => {
+             return this._useSession(async (result) => {

@@ -4,7 +4,7 @@ import { createSupabaseServer } from "@/supabase/server"
 export const get_user_id_server = async () => {
   const supabase = createSupabaseServer()
   return {
-    user_id: (await supabase.auth.getSession()).data?.session?.user.id,
+    user_id: (await supabase.auth.getSession({ suppressWarning: true })).data?.session?.user.id,
     supabase,
   }
 }
