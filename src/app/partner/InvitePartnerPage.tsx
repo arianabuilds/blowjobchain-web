@@ -3,10 +3,10 @@ import { Login } from "../logged-out/Login"
 import { Logo } from "../Logo"
 import { createSupabaseAdmin } from "@/supabase/admin"
 
-export type SearchParamsProp = { searchParams: { [key: string]: string | string[] | undefined } }
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
-export async function InvitePartnerPage({ searchParams }: SearchParamsProp) {
-  const { u } = searchParams
+export async function InvitePartnerPage({ searchParams }: { searchParams: SearchParams }) {
+  const { u } = await searchParams
   if (typeof u !== "string") return <p className="p-4">Error! Missing inviter{"'"}s user ID</p>
 
   const inviter = await loadInvitersName(u)
