@@ -43,9 +43,5 @@
     "semi": false,
     "printWidth": 100
   },
-  "packageManager": "yarn@4.7.0",
-  "resolutions": {
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4"
-  }
+  "packageManager": "yarn@4.7.0"
 }
