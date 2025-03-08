@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -16,10 +16,10 @@
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.43.0",
     "ed25519-keys": "^1.2.0",
-    "next": "14.2.3",
+    "next": "15.2.1",
     "nodemailer": "^6.9.14",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-icons": "^5.2.1",
     "type-fest": "^4.18.2",
     "web-push": "^3.6.7"
@@ -27,11 +27,11 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.15",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
     "@types/web-push": "^3.6.3",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "15.2.1",
     "patch-package": "^8.0.0",
     "postcss": "^8",
     "prettier": "3.2.5",
@@ -43,5 +43,9 @@
     "semi": false,
     "printWidth": 100
   },
-  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+  "packageManager": "yarn@4.7.0",
+  "resolutions": {
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4"
+  }
 }
