@@ -36,6 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 yarn.lock
+.yarnrc.yml
 package-lock.json
 .vscode
 
