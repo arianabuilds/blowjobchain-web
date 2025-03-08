@@ -1,1 +1,1 @@
-export { InvitePartnerPage as default } from "./InvitePartnerPage"
+export { PartnerInvitePage as default } from "./PartnerInvitePage"

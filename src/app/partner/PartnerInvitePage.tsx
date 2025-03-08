@@ -5,7 +5,7 @@ import { createSupabaseAdmin } from "@/supabase/admin"
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
-export async function InvitePartnerPage({ searchParams }: { searchParams: SearchParams }) {
+export async function PartnerInvitePage({ searchParams }: { searchParams: SearchParams }) {
   const { u } = await searchParams
   if (typeof u !== "string") return <p className="p-4">Error! Missing inviter{"'"}s user ID</p>
 
