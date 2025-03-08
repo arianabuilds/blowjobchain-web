@@ -11,7 +11,7 @@ webPush.setVapidDetails(
 export async function POST(req: NextRequest) {
   const subscription = await req.json()
 
-  const supabase = createSupabaseServer()
+  const supabase = await createSupabaseServer()
   const user_id = (await supabase.auth.getUser()).data?.user?.id
   if (!user_id) return NextResponse.json({ error: "Missing user_id" }, { status: 401 })
 

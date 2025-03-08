@@ -60,7 +60,7 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   const cached_charges = { ...cached_balances }
 
   // Download all entries [TODO: newer then balance summary]
-  const { data: newPoints, error } = await createSupabaseServer()
+  const { data: newPoints, error } = await (await createSupabaseServer())
     .from("points")
     .select()
     .in("from", [inviter, invitee])

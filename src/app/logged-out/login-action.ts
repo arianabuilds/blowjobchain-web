@@ -30,7 +30,7 @@ export async function login(formData: FormData) {
 }
 
 export async function submitLoginCode(formData: FormData) {
-  const supabase = createSupabaseServer()
+  const supabase = await createSupabaseServer()
 
   const {
     data: { session },

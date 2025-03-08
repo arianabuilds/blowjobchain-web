@@ -6,7 +6,7 @@ import { createSupabaseServer } from "@/supabase/server"
 /** We want users to be able to mark charges as Resolved, but only if they themselves granted them. We also don't want them editing any of the other columns. */
 export const MarkResolvedAction = async (id: number) => {
   // Use supa-as-server to grab user from cookie
-  const user_id = (await createSupabaseServer().auth.getUser()).data?.user?.id
+  const user_id = (await (await createSupabaseServer()).auth.getUser()).data?.user?.id
   if (!user_id) return { error: "Missing user_id", status: 401 }
 
   // Use supa-as-admin to perform the precise Update
@@ -21,7 +21,7 @@ export const MarkResolvedAction = async (id: number) => {
 
 /** Users can partially resolve a toxicity charge. */
 export const PartiallyResolveAction = async (id: number, amount: number) => {
-  const supaServer = createSupabaseServer()
+  const supaServer = await createSupabaseServer()
   // Use supa-as-server to grab user from cookie
   const user_id = (await supaServer.auth.getUser()).data?.user?.id
   if (!user_id) return { error: "Missing user_id", status: 401 }

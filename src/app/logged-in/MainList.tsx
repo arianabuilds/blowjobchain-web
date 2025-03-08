@@ -67,7 +67,7 @@ export const MainList = async ({
 }
 
 async function loadPoints(a: PartnershipsWithName[0]) {
-  const { data: points, error } = await createSupabaseServer()
+  const { data: points, error } = await (await createSupabaseServer())
     .from("points")
     .select(`*, partial_resolutions(*)`)
     .order("created_at", { ascending: false })
@@ -79,7 +79,7 @@ async function loadPoints(a: PartnershipsWithName[0]) {
 }
 
 async function loadPubKeyChanges(a: PartnershipsWithName[0]) {
-  const { data: pubKeyChanges, error } = await createSupabaseServer()
+  const { data: pubKeyChanges, error } = await (await createSupabaseServer())
     .from("pub_keys")
     .select()
     .order("created_at", { ascending: false })
