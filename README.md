@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project.
 
 ## Getting Started
 
-First, run the development server:
+### First time
+
+1. Fork repo
+2. Clone it down with `git clone`
+3. Install dependencies with `npm install` or `yarn` or equivalent.
+4. Clone `.env.local.TEMPLATE` into `.env.local`, and add relevant keys.
+
+### Then to start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. 🎉
 
-## Learn More
+## Merging PRs from this private repo into upstream
 
-To learn more about Next.js, take a look at the following resources:
+This repo doesn't use a standard Github Fork, because I wish to keep my version `dsernst/blowjobchain-web` set to private, but the upstream `arianabuilds/blowjobchain-web` is public. Github doesn't support that.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I still push commits to this fork, and open PRs, so the changes can still all be reviewed together.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+But now I need to tag @arianabuilds in the comments of a PR when its ready for review, and then she needs to manually fetch the commits and merge using git CLI, rather than GitHub interface. Here are instructions for how to do that: https://github.com/dsernst/blowjobchain-web/pull/1#issuecomment-2184831242
