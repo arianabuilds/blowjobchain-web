@@ -25,7 +25,7 @@ export async function login(formData: FormData) {
   const hasInviter = typeof inviterID === "string" && inviterID.length > 0
   if (hasInviter) storePartnershipInvitation(inviterID, email)
 
-  redirect(`?enter-login-code&email=${email}${hasInviter ? `&u=${inviterID}` : ""}`)
+  redirect(`/?enter-login-code&email=${email}${hasInviter ? `&u=${inviterID}` : ""}`)
 }
 
 export async function submitLoginCode(formData: FormData) {
