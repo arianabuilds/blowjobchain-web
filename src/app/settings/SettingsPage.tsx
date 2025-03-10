@@ -6,6 +6,7 @@ import { BackButton } from "./BackButton"
 import { EnableNotifications } from "./EnableNotifications"
 import { PasswordSettings } from "./password/PasswordSettings"
 import { LogOutButton } from "./LogOutButton"
+import { SuspenseHelper } from "../SuspenseHelper"
 
 export const SettingsPage = async () => {
   const { name, active_partner } = await loadUserProfile()
@@ -18,14 +19,16 @@ export const SettingsPage = async () => {
 
         {/* 'Settings' title */}
         <h1 className="opacity-60">Settings</h1>
-
         <HelloName name={name} />
-
         <EnableNotifications />
 
-        <PartnershipSettings name={name} active_partner={active_partner} />
+        <SuspenseHelper name="Partnership settings">
+          <PartnershipSettings name={name} active_partner={active_partner} />
+        </SuspenseHelper>
 
-        <PasswordSettings />
+        <SuspenseHelper name="Password settings">
+          <PasswordSettings />
+        </SuspenseHelper>
 
         <LogOutButton />
       </div>
