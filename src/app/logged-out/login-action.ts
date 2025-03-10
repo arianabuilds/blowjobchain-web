@@ -22,11 +22,10 @@ export async function login(formData: FormData) {
 
   // If there was an inviterID, store the relationship
   const inviterID = formData.get("inviter-id")
-  if (typeof inviterID === "string") storePartnershipInvitation(inviterID, email)
+  const hasInviter = typeof inviterID === "string" && inviterID.length > 0
+  if (hasInviter) storePartnershipInvitation(inviterID, email)
 
-  redirect(
-    `?enter-login-code&email=${email}${typeof inviterID === "string" ? `&u=${inviterID}` : ""}`,
-  )
+  redirect(`?enter-login-code&email=${email}${hasInviter ? `&u=${inviterID}` : ""}`)
 }
 
 export async function submitLoginCode(formData: FormData) {
