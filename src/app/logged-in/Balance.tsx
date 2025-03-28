@@ -62,7 +62,7 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
   // Download all entries [TODO: newer then balance summary]
   const { data: newPoints, error } = await (await createSupabaseServer())
     .from("points")
-    .select()
+    .select(`*, partial_resolutions(*)`)
     .in("from", [inviter, invitee])
     .in("to", [inviter, invitee])
   if (!newPoints) return console.error(`Error loading new balance Points: ${JSON.stringify(error)}`)
@@ -78,8 +78,12 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
     if (point.comment === "$$IS_CLAIM$$") return (balances[point.from] -= 1)
 
     // If it's a negative charge and unresolved, add to's Charges balance
-    if (point.amount < 0 && !point.resolved_at)
-      return (unresolved_charges[point.to] += point.amount / 10)
+    if (point.amount < 0 && !point.resolved_at) {
+      // Use the latest partial resolution amount if it exists, otherwise use the original amount
+      const latest_partial_resolution = point.partial_resolutions?.at(-1)
+      const amount = latest_partial_resolution ? latest_partial_resolution.amount : point.amount
+      return (unresolved_charges[point.to] += amount / 10)
+    }
   })
 
   // TODO: If balance changed, store update
