@@ -51,7 +51,7 @@ export const RotatingTagline = () => {
       className="group relative mt-8 cursor-pointer select-none"
     >
       <p className="px-5 text-lg font-light tracking-wide text-white/90 transition-all duration-300 group-hover:text-white">
-        <span className="animate-fadeIn inline-flex items-center gap-2">
+        <span className="animate-fadeIn inline-flex items-start gap-2">
           <span className="text-center">{tagline}</span>
           <span className="text-sm opacity-60 transition-transform duration-300 group-hover:translate-x-0.5 mt-1.5">
             ↻
