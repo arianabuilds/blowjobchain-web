@@ -13,28 +13,52 @@ const taglines = [
   "orgasms when you want it",
 ]
 
+const getRandomTagline = () => {
+  const choice = Math.floor(Math.random() * taglines.length)
+  const result = taglines[choice]
+
+  // If a plain string, return it
+  if (typeof result === "string") return result
+
+  // Otherwise, pick randomly from subarray
+  const subChoice = Math.floor(Math.random() * result.length)
+  return result[subChoice]
+}
+
 export const RotatingTagline = () => {
   const [tagline, setTagline] = useState("")
+  const [isHovered, setIsHovered] = useState(false)
 
-  // Pick random tagline
+  // Pick initial random tagline
   useEffect(() => {
-    const choice = Math.floor(Math.random() * taglines.length)
-    const result = taglines[choice]
-
-    // If a plain string, set it
-    if (typeof result === "string") return setTagline(result)
-
-    // Otherwise, pick randomly from subarray
-    const subChoice = Math.floor(Math.random() * result.length)
-    return setTagline(result[subChoice])
+    setTagline(getRandomTagline())
   }, [])
 
+  const rerollTagline = () => {
+    let newTagline
+    // Make sure we get a different tagline
+    do {
+      newTagline = getRandomTagline()
+    } while (newTagline === tagline)
+    setTagline(newTagline)
+  }
+
   return (
-    <p
-      onClick={() => window.location.reload()}
-      className="px-5 mt-5 text-lg italic font-medium cursor-pointer opacity-60 h-9"
+    <div
+      onClick={rerollTagline}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative mt-8 cursor-pointer select-none"
     >
-      <span className="animate-fadeIn">{tagline}</span>
-    </p>
+      <p className="px-5 text-lg font-light tracking-wide text-white/70 transition-all duration-300 group-hover:text-white/90">
+        <span className="animate-fadeIn inline-flex items-center gap-2">
+          {tagline}
+          <span className="text-sm opacity-60 transition-transform duration-300 group-hover:translate-x-0.5">
+            ↻
+          </span>
+        </span>
+      </p>
+      <div className="absolute inset-x-0 -bottom-1 mx-auto w-48 h-px bg-gradient-to-r from-transparent via-pink-500/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    </div>
   )
 }
