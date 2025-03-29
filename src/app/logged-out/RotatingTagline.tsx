@@ -50,15 +50,15 @@ export const RotatingTagline = () => {
       onMouseLeave={() => setIsHovered(false)}
       className="group relative mt-8 cursor-pointer select-none"
     >
-      <p className="px-5 text-lg font-light tracking-wide text-white/70 transition-all duration-300 group-hover:text-white/90">
+      <p className="px-5 text-lg font-light tracking-wide text-white/90 transition-all duration-300 group-hover:text-white">
         <span className="animate-fadeIn inline-flex items-center gap-2">
-          {tagline}
-          <span className="text-sm opacity-60 transition-transform duration-300 group-hover:translate-x-0.5">
+          <span className="text-center">{tagline}</span>
+          <span className="text-sm opacity-60 transition-transform duration-300 group-hover:translate-x-0.5 mt-1.5">
             ↻
           </span>
         </span>
       </p>
-      <div className="absolute inset-x-0 -bottom-1 mx-auto w-48 h-px bg-gradient-to-r from-transparent via-pink-500/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 -bottom-1 mx-auto w-48 h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent transition-all duration-300 group-hover:via-pink-500/50" />
     </div>
   )
 }
