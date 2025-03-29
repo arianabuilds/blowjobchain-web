@@ -1,0 +1,17 @@
+{
+  "name": "BlowjobChain",
+  "short_name": "BlowjobChain",
+  "description": "Track and settle debts with friends",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icons/icon-612x612.png",
+      "sizes": "612x612",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
