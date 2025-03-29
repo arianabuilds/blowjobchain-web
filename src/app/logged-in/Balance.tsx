@@ -82,7 +82,7 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
       // Use the latest partial resolution amount if it exists, otherwise use the original amount
       const latest_partial_resolution = point.partial_resolutions?.at(-1)
       const amount = latest_partial_resolution ? latest_partial_resolution.amount : point.amount
-      return (unresolved_charges[point.to] += amount / 10)
+      return (unresolved_charges[point.to] += amount)
     }
   })
 
