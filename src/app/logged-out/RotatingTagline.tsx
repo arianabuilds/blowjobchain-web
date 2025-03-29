@@ -27,7 +27,6 @@ const getRandomTagline = () => {
 
 export const RotatingTagline = () => {
   const [tagline, setTagline] = useState("")
-  const [isHovered, setIsHovered] = useState(false)
 
   // Pick initial random tagline
   useEffect(() => {
@@ -44,12 +43,7 @@ export const RotatingTagline = () => {
   }
 
   return (
-    <div
-      onClick={rerollTagline}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group relative mt-8 cursor-pointer select-none"
-    >
+    <div onClick={rerollTagline} className="group relative mt-8 cursor-pointer select-none">
       <p className="px-5 text-lg font-light tracking-wide text-white/90 transition-all duration-300 group-hover:text-white">
         <span className="animate-fadeIn inline-flex items-start gap-2">
           <span className="text-center">{tagline}</span>
