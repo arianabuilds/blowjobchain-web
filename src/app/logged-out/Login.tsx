@@ -65,13 +65,16 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
 }
 
 const buttonClass =
-  "p-1 mt-2 text-white/80 rounded bg-fuchsia-900/40 hover:bg-fuchsia-800/50 active:bg-fuchsia-700/50"
+  "mt-2 w-full px-8 py-4 text-white/90 rounded-full bg-gradient-to-r from-pink-600/30 to-purple-600/30 border border-pink-500/20 shadow-lg transition-all duration-300 text-lg font-medium hover:from-pink-600/40 hover:to-purple-600/40 hover:shadow-pink-500/20 active:scale-95 active:from-pink-600/40 active:to-purple-600/40"
 
 function SendLoginCodeButton() {
   const { pending } = useFormStatus()
   return (
     <button disabled={pending} formAction={login} className={buttonClass}>
-      Send{pending && "ing"} Login Code
+      <span className="inline-flex items-center justify-center gap-2">
+        Send{pending && "ing"} Login Code
+        <span className="text-white/70">→</span>
+      </span>
     </button>
   )
 }
@@ -80,7 +83,10 @@ const SubmitCodeButton = forwardRef<HTMLButtonElement>((props, ref) => {
   const { pending } = useFormStatus()
   return (
     <button ref={ref} disabled={pending} formAction={submitLoginCode} className={buttonClass}>
-      Submit{pending && "ting..."}
+      <span className="inline-flex items-center justify-center gap-2">
+        Submit{pending && "ting..."}
+        <span className="text-white/70">→</span>
+      </span>
     </button>
   )
 })
