@@ -17,12 +17,14 @@ export const Login = ({ inviterID }: { inviterID?: string }) => {
     // Login Button
     <Link
       href="?login"
-      className="inline-block px-5 py-4 transition rounded-lg group hover:bg-[#5c0241] active:bg-pink-600/20"
+      className="inline-block px-8 py-4 transition-all duration-300 rounded-full bg-gradient-to-r from-pink-600/30 to-purple-600/30 border border-pink-500/20 shadow-lg group
+        hover:from-pink-600/40 hover:to-purple-600/40 hover:scale-105 hover:shadow-pink-500/20
+        active:scale-95 active:from-pink-600/40 active:to-purple-600/40"
     >
-      <h2 className="text-2xl font-semibold">
-        Log In{" "}
-        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-          -&gt;
+      <h2 className="text-2xl font-semibold text-white/90 flex items-center gap-2">
+        Log In
+        <span className="inline-block transition-all duration-300 opacity-70 group-hover:translate-x-1 group-active:translate-x-1 motion-reduce:transform-none">
+          →
         </span>
       </h2>
     </Link>
