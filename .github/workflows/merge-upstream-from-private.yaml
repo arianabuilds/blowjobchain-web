@@ -66,13 +66,12 @@ jobs:
       - name: Comment on PR with Job Status
         if: ${{ !cancelled() }} # Run on success&failure, just not if job is cancelled
         run: |
-          FOOTNOTE="\n\n---\n<sub>*Status update from Auto-merge action*</sub>"
-          LOGS_LINK="[action logs](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})"
+          FOOTNOTE="\n<sub>*&ndash; from [Auto-merge action](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})*</sub>"
 
           if [ "${{ job.status }}" = "success" ]; then
-            COMMENT="✅ Upstream merge successful. ${LOGS_LINK}${FOOTNOTE}"
+            COMMENT="✅ Upstream merge successful.${FOOTNOTE}"
           else
-            COMMENT="❌ Upstream merge failed. See ${LOGS_LINK} for details.${FOOTNOTE}"
+            COMMENT="❌ Upstream merge failed. See link for details${FOOTNOTE}"
           fi
 
           curl -s -X POST \
