@@ -47,6 +47,7 @@ jobs:
           ref: test-automerge
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: pato
+          fetch-depth: 0 # Fetch full history to allow merging
 
       - name: 3. Merge PR branch into upstream/main
         run: |
@@ -62,7 +63,7 @@ jobs:
           git fetch pato
 
           # We're already on 'main' in the upstream folder, so just merge.
-          git merge private/HEAD -m "Merge PR pato/#${{ github.event.issue.number }}"
+          git merge pato/HEAD -m "Merge PR pato/#${{ github.event.issue.number }}"
 
       # 4. Push the updated main branch back to the public repo
       - name: Push updated main
