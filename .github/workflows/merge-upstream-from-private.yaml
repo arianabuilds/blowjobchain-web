@@ -24,8 +24,8 @@ jobs:
           token: ${{ secrets.PUBLIC_REPO_TOKEN }}
           fetch-depth: 0 # Fetch full history to allow merging
 
-      - name: 2. Add Private Fork Remote using secret URL
-        run: git remote add pato "${{ secrets.PRIVATE_REPO_URL }}"
+      - name: 2. Add Private Fork as a Remote
+        run: git remote add pato "https://github.com/${{ github.repository }}.git" # Env var provided by where this action is run
 
       - name: 3. Fetch branches from private fork
         run: git fetch pato
