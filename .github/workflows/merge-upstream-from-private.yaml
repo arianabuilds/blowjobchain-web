@@ -14,21 +14,21 @@ jobs:
     if: >
       github.event.issue.pull_request != null &&
       toLower(github.event.comment.body) == 'merge' &&
-      github.event.comment.user.login == env.maintainer
+      github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
       - name: 1. Checkout Public Repository
         uses: actions/checkout@v3
         with:
-          repository: ${{ env.maintainer }}/${{ env.repo }}
+          repository: arianabuilds/blowjobchain
           token: ${{ secrets.PUBLIC_REPO_TOKEN }}
           fetch-depth: 0 # Fetch full history to allow merging
 
       - name: 2. Add Private Fork Remote using secret URL
-        run: git remote add private "${{ secrets.PRIVATE_REPO_URL }}"
+        run: git remote add pato "${{ secrets.PRIVATE_REPO_URL }}"
 
       - name: 3. Fetch branches from private fork
-        run: git fetch private
+        run: git fetch pato
 
       - name: 4. Checkout main branch of public repository
         run: git checkout main
@@ -36,7 +36,7 @@ jobs:
       - name: 5. Merge PR branch from private fork into main (using PR event data)
         run: |
           pr_branch="${{ github.event.issue.pull_request.head.ref }}"
-          git merge private/${pr_branch} -m "Merge pull request #${pr_number} from ${pseudonym}/${pr_branch}"
+          git merge pato/${pr_branch} -m "Merge pull request #${pr_number} from pato/${pr_branch}"
 
       - name: 6. Push updated main branch back to public repository
         run: git push origin main
