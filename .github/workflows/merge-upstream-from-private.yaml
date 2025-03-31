@@ -5,10 +5,6 @@ on:
   issue_comment:
     types: [created]
 
-# Allow actions to write to the repository
-permissions:
-  contents: write
-
 jobs:
   merge_pr:
     # Run only if:
