@@ -1,15 +1,17 @@
 import type { Metadata, Viewport } from "next"
 import "./globals.css"
 
-export const viewport: Viewport = { maximumScale: 1, userScalable: false }
+export const viewport: Viewport = {
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#42002E",
+}
 
 export const metadata: Metadata = {
   title: "BlowjobChain",
   description: "Orgasms for world peace",
-  manifest: "/manifest.json",
   icons: { apple: "/icons/icon-612x612.png", shortcut: "/icons/icon-612x612.png" },
   appleWebApp: { capable: true, statusBarStyle: "default", title: "BlowjobChain" },
-  themeColor: "#42002E",
 }
 
 export default function RootLayout({
