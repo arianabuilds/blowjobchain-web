@@ -15,7 +15,7 @@ jobs:
       github.event.issue.pull_request != null &&
       (github.event.comment.body == 'merge' || github.event.comment.body == 'MERGE' || github.event.comment.body == 'Merge') &&
       github.event.comment.user.login == 'arianabuilds'
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Debug Variables and Remote URL
         run: |
