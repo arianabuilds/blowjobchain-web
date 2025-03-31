@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0 # Fetch full history to allow merging
 
       - name: 2. Add Private Fork as Remote
-        run: git remote add pato "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        run: git remote add pato "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
       - name: 3. Fetch branches from private fork
         run: git fetch pato
