@@ -1,4 +1,4 @@
-name: Automate merging PRs from private fork into public repo
+name: Auto-merge PRs from private fork into public repo
 
 # Trigger on new issue comments
 on:
@@ -7,9 +7,6 @@ on:
 
 jobs:
   merge_pr:
-    env:
-      maintainer: ${{ secrets.UPSTREAM_MAINTAINER_USERNAME }}
-      repo: ${{ secrets.UPSTREAM_REPO_NAME }}
     # Run only if:
     # - The comment is on a PR (not a regular issue)
     # - The comment text is exactly "merge" (case-insensitive)
@@ -39,7 +36,7 @@ jobs:
       - name: 5. Merge PR branch from private fork into main (using PR event data)
         run: |
           pr_branch="${{ github.event.issue.pull_request.head.ref }}"
-          git merge --no-edit private/${pr_branch}
+          git merge private/${pr_branch} -m "Merge pull request #${pr_number} from ${pseudonym}/${pr_branch}"
 
       - name: 6. Push updated main branch back to public repository
         run: git push origin main
