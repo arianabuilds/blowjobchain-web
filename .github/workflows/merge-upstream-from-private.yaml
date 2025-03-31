@@ -9,7 +9,7 @@ jobs:
   merge_pr:
     # Run only if:
     # - The comment is on a PR (not a regular issue)
-    # - The comment text is exactly "merge" or a case-sensitive variation
+    # - The comment text is exactly 'merge', 'Merge', or 'MERGE'
     # - The comment author is the pre-defined maintainer
     if: >
       github.event.issue.pull_request != null &&
@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "Repository: ${{ github.repository }}"
           echo "PR head ref: ${{ github.event.issue.pull_request.head.ref }}"
+          echo "PR number: ${{ github.event.issue.number }}"
           echo "Comment Body: ${{ github.event.comment.body }}"
           echo "Comment User Login: ${{ github.event.comment.user.login }}"
           # Check that our tokens are set (masked output)
@@ -42,17 +43,19 @@ jobs:
       - name: 2. Add Private Fork as Remote
         run: git remote add pato "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
-      - name: 3. Fetch branches from private fork
-        run: git fetch pato
+      - name: 3. Fetch only the PR branch from private fork
+        run: |
+          pr_number="${{ github.event.issue.number }}"
+          # Fetch only the pull request branch (avoiding a full fetch of all refs)
+          git fetch pato "refs/pull/${pr_number}/head:temp_pr"
 
       - name: 4. Checkout main branch of upstream repository
         run: git checkout main
 
-      - name: 5. Merge PR branch from private fork into main (using PR event data)
+      - name: 5. Merge PR branch into main
         run: |
-          pr_branch="${{ github.event.issue.pull_request.head.ref }}"
           pr_number="${{ github.event.issue.number }}"
-          git merge pato/${pr_branch} -m "Merge pull request #${pr_number} from pato/${pr_branch}"
+          git merge temp_pr -m "Merge pull request pato/${pr_number}"
 
       - name: 6. Push updated main branch back to public repository
         run: git push origin main
