@@ -7,27 +7,32 @@ on:
 
 jobs:
   merge_pr:
-    # Run only if:
-    # - The comment is on a PR (not a regular issue)
-    # - The comment text is exactly 'merge', 'Merge', or 'MERGE'
-    # - The comment author is the pre-defined maintainer
+    # Only run on PR comments by maintainer that say exactly 'merge'
     if: >
       github.event.issue.pull_request != null &&
-      (github.event.comment.body == 'merge' || github.event.comment.body == 'MERGE' || github.event.comment.body == 'Merge') &&
+      (github.event.comment.body == 'merge' || github.event.comment.body == 'Merge' || github.event.comment.body == 'MERGE') &&
       github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
       - name: Debug Variables
         run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "PR number: ${{ github.event.issue.number }}"
-          echo "Comment Body: ${{ github.event.comment.body }}"
-          echo "Comment User Login: ${{ github.event.comment.user.login }}"
-          # Check that our tokens are set (masked output)
-          if [ -z "${{ secrets.UPSTREAM_REPO_TOKEN }}" ]; then echo "UPSTREAM_REPO_TOKEN is NOT set"; else echo "UPSTREAM_REPO_TOKEN is set"; fi
-          if [ -z "${{ secrets.PRIVATE_REPO_TOKEN }}" ]; then echo "PRIVATE_REPO_TOKEN is NOT set"; else echo "PRIVATE_REPO_TOKEN is set"; fi
+          echo "PR number: #${{ github.event.issue.number }}"
+          echo "PR: ${{ github.event.issue.pull_request }}"
+          # Confirm our tokens are set
+          if [ -z "${{ secrets.UPSTREAM_REPO_TOKEN }}" ]; then echo "⚠️ UPSTREAM_REPO_TOKEN is NOT set"; else echo "✓ UPSTREAM_REPO_TOKEN is set"; fi
+          if [ -z "${{ secrets.PRIVATE_REPO_TOKEN }}" ]; then echo "⚠️ PRIVATE_REPO_TOKEN is NOT set"; else echo "✓ PRIVATE_REPO_TOKEN is set"; fi
 
-      - name: 1. Checkout Public Upstream Repository
+      - name: 1. Get PR branch
+        id: get_pr
+        run: |
+          # Fetch PR details from GitHub API to get the branch name
+          PR_DATA=$(curl -s -H "Authorization: token ${{ secrets.PRIVATE_REPO_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.issue.number }}")
+          PR_BRANCH=$(echo "$PR_DATA" | jq -r .head.ref)
+          echo "Found PR branch: $PR_BRANCH"
+          echo "branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: 2. Checkout Public Upstream Repository
         uses: actions/checkout@v3
         with:
           repository: arianabuilds/blowjobchain-web
@@ -36,20 +41,11 @@ jobs:
           path: upstream
           fetch-depth: 0 # Fetch full history to allow merging
 
-      - name: 2. Get PR branch
-        id: get_pr_branch
-        run: |
-          PR_DATA=$(curl -s -H "Authorization: token ${{ secrets.PRIVATE_REPO_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.issue.number }}")
-          PR_BRANCH=$(echo "$PR_DATA" | jq -r .head.ref)
-          echo "Found PR branch name: $PR_BRANCH"
-          echo "branch=$PR_BRANCH" >> $GITHUB_OUTPUT # Store for later access
-
       - name: 3. Checkout Private Fork PR branch
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }}
-          ref: ${{ steps.get_pr_branch.outputs.branch }}
+          ref: ${{ steps.get_pr.outputs.branch }}
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: pato
           fetch-depth: 0 # Fetch full history to allow merging
@@ -60,17 +56,10 @@ jobs:
           git config user.name "ariana-via-gh-action"
           git config user.email "arianabuilds[bot]@users.noreply.github.com"
 
-          # Add the private clone as a remote (pointing to the local folder).
-          # We can reference the path to the local clone, so no network fetch is needed.
+          # Add the private clone as a remote (pointing to the local folder)
           git remote add pato ../pato
-
-          # The HEAD of ../pato is the PR branch we checked out.
           git fetch pato
 
-          # We're already on 'main' in the upstream folder, so just merge.
-          git merge pato/HEAD -m "Merge PR ${{ github.event.issue.number }} from pato/${{ steps.get_pr_branch.outputs.branch }}"
-
-      - name: 5. Push updated local main up to github
-        run: |
-          cd upstream
+          # Merge the PR branch and push to upstream
+          git merge pato/HEAD -m "Merge PR #${{ github.event.issue.number }} from pato/${{ steps.get_pr.outputs.branch }}"
           git push origin main
