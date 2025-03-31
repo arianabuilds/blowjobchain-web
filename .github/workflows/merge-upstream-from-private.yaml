@@ -64,7 +64,7 @@ jobs:
           git push origin main
 
       - name: Comment on PR with Job Status
-        if: !cancelled()
+        if: ${{ !cancelled() }} # Run on success&failure, just not if job is cancelled
         run: |
           FOOTNOTE="\n\n---\n<sub>*Status update from Auto-merge action*</sub>"
           LOGS_LINK="[action logs](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})"
