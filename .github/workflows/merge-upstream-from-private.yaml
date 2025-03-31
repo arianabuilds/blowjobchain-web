@@ -40,6 +40,9 @@ jobs:
           fetch-depth: 0 # Fetch full history to allow merging
 
       - name: 2. Fetch PR branch using PR number directly
+        env:
+          GIT_CURL_VERBOSE: 1
+          GIT_TRACE: 1
         run: |
           pr_number="${{ github.event.issue.number }}"
           echo "Fetching PR ref for PR number ${pr_number}"
