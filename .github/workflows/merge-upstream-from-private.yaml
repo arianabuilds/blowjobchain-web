@@ -21,14 +21,16 @@ jobs:
         run: |
           echo "Repository: ${{ github.repository }}"
           echo "PR head ref: ${{ github.event.issue.pull_request.head.ref }}"
-          echo "PR head SHA: ${{ github.event.issue.pull_request.head.sha }}"
+          echo "PR number: ${{ github.event.issue.number }}"
           echo "Comment Body: ${{ github.event.comment.body }}"
           echo "Comment User Login: ${{ github.event.comment.user.login }}"
           # Check that our tokens are set (masked output)
           if [ -z "${{ secrets.UPSTREAM_REPO_TOKEN }}" ]; then echo "UPSTREAM_REPO_TOKEN is NOT set"; else echo "UPSTREAM_REPO_TOKEN is set"; fi
           if [ -z "${{ secrets.PRIVATE_REPO_TOKEN }}" ]; then echo "PRIVATE_REPO_TOKEN is NOT set"; else echo "PRIVATE_REPO_TOKEN is set"; fi
-          REMOTE_URL="https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
+          # Construct the remote URL (masking the token in the echo)
+          REMOTE_URL="https://x-access-token:***@github.com/${{ github.repository }}.git"
           echo "Constructed remote URL: ${REMOTE_URL}"
+          # Test remote access with ls-remote
           git ls-remote "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
       - name: 1. Checkout Public Upstream Repository
@@ -41,19 +43,19 @@ jobs:
       - name: 2. Add Private Fork as Remote
         run: git remote add pato "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
-      - name: 3. Fetch PR commit SHA from private fork with limited depth and no tags
+      - name: 3. Fetch only the PR branch from private fork
         run: |
-          pr_sha="${{ github.event.issue.pull_request.head.sha }}"
-          echo "Fetching commit ${pr_sha}"
-          git fetch pato --no-tags --depth=1 ${pr_sha}:temp_pr
+          pr_number="${{ github.event.issue.number }}"
+          # Fetch only the pull request branch (avoiding a full fetch of all refs)
+          git fetch pato "refs/pull/${pr_number}/head:temp_pr"
 
       - name: 4. Checkout main branch of upstream repository
         run: git checkout main
 
-      - name: 5. Merge PR commit into main
+      - name: 5. Merge PR branch into main
         run: |
           pr_number="${{ github.event.issue.number }}"
-          git merge --no-edit temp_pr -m "Merge pull request from from pato/#${pr_number}"
+          git merge temp_pr -m "Merge pull request pato/${pr_number}"
 
       - name: 6. Push updated main branch back to public repository
         run: git push origin main
