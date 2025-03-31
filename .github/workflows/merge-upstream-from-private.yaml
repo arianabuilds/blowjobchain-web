@@ -17,7 +17,7 @@ jobs:
       github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
-      - name: Debug Variables and Remote URL
+      - name: Debug Variables
         run: |
           echo "Repository: ${{ github.repository }}"
           echo "PR number: ${{ github.event.issue.number }}"
@@ -26,35 +26,46 @@ jobs:
           # Check that our tokens are set (masked output)
           if [ -z "${{ secrets.UPSTREAM_REPO_TOKEN }}" ]; then echo "UPSTREAM_REPO_TOKEN is NOT set"; else echo "UPSTREAM_REPO_TOKEN is set"; fi
           if [ -z "${{ secrets.PRIVATE_REPO_TOKEN }}" ]; then echo "PRIVATE_REPO_TOKEN is NOT set"; else echo "PRIVATE_REPO_TOKEN is set"; fi
-          # Construct the remote URL (masking the token in the echo)
-          REMOTE_URL="https://x-access-token:***@github.com/${{ github.repository }}.git"
-          echo "Constructed remote URL: ${REMOTE_URL}"
-          # Test remote access with ls-remote
-          git ls-remote "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
       - name: 1. Checkout Public Upstream Repository
         uses: actions/checkout@v3
         with:
           repository: arianabuilds/blowjobchain-web
+          ref: main
           token: ${{ secrets.UPSTREAM_REPO_TOKEN }}
+          path: upstream
           fetch-depth: 0 # Fetch full history to allow merging
 
-      - name: 2. Fetch PR branch using PR number directly
-        env:
-          GIT_CURL_VERBOSE: 1
-          GIT_TRACE: 1
+      # 2. Check out the private fork’s PR branch.
+      #    The PR branch name can be derived from github.event.pull_request.head.ref
+      #    but for issue_comment events, you often need to fetch the PR details first.
+      #    For simplicity, suppose you already know the PR branch or pass it in some way.
+      - name: 2. Checkout Private Fork PR branch
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}
+          ref: test-automerge
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: pato
+
+      - name: 3. Merge PR branch into upstream/main
         run: |
-          pr_number="${{ github.event.issue.number }}"
-          echo "Fetching PR ref for PR number ${pr_number}"
-          git fetch "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git" "refs/pull/${pr_number}/head:temp_pr"
+          cd upstream
+          git config user.name "ariana-via-gh-action"
+          git config user.email "arianabuilds[bot]@users.noreply.github.com"
 
-      - name: 3. Checkout main branch of upstream repository
-        run: git checkout main
+          # Add the private clone as a remote (pointing to the local folder).
+          # We can reference the path to the local clone, so no network fetch is needed.
+          git remote add pato ../pato
 
-      - name: 4. Merge PR branch (temp_pr) into main
+          # The HEAD of ../pato is the PR branch we checked out.
+          git fetch pato
+
+          # We're already on 'main' in the upstream folder, so just merge.
+          git merge private/HEAD -m "Merge PR pato/#${{ github.event.issue.number }}"
+
+      # 4. Push the updated main branch back to the public repo
+      - name: Push updated main
         run: |
-          pr_number="${{ github.event.issue.number }}"
-          git merge --no-edit temp_pr -m "Merge PR from pato/#${pr_number}"
-
-      - name: 5. Push updated main branch back to public repository
-        run: git push origin main
+          cd upstream
+          git push origin main
