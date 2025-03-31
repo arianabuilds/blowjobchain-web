@@ -8,7 +8,7 @@ const taglines = [
   "10 points = 1 blowjob card",
   ["orgasms for world peace", "world peace thru orgasm", "orgasms can create world peace"],
   "imagine a world of ten times more blowjobs",
-  "discover the magic of blockchains :sparkles:",
+  "discover the magic of blockchains ✨",
   "your own private currency",
   "orgasms when you want it",
 ]
