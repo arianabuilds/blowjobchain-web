@@ -17,15 +17,20 @@ jobs:
       github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
-      - name: Debug Variables
+      - name: Debug Variables and Remote URL
         run: |
           echo "Repository: ${{ github.repository }}"
-          echo "Event Issue PR head ref: ${{ github.event.issue.pull_request.head.ref }}"
+          echo "PR head ref: ${{ github.event.issue.pull_request.head.ref }}"
           echo "Comment Body: ${{ github.event.comment.body }}"
           echo "Comment User Login: ${{ github.event.comment.user.login }}"
-          # Check if tokens are non-empty (will print masked values if set)
+          # Check that our tokens are set (masked output)
           if [ -z "${{ secrets.UPSTREAM_REPO_TOKEN }}" ]; then echo "UPSTREAM_REPO_TOKEN is NOT set"; else echo "UPSTREAM_REPO_TOKEN is set"; fi
           if [ -z "${{ secrets.PRIVATE_REPO_TOKEN }}" ]; then echo "PRIVATE_REPO_TOKEN is NOT set"; else echo "PRIVATE_REPO_TOKEN is set"; fi
+          # Construct the remote URL (masking the token in the echo)
+          REMOTE_URL="https://x-access-token:***@github.com/${{ github.repository }}.git"
+          echo "Constructed remote URL: ${REMOTE_URL}"
+          # Test remote access with ls-remote
+          git ls-remote "https://x-access-token:${{ secrets.PRIVATE_REPO_TOKEN }}@github.com/${{ github.repository }}.git"
 
       - name: 1. Checkout Public Upstream Repository
         uses: actions/checkout@v3
