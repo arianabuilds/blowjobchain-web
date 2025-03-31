@@ -67,11 +67,12 @@ jobs:
         if: !cancelled()
         run: |
           FOOTNOTE="\n\n---\n<sub>*Status update from Auto-merge action*</sub>"
+          LOGS_LINK="[action logs](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})"
 
           if [ "${{ job.status }}" = "success" ]; then
-            COMMENT="✅ Upstream merge successful${FOOTNOTE}"
+            COMMENT="✅ Upstream merge successful. ${LOGS_LINK}${FOOTNOTE}"
           else
-            COMMENT="❌ Upstream merge failed. See [action logs](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) for details.${FOOTNOTE}"
+            COMMENT="❌ Upstream merge failed. See ${LOGS_LINK} for details.${FOOTNOTE}"
           fi
 
           curl -s -X POST \
