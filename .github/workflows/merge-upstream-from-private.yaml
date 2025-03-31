@@ -65,8 +65,7 @@ jobs:
           # We're already on 'main' in the upstream folder, so just merge.
           git merge pato/HEAD -m "Merge PR pato/#${{ github.event.issue.number }}"
 
-      # 4. Push the updated main branch back to the public repo
-      - name: Push updated main
+      - name: 4. Push updated local main up to github
         run: |
           cd upstream
           git push origin main
