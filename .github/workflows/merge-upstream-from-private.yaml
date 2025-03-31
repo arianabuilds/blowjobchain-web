@@ -13,7 +13,7 @@ jobs:
     # - The comment author is the pre-defined maintainer
     if: >
       github.event.issue.pull_request != null &&
-      toLower(github.event.comment.body) == 'merge' &&
+      (github.event.comment.body == 'merge' || github.event.comment.body == 'MERGE' || github.event.comment.body == 'Merge') &&
       github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
