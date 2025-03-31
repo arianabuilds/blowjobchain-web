@@ -2,7 +2,7 @@
 
 import { createSupabaseClient } from "@/supabase/client"
 
-export const HelloName = ({ name }: { name: string }) => {
+export const HelloNameClient = ({ name }: { name: string }) => {
   return (
     <p className="text-xl opacity-80">
       Hello{" "}

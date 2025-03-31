@@ -5,16 +5,12 @@ import { MembershipSettings } from "./MembershipSettings"
 import { AddNewPartner } from "./AddNewPartner"
 
 import { SetCurrentButton } from "./SetCurrentButton"
+import { loadUserProfile } from "@/app/HomePage"
 
 const shadedRowStyle = "rounded-lg bg-black/15 p-1 px-4 mb-3 flex justify-between"
 
-export const PartnershipSettings = async ({
-  name,
-  active_partner,
-}: {
-  name: string
-  active_partner?: string | null
-}) => {
+export const PartnershipSettings = async ({}) => {
+  const { name, active_partner } = await loadUserProfile()
   const { partnerships } = await loadPartnerships()
   if (!partnerships) return <p>Error loading partnerships</p>
   if (!isNonEmptyArray(partnerships)) return null
