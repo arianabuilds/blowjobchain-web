@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: { apple: "/icons/icon-612x612.png", shortcut: "/icons/icon-612x612.png" },
   appleWebApp: { capable: true, statusBarStyle: "default", title: "BlowjobChain" },
+  themeColor: "#42002E",
 }
 
 export default function RootLayout({
@@ -17,9 +18,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[#42002E]">
       <body
-        style={{ WebkitUserSelect: "none" }}
+        style={{ WebkitUserSelect: "none", backgroundColor: "#42002E" }}
         className="from-[#42002E] to-[#4e031f] bg-gradient-to-b h-[100cqh] flex flex-col items-center overflow-hidden text-white/70 select-none cursor-default"
       >
         {children}
