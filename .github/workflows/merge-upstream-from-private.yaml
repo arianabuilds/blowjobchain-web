@@ -42,7 +42,8 @@ jobs:
           PR_DATA=$(curl -s -H "Authorization: token ${{ secrets.PRIVATE_REPO_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.issue.number }}")
           PR_BRANCH=$(echo "$PR_DATA" | jq -r .head.ref)
-          echo "branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+          echo "Found PR branch name: $PR_BRANCH"
+          echo "branch=$PR_BRANCH" >> $GITHUB_OUTPUT # Store for later access
 
       - name: 3. Checkout Private Fork PR branch
         uses: actions/checkout@v3
@@ -67,7 +68,7 @@ jobs:
           git fetch pato
 
           # We're already on 'main' in the upstream folder, so just merge.
-          git merge pato/HEAD -m "Merge PR pato/#${{ github.event.issue.number }}"
+          git merge pato/HEAD -m "Merge PR ${{ github.event.issue.number }} from pato/${{ steps.get_pr_branch.outputs.branch }}"
 
       - name: 5. Push updated local main up to github
         run: |
