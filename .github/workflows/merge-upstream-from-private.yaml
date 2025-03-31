@@ -17,11 +17,11 @@ jobs:
       github.event.comment.user.login == 'arianabuilds'
     runs-on: ubuntu-latest
     steps:
-      - name: 1. Checkout Public Repository
+      - name: 1. Checkout Public Upstream Repository
         uses: actions/checkout@v3
         with:
           repository: arianabuilds/blowjobchain
-          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          token: ${{ secrets.UPSTREAM_REPO_TOKEN }}
           fetch-depth: 0 # Fetch full history to allow merging
 
       - name: 2. Add Private Fork as a Remote
@@ -30,7 +30,7 @@ jobs:
       - name: 3. Fetch branches from private fork
         run: git fetch pato
 
-      - name: 4. Checkout main branch of public repository
+      - name: 4. Checkout main branch of upstream repository
         run: git checkout main
 
       - name: 5. Merge PR branch from private fork into main (using PR event data)
