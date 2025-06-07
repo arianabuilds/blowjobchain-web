@@ -1,5 +1,8 @@
+"use client"
+
 export const Logo = ({ big }: { big?: boolean }) => (
   <p
+    onClick={() => window.location.reload()}
     className={`
       font-bold tracking-tight
       bg-gradient-to-b from-white via-white/90 to-white/20
