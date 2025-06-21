@@ -7,6 +7,7 @@ import { Footer } from "./logged-in/Footer"
 import { SettingsButton } from "./logged-in/SettingsButton"
 import { Tables } from "@/supabase/types"
 import { get_user_id_server } from "./get-user-id-server"
+import { AddToHomeScreen } from "./add-to-homescreen/AddToHomeScreen"
 
 export async function HomePage() {
   const { user_id, name, active_partner } = await loadUserProfile()
@@ -34,6 +35,7 @@ export async function HomePage() {
       <footer className="pb-6">
         {!!name && <Footer name={name} active_partner={active_partner} />}
       </footer>
+      <AddToHomeScreen />
     </>
   )
 }
