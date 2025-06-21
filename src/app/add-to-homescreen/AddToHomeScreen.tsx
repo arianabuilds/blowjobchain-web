@@ -10,7 +10,7 @@ export function AddToHomeScreen() {
   return (
     <>
       <button
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-950 rounded-lg hover:bg-blue-900/80 active:bg-blue-800 transition duration-75 cursor-pointer border border-blue-900"
+        className="flex items-center gap-2 px-4 py-2 mb-2 text-sm font-medium text-white bg-blue-950 rounded-lg hover:bg-blue-900/80 active:bg-blue-800 transition duration-75 cursor-pointer border border-blue-900"
         onClick={() => setShowModal(true)}
       >
         <svg
