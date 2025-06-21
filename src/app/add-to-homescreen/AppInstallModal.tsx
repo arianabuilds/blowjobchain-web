@@ -30,14 +30,14 @@ export function AppInstallModal({ onClose, open }: AppInstallModalProps) {
 
         {/* Icon, Title, URL  */}
         <div className="flex items-center gap-3 bg-gray-900 rounded-lg p-3 mb-11">
-          {/*<Image
+          <Image
             alt="App Icon"
             className="rounded-md border"
-            height={40}
             onError={(e) => (e.currentTarget.style.display = "none")}
-            src={appIcon}
+            height={40}
             width={40}
-          />*/}
+            src="/icons/icon-transparent.png"
+          />
           <div>
             <div className="font-medium">BlowjobChain</div>
             <div className="text-xs text-gray-500">https://blowjobchain.com</div>
@@ -65,13 +65,14 @@ export function AppInstallModal({ onClose, open }: AppInstallModalProps) {
           <li className="list-none text-center mt-18">
             Look for the{" "}
             <span className="inline-block align-middle mx-1">
-              {/*<Image
+              <Image
                 alt="App Icon"
-                className="rounded border inline"
+                className="rounded"
                 height={20}
                 onError={(e) => (e.currentTarget.style.display = "none")}
                 width={20}
-              />*/}
+                src="/icons/icon-transparent.png"
+              />
             </span>{" "}
             icon on your home screen 🎉
           </li>
