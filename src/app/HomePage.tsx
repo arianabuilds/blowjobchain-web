@@ -7,6 +7,9 @@ import { Footer } from "./logged-in/Footer"
 import { SettingsButton } from "./logged-in/SettingsButton"
 import { Tables } from "@/supabase/types"
 import { get_user_id_server } from "./get-user-id-server"
+import { Suspense } from "react"
+import Image from "next/image"
+import orgasm from "./logged-in/orgasm.png"
 
 export async function HomePage() {
   const { user_id, name, active_partner } = await loadUserProfile()
@@ -28,11 +31,22 @@ export async function HomePage() {
       ) : !name ? (
         <SetYourName />
       ) : (
-        <MainList name={name} active_partner={active_partner} />
+        <>
+          <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
+          <Suspense
+            fallback={<div className="mt-20 mb-20 italic animate-pulse">Loading your data...</div>}
+          >
+            <MainList name={name} active_partner={active_partner} />
+          </Suspense>
+        </>
       )}
 
       <footer className="pb-6">
-        {!!name && <Footer name={name} active_partner={active_partner} />}
+        {!!name && (
+          <Suspense fallback={<></>}>
+            <Footer name={name} active_partner={active_partner} />
+          </Suspense>
+        )}
       </footer>
     </>
   )

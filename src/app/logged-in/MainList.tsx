@@ -4,8 +4,7 @@ import { getActivePartnership, isNonEmptyArray } from "./getActivePartnership"
 import { PrePartner } from "./PrePartner"
 import { NoRecordsYet } from "./NoRecordsYet"
 import { PointRow } from "./PointRow"
-import Image from "next/image"
-import orgasm from "./orgasm.png"
+
 import { Tables } from "@/supabase/types"
 import { PubKeyChangeLine } from "./PubKeyChangeLine"
 
@@ -37,7 +36,6 @@ export const MainList = async ({
 
   return (
     <>
-      <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
       <div className="w-full px-1 overflow-y-scroll text-center flex-grow">
         {!combinedChain?.length ? (
           <NoRecordsYet />
