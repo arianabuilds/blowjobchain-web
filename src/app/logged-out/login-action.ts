@@ -85,7 +85,7 @@ async function sendLoginEmail(
 
   try {
     await nodemailer.sendMail({
-      from: '"BlowjobChain" <blowjobchain@gmail.com>',
+      from: '"BlowjobChain" <hi@blowjobchain.com>',
       to: recipient_email,
       subject: `Confirm Your Email: ${email_otp}`,
       html: `<h2>Confirm your email</h2>
