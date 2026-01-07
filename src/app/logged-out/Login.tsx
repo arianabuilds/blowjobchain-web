@@ -72,7 +72,7 @@ function SendLoginCodeButton() {
   return (
     <button disabled={pending} formAction={login} className={buttonClass}>
       <span className="inline-flex items-center justify-center gap-2">
-        Send{pending && "ing"} Login Code
+        Send{pending && "ing"} Login Code{pending && "..."}
         <span className="text-white/70">→</span>
       </span>
     </button>
