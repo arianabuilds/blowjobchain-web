@@ -36,7 +36,7 @@ export async function HomePage() {
           <Suspense
             fallback={<div className="mt-20 mb-20 italic animate-pulse">Loading your data...</div>}
           >
-            <MainList name={name} active_partner={active_partner} />
+            <MainList {...{ name, active_partner }} />
           </Suspense>
         </>
       )}
@@ -44,7 +44,7 @@ export async function HomePage() {
       <footer className="pb-6">
         {!!name && (
           <Suspense fallback={<></>}>
-            <Footer name={name} active_partner={active_partner} />
+            <Footer {...{ name, active_partner }} />
           </Suspense>
         )}
       </footer>
