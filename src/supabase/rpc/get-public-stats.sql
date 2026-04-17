@@ -10,7 +10,7 @@ create or replace function public.get_public_stats ()
 as $$
   select
     (select count(*)::bigint from public.partnerships),
-    (select sum(amount)::numeric from public.points where amount > 0);
+    (select round(sum(amount))::numeric from public.points where amount > 0);
 $$;
 
 revoke execute on function public.get_public_stats() from public, anon, authenticated;
