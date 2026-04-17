@@ -8,9 +8,5 @@ export async function GET() {
 
   const row = data?.[0]
 
-  return NextResponse.json({
-    partnerships: Number(row?.partnerships_count),
-    total_points_granted: Number(row?.total_points_granted),
-    last_updated: new Date().toLocaleString(),
-  })
+  return NextResponse.json({ ...row, last_updated: new Date().toLocaleString() })
 }
