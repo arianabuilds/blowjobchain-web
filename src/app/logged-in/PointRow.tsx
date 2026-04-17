@@ -8,6 +8,7 @@ import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { MarkResolvedAction, PartiallyResolveAction } from "./mark-resolved-action"
 import { useUserId } from "../use-user-id"
+import { sendNotification } from "../api/notify/sendNotification"
 
 export const PointRow = ({ point, who }: { point: Tables<"points">; who: string | null }) => {
   const [open, setOpen] = useState(false)
@@ -98,6 +99,11 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
                     const { error } = await MarkResolvedAction(point.id)
                     if (error) alert(JSON.stringify({ error }))
+                    else
+                      await sendNotification(
+                        point.to,
+                        `Charge ${latest_partial_resolution?.amount ?? point.amount} resolved`,
+                      )
 
                     window.location.reload()
                   }}
@@ -133,6 +139,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
 
                       const { error } = await PartiallyResolveAction(point.id, +input)
                       if (error) alert(JSON.stringify({ error }))
+                      else await sendNotification(point.to, `Charge ${previousAmount} -> ${input}`)
 
                       window.location.reload()
                     }}

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Tables } from "@/supabase/types"
 import { passwordToPublicKey } from "../settings/password/SetPassword"
 import { useUserId } from "../use-user-id"
+import { sendNotification } from "../api/notify/sendNotification"
 
 const buttonClasses = `w-[9.1rem] py-2 border-2 rounded-lg`
 
@@ -117,11 +118,7 @@ function notifyPartner(
   const from_name = active.inviter === user_id ? active.inviter_name : active.invitee_name
   const title = `${from_name} ${amount === -10 ? "is claiming a card" : `granted you ${amount} point${amount !== 1 ? "s" : ""}`}`
 
-  return fetch("/api/notify", {
-    method: "POST",
-    body: JSON.stringify({ to_id, title, body: comment }),
-    headers: { "Content-Type": "application/json" },
-  })
+  return sendNotification(to_id, title, comment)
 }
 
 type PublicKey = undefined | Tables<"pub_keys">["value"]
