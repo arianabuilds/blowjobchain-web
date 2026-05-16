@@ -47,7 +47,7 @@ export const WeeklyExpirationRow = ({
         <span className="w-12" />
       </div>
       {open && (
-        <div className="mt-2 text-sm opacity-80 text-left space-y-1">
+        <div className="mt-2 text-sm opacity-80 text-center space-y-1">
           {points.map((p) => {
             const beforePts = p.comment ? parseWeeklyExpireBeforeBalancePts(p.comment) : null
             const label = idToName[p.from] ?? "?"
