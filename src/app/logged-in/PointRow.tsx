@@ -164,7 +164,7 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
   )
 }
 
-function formatTimeAgo(timestamp: string) {
+export function formatTimeAgo(timestamp: string) {
   return format(timestamp)
     .replace("ago", "")
     .replace("just ", "")

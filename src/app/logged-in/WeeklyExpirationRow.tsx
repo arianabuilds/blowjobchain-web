@@ -2,8 +2,8 @@
 
 import { printDecimals } from "./print-decimals"
 import { Tables } from "@/supabase/types"
-import { format } from "@expo/timeago.js"
 import { useState } from "react"
+import { formatTimeAgo } from "./PointRow"
 
 /** `after` in points = was + row.amount (amount is negative for weekly expire). */
 function parseWeeklyExpireBeforeBalancePts(comment: string): number | null {
@@ -20,10 +20,6 @@ function parseWeeklyExpireBeforeBalancePts(comment: string): number | null {
 }
 
 type Point = Tables<"points">
-
-function formatTimeAgo(iso: string) {
-  return format(new Date(iso), "tiny")
-}
 
 export const WeeklyExpirationRow = ({
   points,
