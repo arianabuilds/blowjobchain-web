@@ -15,9 +15,10 @@ export const PointRow = ({ point, who }: { point: Tables<"points">; who: string 
   const { user_id } = useUserId()
 
   const isClaim = point.comment === "$$IS_CLAIM$$"
-  const hasComment = point.comment && !isClaim
+  const isWeeklyExpire = !!point.comment?.startsWith("$$WEEKLY_EXPIRE$$")
+  const hasComment = point.comment && !isClaim && !isWeeklyExpire
 
-  const isCharge = point.amount < 0 && !isClaim
+  const isCharge = point.amount < 0 && !isClaim && !isWeeklyExpire
   const isChargesFilter = useSearchParams().has("charges")
   if (isChargesFilter && (!isCharge || point.resolved_at)) return null
 

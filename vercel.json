@@ -4,6 +4,10 @@
         {
             "path": "/stats",
             "schedule": "0 4 * * *"
+        },
+        {
+            "path": "/api/cron/weekly-expire",
+            "schedule": "0 * * * *"
         }
     ]
 }
