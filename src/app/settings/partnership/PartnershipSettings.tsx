@@ -6,6 +6,7 @@ import { AddNewPartner } from "./AddNewPartner"
 
 import { SetCurrentButton } from "./SetCurrentButton"
 import { loadUserProfile } from "@/app/HomePage"
+import { ExpireRateControl } from "./ExpireRateControl"
 
 const shadedRowStyle = "rounded-lg bg-black/15 p-1 px-4 mb-3 flex justify-between"
 
@@ -35,6 +36,8 @@ export const PartnershipSettings = async ({}) => {
         </div>
 
         <MembershipSettings />
+
+        <ExpireRateControl inviter={active.inviter} invitee={active.invitee} />
       </div>
 
       {/* Other Partnerships */}

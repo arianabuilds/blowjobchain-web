@@ -59,6 +59,58 @@ export type Database = {
           },
         ]
       }
+      updated_expire_rate: {
+        Row: {
+          created_at: string
+          id: number
+          next_r: number
+          previous_r: number
+          set_by: string
+          user_a: string
+          user_b: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          next_r: number
+          previous_r?: number
+          set_by: string
+          user_a: string
+          user_b: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          next_r?: number
+          previous_r?: number
+          set_by?: string
+          user_a?: string
+          user_b?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "updated_expire_rate_set_by_fkey"
+            columns: ["set_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "updated_expire_rate_user_a_fkey"
+            columns: ["user_a"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "updated_expire_rate_user_b_fkey"
+            columns: ["user_b"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partnerships: {
         Row: {
           created_at: string
@@ -216,6 +268,27 @@ export type Database = {
           inviter_name: string
           invitee_name: string
         }[]
+      }
+      get_partnership_expiration_rate: {
+        Args: {
+          p_invitee: string
+          p_inviter: string
+        }
+        Returns: number
+      }
+      set_partnership_expire_rate: {
+        Args: {
+          p_invitee: string
+          p_inviter: string
+          p_next_r: number
+        }
+        Returns: boolean
+      }
+      expire_weekly_points: {
+        Args: {
+          p_sunday: string
+        }
+        Returns: undefined
       }
       get_user_id_by_email: {
         Args: {

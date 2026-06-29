@@ -77,6 +77,10 @@ async function getBalances({ inviter, invitee }: { inviter: string; invitee: str
     // If it's a $$IS_CLAIM$$, subtract from's balance 1 card
     if (point.comment === "$$IS_CLAIM$$") return (balances[point.from] -= 1)
 
+    // If $$WEEKLY_EXPIRE$$, subtract the amount
+    if (point.comment?.startsWith("$$WEEKLY_EXPIRE$$"))
+      return (balances[point.from] += point.amount / 10)
+
     // If it's a negative charge and unresolved, add to's Charges balance
     if (point.amount < 0 && !point.resolved_at) {
       // Use the latest partial resolution amount if it exists, otherwise use the original amount
