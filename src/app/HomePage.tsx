@@ -10,6 +10,7 @@ import { get_user_id_server } from "./get-user-id-server"
 import { Suspense } from "react"
 import Image from "next/image"
 import orgasm from "./logged-in/orgasm.png"
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export async function HomePage() {
   const { user_id, name, active_partner } = await loadUserProfile()
@@ -34,7 +35,11 @@ export async function HomePage() {
         <>
           <Image className="max-w-[22rem] mx-auto px-2" src={orgasm} alt="Orgasm image" />
           <Suspense
-            fallback={<div className="mt-20 mb-20 italic animate-pulse">Loading your data...</div>}
+            fallback={
+              <div className="mt-20 mb-20 flex justify-center">
+                <LoadingSpinner />
+              </div>
+            }
           >
             <MainList {...{ name, active_partner }} />
           </Suspense>
